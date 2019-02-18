@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">Ride Pal</string>
+    <string name="Email">Email</string>
+    <string name="password">Password</string>
+    <string name="SignIn">Sign In</string>
+    <string name="Firstname">First Name</string>
+    <string name="Lastname">Last Name</string>
+    <string name="birthday">Birthday</string>
+    <string name="gender">Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="confirmpassword">Confirm Password</string>
+    <string name="uploadphoto">Upload Photo</string>
+    <string name="next">Next</string>
+    <string name="forgetpassword">Forgot Password</string>
+    <string name="createaccount">Create Account</string>
+    <string name="preference">Preferences</string>
+    <string name="agerange">Age Range</string>
+    <string name="max">Max</string>
+    <string name="min">Min</string>
+    <string name="genderpref">Gender Preference</string>
+    <string name="either">Either</string>
+    <string name="searchwithin">Search Within (Miles)</string>
+    <string name="vehicleinfo">Vehicle Info</string>
+    <string name="make">Make</string>
+    <string name="model">Model</string>
+    <string name="year">Year</string>
+    <string name="color">Color</string>
+    <string name="platenumber">License Plate Number</string>
+    <string name="skip">Skip</string>
+    <string name="paymentinfo">Payment Info</string>
+    <string name="ccname">Name on Card</string>
+    <string name="ccnum">CC #</string>
+    <string name="ccexp">Exp Date</string>
+    <string name="ccccv">CCV #</string>
+    <string name="cczip">Zip Code</string>
+    <string name="finish">Finish</string>
+
+</resources>
