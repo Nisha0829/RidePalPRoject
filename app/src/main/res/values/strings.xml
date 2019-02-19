@@ -35,5 +35,11 @@
     <string name="ccccv">CCV #</string>
     <string name="cczip">Zip Code</string>
     <string name="finish">Finish</string>
-
+    <string name="drivingmodeselect">I\'m Driving!</string>
+    <string name="passengermodeselect">I\'m Riding!</string>
+    <string name="modeselectreturn">Select Mode</string>
+    <string name="driving">Driving</string>
+    <string name="destinationquestion">Where are you going?</string>
+    <string name="searchbutton">Search</string>
+    <string name="mapsearchinput">Enter an address or place</string>
 </resources>
