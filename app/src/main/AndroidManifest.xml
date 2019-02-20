@@ -19,7 +19,9 @@
         <activity android:name=".CreateAccount1" />
         <activity android:name=".EditPrefernces" />
         <activity android:name=".VehicleInfo" />
-        <activity android:name=".PaymentInfo"></activity>
+        <activity android:name=".PaymentInfo" />
+        <activity android:name=".ModeSelect" />
+        <activity android:name=".DriverDestinationSearch"></activity>
     </application>
 
 </manifest>
