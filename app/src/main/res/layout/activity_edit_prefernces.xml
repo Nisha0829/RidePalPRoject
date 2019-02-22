@@ -114,35 +114,7 @@
                 android:text="@string/either" />
         </RadioGroup>
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="20px" />
 
-        <TextView
-            android:id="@+id/searchwithintitile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/searchwithin"
-            android:textSize="18sp" />
-
-        <SeekBar
-            android:id="@+id/milesbar"
-            android:layout_width="match_parent"
-            android:layout_height="75px"
-            android:max="50"
-            android:progress="2" />
-
-        <TextView
-            android:id="@+id/miles"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="TextView"
-            android:textSize="18sp" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="150px" />
 
         <Button
             android:id="@+id/nextbutton"

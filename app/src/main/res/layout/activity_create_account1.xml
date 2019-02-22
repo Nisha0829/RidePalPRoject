@@ -7,8 +7,8 @@
     tools:context=".CreateAccount1">
 
     <LinearLayout
-        android:layout_width="308dp"
-        android:layout_height="440dp"
+        android:layout_width="321dp"
+        android:layout_height="472dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,7 +40,7 @@
             android:inputType="textEmailAddress" />
 
         <EditText
-            android:id="@+id/editText3"
+            android:id="@+id/bday"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -94,16 +94,30 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="81dp"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="107dp"
+            <Space
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/uploadphoto" />
+                android:layout_weight="1" />
 
+            <ImageButton
+                android:id="@+id/picturebutton"
+                android:layout_width="70dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="0dp"
+                android:scaleType="fitCenter"
+                app:srcCompat="@android:drawable/ic_menu_gallery" />
+
+            <Space
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
         </LinearLayout>
 
         <Button
