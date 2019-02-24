@@ -42,4 +42,5 @@
     <string name="destinationquestion">Where are you going?</string>
     <string name="searchbutton">Search</string>
     <string name="mapsearchinput">Enter an address or place</string>
+    <string name="google_android_map_api_key">AIzaSyBcf6w9AuEzxBJAmRisNzMBCQ-sCAd-8Zw</string>
 </resources>

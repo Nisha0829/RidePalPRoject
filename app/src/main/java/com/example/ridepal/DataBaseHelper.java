@@ -33,8 +33,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE IF NOT EXISTS customerInfo(FIRSTNAME TEXT not null,LASTNAME TEXT not null,BIRTHDAY DATE not null,EMAILID TEXT PRIMARY KEY,GENDER TEXT, PASSWORD TEXT not null, PHOTO TEXT);");
         db.execSQL("CREATE TABLE IF NOT EXISTS vehicleInfo(MAKE TEXT,MODEL TEXT,YEAR INTEGER, COLOR TEXT,LICENCEPLATE TEXT, EMAILID TEXT, FOREIGN KEY(EMAILID) REFERENCES customerInfo(EMAILID) );");
         db.execSQL("CREATE TABLE IF NOT EXISTS customer_preference(MAXAGE INTEGER,MINRANGE INTEGER,GENDER TEXT, SEARCHMILES INTEGR,EMAILID TEXT, FOREIGN KEY(EMAILID) REFERENCES customerInfo(EMAILID) );");
-
-        // db.execSQL("CREATE TABLE IF NOT EXISTS vehicleInfo(MAKE TEXT,MODEL TEXT,YEAR INTEGER, COLOR TEXT );");
+        db.execSQL("CREATE TABLE IF NOT EXISTS cust_destination(ORIGIN TEXT,DESTINATION TEXT,SEARCHMILES INTEGER, EMAILID TEXT, FOREIGN KEY(EMAILID) REFERENCES customerInfo(EMAILID) );");
         //db.execSQL("create table if not exists imageTb ( a blob )");
 
     }
@@ -50,7 +49,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
 
 
-    public void createAccount(String firstName, String lastName, String birthday , String emailId, String gender , String  password, String photoString) //createcreateAccount with 7 parameters
+    public String createAccount(String firstName, String lastName, String birthday , String emailId, String gender , String  password, String photoString) //createcreateAccount with 7 parameters
      {
         ContentValues contentValues = new ContentValues();
         contentValues.put("FIRSTNAME", firstName);
@@ -61,6 +60,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         contentValues.put("PASSWORD", password);
         contentValues.put("PHOTO", photoString);
         this.getWritableDatabase().insert("customerInfo", null, contentValues);
+        return "done";
     }
     public void custPreference(int max, int min, String gender, int searchMiles, String emailId) //5 paramteres with 1 emailid to be passes explicitly
     {

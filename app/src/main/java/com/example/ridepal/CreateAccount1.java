@@ -22,10 +22,10 @@ public class CreateAccount1 extends AppCompatActivity {
     DataBaseHelper newUserInfo;
     ImageButton pickPhoto;
     Button submit;
-    String photo, firstname, lastname, email, password,passowrdconfirm, gender, birthday;
+    String photo, firstname, lastname, email, password, passowrdconfirm, gender, birthday;
     RadioGroup genderbuttons;
     EditText ifirstname, ilastname, iemail, ipassword, ipasswordconfirm, ibirthday;
-    boolean photoSelected=false;
+    boolean photoSelected = false;
 
     private static final int RESULT_LOAD_IMAGE = 1;
 
@@ -33,7 +33,7 @@ public class CreateAccount1 extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data!=null){
+        if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null) {
             Uri selectedImage = data.getData();
             pickPhoto.setImageURI(selectedImage);
         }
@@ -43,16 +43,17 @@ public class CreateAccount1 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account1);
+        newUserInfo = new DataBaseHelper(this);
 
-        pickPhoto = (ImageButton)findViewById(R.id.picturebutton);
-        submit = (Button)findViewById(R.id.nextbutton);
-        ifirstname = (EditText)findViewById(R.id.firstname);
-        ilastname = (EditText)findViewById(R.id.lastname);
-        iemail = (EditText)findViewById(R.id.newemail);
-        ipassword = (EditText)findViewById(R.id.createpassword);
-        ipasswordconfirm = (EditText)findViewById(R.id.comfirmpassword);
-        ibirthday = (EditText)findViewById(R.id.bday);
-        genderbuttons = (RadioGroup)findViewById(R.id.setgender);
+        pickPhoto = (ImageButton) findViewById(R.id.picturebutton);
+        submit = (Button) findViewById(R.id.nextbutton);
+        ifirstname = (EditText) findViewById(R.id.firstname);
+        ilastname = (EditText) findViewById(R.id.lastname);
+        iemail = (EditText) findViewById(R.id.newemail);
+        ipassword = (EditText) findViewById(R.id.createpassword);
+        ipasswordconfirm = (EditText) findViewById(R.id.comfirmpassword);
+        ibirthday = (EditText) findViewById(R.id.bday);
+        genderbuttons = (RadioGroup) findViewById(R.id.setgender);
 
 
         pickPhoto.setOnClickListener(new View.OnClickListener() {
@@ -60,7 +61,7 @@ public class CreateAccount1 extends AppCompatActivity {
             public void onClick(View v) {
                 Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE);
-                photoSelected=true;
+                photoSelected = true;
             }
         });
         submit.setOnClickListener(new View.OnClickListener() {
@@ -69,10 +70,10 @@ public class CreateAccount1 extends AppCompatActivity {
 
                 //Code to transform image Uri to bitmap and then to string.
                 Bitmap image = ((BitmapDrawable) pickPhoto.getDrawable()).getBitmap();
-                ByteArrayOutputStream baos=new ByteArrayOutputStream();
-                image.compress(Bitmap.CompressFormat.PNG,100, baos);
-                byte [] b=baos.toByteArray();
-                photo=Base64.encodeToString(b, Base64.DEFAULT);
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                image.compress(Bitmap.CompressFormat.PNG, 100, baos);
+                byte[] b = baos.toByteArray();
+                photo = Base64.encodeToString(b, Base64.DEFAULT);
 
                 //filling in strings with input values.
                 firstname = ifirstname.getText().toString();
@@ -82,44 +83,46 @@ public class CreateAccount1 extends AppCompatActivity {
                 password = ipassword.getText().toString();
                 passowrdconfirm = ipasswordconfirm.getText().toString();
 
-                switch(genderbuttons.getCheckedRadioButtonId()){
+                switch (genderbuttons.getCheckedRadioButtonId()) {
                     case R.id.malebutton:
-                        gender="Male";
+                        gender = "Male";
                         break;
                     case R.id.femalebutton:
-                        gender="Female";
+                        gender = "Female";
                         break;
                 }
                 //Instances of missing fields.
 
-                if(firstname==null || lastname==null || email==null || birthday==null || password==null || passowrdconfirm==null || gender==null){
-                    Toast completeFields=Toast.makeText(getApplicationContext(),"Please fill in all fields", Toast.LENGTH_SHORT);
+                if (firstname == null || lastname == null || email == null || birthday == null || password == null || passowrdconfirm == null || gender == null) {
+                    Toast completeFields = Toast.makeText(getApplicationContext(), "Please fill in all fields", Toast.LENGTH_SHORT);
                     completeFields.show();
                 }
-                if(password!=null && passowrdconfirm!=null && password!=passowrdconfirm){
-                    Toast passwordMismatch=Toast.makeText(getApplicationContext(), "Passwords do not match.", Toast.LENGTH_SHORT);
+                if (password != null && passowrdconfirm != null && password != passowrdconfirm) {
+                    Toast passwordMismatch = Toast.makeText(getApplicationContext(), "Passwords do not match.", Toast.LENGTH_SHORT);
                     passwordMismatch.show();
                 }
-                if(!photoSelected){
-                    Toast photoMissing=Toast.makeText(getApplicationContext(),"You must upload photo to continue.", Toast.LENGTH_SHORT);
+                if (!photoSelected) {
+                    Toast photoMissing = Toast.makeText(getApplicationContext(), "You must upload photo to continue.", Toast.LENGTH_SHORT);
                     photoMissing.show();
                 }
 
+
                 //Adding information and moving to next screen if all fields are entered.
-                if(firstname!=null && lastname!=null && email!=null && birthday!=null && password!=null && passowrdconfirm!=null && gender!=null && photo!=null && photoSelected){
-                    newUserInfo.createAccount(firstname,lastname,birthday,email,gender,password,photo);
-                    Toast success =Toast.makeText(getApplicationContext(), "User Info Saved Successfully!", Toast.LENGTH_SHORT);
+                if (firstname != null && lastname != null && email != null && birthday != null && password != null && passowrdconfirm != null && gender != null)
+                {
+                   // photo = "ZDfxgcv";  for testing
+                    System.out.println("firstname" +firstname +" " + "lastname" + lastname+ " " + "email" + email + " "+ " birthday" + birthday + " " + "password"+ password+ " "+ "gender" + gender); //testing
+                    String result = newUserInfo.createAccount(firstname, lastname, birthday, email, gender, password, photo);
+                    System.out.println("Result "+ result);  //for testing
+                    Toast success = Toast.makeText(getApplicationContext(), "User Info Saved Successfully!", Toast.LENGTH_SHORT);
                     success.show();
                     Intent next = new Intent(CreateAccount1.this, EditPrefernces.class);
                     startActivity(next);
                 }
 
 
-
-
             }
         });
-
 
 
     }
