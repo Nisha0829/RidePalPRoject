@@ -8,6 +8,8 @@ import android.widget.Button;
 
 public class LogInPage extends AppCompatActivity {
     Button createAccount;
+    Button logIn;
+
 
 
     @Override
@@ -22,6 +24,14 @@ public class LogInPage extends AppCompatActivity {
                 Intent createAccount = new Intent(LogInPage.this, CreateAccount1.class);
                 startActivity(createAccount);
 
+            }
+        });
+        logIn = (Button)findViewById(R.id.signinbutton);
+        logIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent next = new Intent(LogInPage.this,ModeSelect.class);
+                startActivity(next);
             }
         });
     }

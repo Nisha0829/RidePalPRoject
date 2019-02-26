@@ -32,8 +32,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE IF NOT EXISTS customerInfo(FIRSTNAME TEXT not null,LASTNAME TEXT not null,BIRTHDAY DATE not null,EMAILID TEXT PRIMARY KEY,GENDER TEXT, PASSWORD TEXT not null, PHOTO TEXT);");
         db.execSQL("CREATE TABLE IF NOT EXISTS vehicleInfo(MAKE TEXT,MODEL TEXT,YEAR INTEGER, COLOR TEXT,LICENCEPLATE TEXT, EMAILID TEXT, FOREIGN KEY(EMAILID) REFERENCES customerInfo(EMAILID) );");
-        db.execSQL("CREATE TABLE IF NOT EXISTS customer_preference(MAXAGE INTEGER,MINRANGE INTEGER,GENDER TEXT, SEARCHMILES INTEGR,EMAILID TEXT, FOREIGN KEY(EMAILID) REFERENCES customerInfo(EMAILID) );");
+        db.execSQL("CREATE TABLE IF NOT EXISTS customer_preference(MAXAGE INTEGER,MINRANGE INTEGER,GENDER TEXT, EMAILID TEXT, FOREIGN KEY(EMAILID) REFERENCES customerInfo(EMAILID) );");
         db.execSQL("CREATE TABLE IF NOT EXISTS cust_destination(ORIGIN TEXT,DESTINATION TEXT,SEARCHMILES INTEGER, EMAILID TEXT, FOREIGN KEY(EMAILID) REFERENCES customerInfo(EMAILID) );");
+        db.execSQL("CREATE TABLE IF NOT EXISTS payment_info(CARDNAME TEXT, CCNUMBER INTEGER, EXPDATE DATE, CCV INTEGER, ZIPCODE INTEGER, EMAILID TEXT, FOREIGN KEY(EMAILID) REFERENCES customerInfo(EMAILID) );");
         //db.execSQL("create table if not exists imageTb ( a blob )");
 
     }
@@ -44,6 +45,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS customer_preference");
         // db.execSQL("DROP TABLE IF EXISTS imageTb");
         db.execSQL("DROP TABLE IF EXISTS vehicleInfo");
+        db.execSQL("DROP TABLE IF EXISTS payment_info");
         onCreate(db);
     }
 
@@ -62,13 +64,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         this.getWritableDatabase().insert("customerInfo", null, contentValues);
         return "done";
     }
-    public void custPreference(int max, int min, String gender, int searchMiles, String emailId) //5 paramteres with 1 emailid to be passes explicitly
+    public void custPreference(int max, int min, String gender, String emailId) //5 paramteres with 1 emailid to be passes explicitly
     {
         ContentValues contentValues2 = new ContentValues();
         contentValues2.put("MAXAGE", max);
         contentValues2.put("MINRANGE", min);
         contentValues2.put("GENDER", gender);
-        contentValues2.put("SEARCHMILES", searchMiles);
         contentValues2.put("EMAILID", emailId);
         this.getWritableDatabase().insert("customer_preference", null, contentValues2);
     }
@@ -84,6 +85,18 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
 
     }
+
+    public void paymentInfo(String cardName, int ccNum, String expDate, int ccv, int zipCode, String emailId){
+        ContentValues contentValues4 = new ContentValues();
+        contentValues4.put("CARDNAME", cardName);
+        contentValues4.put("CCNUMBER", ccNum);
+        contentValues4.put("EXPDATE", expDate);
+        contentValues4.put("CCV", ccv);
+        contentValues4.put("ZIPCODE", zipCode);
+        contentValues4.put("EMAILID", emailId);
+        this.getWritableDatabase().insert("payment_info", null, contentValues4);
+    }
+
     public void logIn(String emailId, String pwd)  //User Id and password
     {
 

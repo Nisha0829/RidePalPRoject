@@ -1,14 +1,15 @@
 package com.example.ridepal;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.Location;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Display;
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,13 +17,11 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.Marker;
 
-public class DriverDestinationSearch extends AppCompatActivity implements OnMapReadyCallback {
+public class PassengerDesinationSearch extends AppCompatActivity implements OnMapReadyCallback {
 
     public GoogleMap map;
     Location location;
@@ -33,13 +32,10 @@ public class DriverDestinationSearch extends AppCompatActivity implements OnMapR
     String currentMiles;
     SupportMapFragment mapFragment;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_driver_destination_search);
+        setContentView(R.layout.activity_passenger_desination_search);
         mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.destinationmap);
         mapFragment.getMapAsync(this);
@@ -58,7 +54,7 @@ public class DriverDestinationSearch extends AppCompatActivity implements OnMapR
         modeSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent modeSelect = new Intent(DriverDestinationSearch.this, ModeSelect.class);
+                Intent modeSelect = new Intent(PassengerDesinationSearch.this, ModeSelect.class);
                 startActivity(modeSelect);
             }
         });
@@ -91,15 +87,10 @@ public class DriverDestinationSearch extends AppCompatActivity implements OnMapR
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent next = new Intent(DriverDestinationSearch.this, DriverDestinationResults.class);
+                Intent next = new Intent(PassengerDesinationSearch.this, DriverDestinationResults.class);
                 startActivity(next);
             }
         });
-
-
-
-
-
     }
 
     @Override

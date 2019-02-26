@@ -48,22 +48,24 @@
 
             <TextView
                 android:id="@+id/yeartitle"
-                android:layout_width="wrap_content"
+                android:layout_width="192dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/year"
                 android:textSize="20sp" />
 
             <Space
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="161dp"
+                android:layout_height="66dp"
                 android:layout_weight="1" />
 
-            <Spinner
+            <EditText
                 android:id="@+id/vehicleyear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="number" />
         </LinearLayout>
 
         <EditText
