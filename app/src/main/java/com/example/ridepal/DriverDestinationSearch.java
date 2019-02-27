@@ -47,6 +47,8 @@ public class DriverDestinationSearch extends AppCompatActivity implements OnMapR
         if(ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
             map.setMyLocationEnabled(true);
         }else{
+
+            // TODO Code needed here to ask for location permissions
             Toast enableLocationPermission = Toast.makeText(getApplicationContext(), "Please enable Location Permissions in Settings", Toast.LENGTH_SHORT);
             enableLocationPermission.show();
         }
