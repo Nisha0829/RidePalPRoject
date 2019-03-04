@@ -26,6 +26,7 @@ public class CreateAccount1 extends AppCompatActivity {
     RadioGroup genderbuttons;
     EditText ifirstname, ilastname, iemail, ipassword, ipasswordconfirm, ibirthday;
     boolean photoSelected = false;
+    public static final String EXTRA_EMAIL = "com.example.ridepal.EMAIL";
 
     private static final int RESULT_LOAD_IMAGE = 1;
 
@@ -117,6 +118,8 @@ public class CreateAccount1 extends AppCompatActivity {
                     Toast success = Toast.makeText(getApplicationContext(), "User Info Saved Successfully!", Toast.LENGTH_SHORT);
                     success.show();
                     Intent next = new Intent(CreateAccount1.this, EditPrefernces.class);
+                    next.putExtra(EXTRA_EMAIL, email);
+
                     startActivity(next);
                 }
 

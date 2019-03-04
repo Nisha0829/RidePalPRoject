@@ -43,4 +43,6 @@
     <string name="searchbutton">Search</string>
     <string name="mapsearchinput">Enter an address or place</string>
     <string name="google_android_map_api_key">AIzaSyBcf6w9AuEzxBJAmRisNzMBCQ-sCAd-8Zw</string>
+    <string name="riding">Riding</string>
+    <string name="signout">Sign Out</string>
 </resources>

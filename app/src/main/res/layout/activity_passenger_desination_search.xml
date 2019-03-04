@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DriverDestinationSearch">
+    tools:context=".PassengerDesinationSearch">
     <LinearLayout
         android:layout_width="369dp"
         android:layout_height="63dp"
@@ -24,12 +24,12 @@
             android:text="@string/modeselectreturn" />
 
         <TextView
-            android:id="@+id/drivermodetitle"
+            android:id="@+id/passengermodetitle"
             android:layout_width="305dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/driving"
+            android:text="@string/riding"
             android:textSize="24sp" />
     </LinearLayout>
 
@@ -92,8 +92,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="TextView"
-            android:textSize="18sp"
-            android:visibility="visible" />
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/searchbutton"
@@ -101,4 +100,5 @@
             android:layout_height="wrap_content"
             android:text="@string/searchbutton" />
     </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>

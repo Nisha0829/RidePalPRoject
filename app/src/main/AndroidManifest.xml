@@ -3,6 +3,11 @@
     package="com.example.ridepal">
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -26,12 +31,9 @@
         <activity android:name=".VehicleInfo" />
         <activity android:name=".PaymentInfo" />
         <activity android:name=".ModeSelect" />
-        <activity android:name=".DriverDestinationSearch"></activity>
+        <activity android:name=".DriverDestinationSearch" />
+        <activity android:name=".DriverDestinationResults" />
+        <activity android:name=".PassengerDesinationSearch"></activity>
     </application>
-
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
 
 </manifest>
