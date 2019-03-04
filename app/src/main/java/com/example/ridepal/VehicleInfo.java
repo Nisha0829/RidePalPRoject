@@ -16,26 +16,26 @@ public class VehicleInfo extends AppCompatActivity {
     DataBaseHelper newVehicleInfo;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vehicle_info);
+        newVehicleInfo = new DataBaseHelper(this);
 
-        iMake=(EditText)findViewById(R.id.vehiclemake);
-        iModel=(EditText)findViewById(R.id.vehiclemodel);
-        iColor=(EditText)findViewById(R.id.vehiclecolor);
-        iYear=(EditText)findViewById(R.id.vehicleyear);
-        iLPlate=(EditText)findViewById(R.id.platenumber);
-        next=(Button)findViewById(R.id.nextbutton);
-        skip=(Button)findViewById(R.id.skipbutton);
+        iMake = (EditText) findViewById(R.id.vehiclemake);
+        iModel = (EditText) findViewById(R.id.vehiclemodel);
+        iColor = (EditText) findViewById(R.id.vehiclecolor);
+        iYear = (EditText) findViewById(R.id.vehicleyear);
+        iLPlate = (EditText) findViewById(R.id.platenumber);
+        next = (Button) findViewById(R.id.nextbutton);
+        skip = (Button) findViewById(R.id.skipbutton);
 
         //skip button for no vehicle information saved.
         skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent skip = new Intent(VehicleInfo.this, PaymentInfo.class);
-                Toast noInfoSaved = Toast.makeText(getApplicationContext(),"No Vehicle Information saved.",Toast.LENGTH_SHORT);
+                Toast noInfoSaved = Toast.makeText(getApplicationContext(), "No Vehicle Information saved.", Toast.LENGTH_SHORT);
                 noInfoSaved.show();
                 startActivity(skip);
             }
@@ -51,22 +51,31 @@ public class VehicleInfo extends AppCompatActivity {
                 lPlate = iLPlate.getText().toString();
                 sYear = iYear.getText().toString();
                 year = Integer.parseInt(sYear);
-                Intent getEmail = getIntent();
-                email = getEmail.getStringExtra(CreateAccount1.EXTRA_EMAIL);
+                Intent intent = getIntent();
+                Bundle bundle = intent.getExtras();
+                email = bundle.getString("editEmail");
 
                 //Incomplete Info message
-                if(make==null||model==null||color==null||lPlate==null||sYear==null){
+                if (make == null || model == null || color == null || lPlate == null || sYear == null) {
                     Toast missingInfo = Toast.makeText(getApplicationContext(), "Please fill in all fields or select SKIP", Toast.LENGTH_SHORT);
                     missingInfo.show();
-                }else{
+                } else {
                     //save completed info and move to Payment activity.
-                    newVehicleInfo.vehicleInfo(make, model,year,color,lPlate,email);
-                    Intent next=new Intent(VehicleInfo.this, PaymentInfo.class);
-                    startActivity(next);
+                    String result = newVehicleInfo.vehicleInfo(make, model, year, color, lPlate, email);
+                    if(result == "done") {
+                        Bundle vehBundle = new Bundle();
+                        vehBundle.putString("vehEmail", email);
+                        Intent next = new Intent(VehicleInfo.this, PaymentInfo.class);
+                        next.putExtras(bundle);
+                        startActivity(next);
+                    }
+                    else{
+                        Toast missingInfo = Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT);
+                        missingInfo.show();
+                    }
                 }
             }
         });
-
 
 
     }

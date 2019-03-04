@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="@string/make" />
+            android:hint="@string/make" />
 
         <EditText
             android:id="@+id/vehiclemodel"
@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="@string/model" />
+            android:hint="@string/model" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -51,7 +51,7 @@
                 android:layout_width="192dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/year"
+                android:hint="@string/year"
                 android:textSize="20sp" />
 
             <Space
@@ -74,7 +74,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="@string/color" />
+            android:hint="@string/color" />
 
         <EditText
             android:id="@+id/platenumber"
@@ -82,7 +82,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="@string/platenumber" />
+            android:hint="@string/platenumber" />
 
         <Space
             android:layout_width="match_parent"
