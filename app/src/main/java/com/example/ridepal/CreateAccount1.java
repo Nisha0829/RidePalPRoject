@@ -26,7 +26,6 @@ public class CreateAccount1 extends AppCompatActivity {
     RadioGroup genderbuttons;
     EditText ifirstname, ilastname, iemail, ipassword, ipasswordconfirm, ibirthday;
     boolean photoSelected = false;
-    public static final String EXTRA_EMAIL = "com.example.ridepal.EMAIL";
 
     private static final int RESULT_LOAD_IMAGE = 1;
 
@@ -109,16 +108,22 @@ public class CreateAccount1 extends AppCompatActivity {
 
 
                 //Adding information and moving to next screen if all fields are entered.
-                if (firstname != null && lastname != null && email != null && birthday != null && password != null && passowrdconfirm != null && gender != null && password==passowrdconfirm)
-                {
-                   // photo = "ZDfxgcv";  for testing
-                    System.out.println("firstname" +firstname +" " + "lastname" + lastname+ " " + "email" + email + " "+ " birthday" + birthday + " " + "password"+ password+ " "+ "gender" + gender); //testing
+                if (firstname != null && lastname != null && email != null && birthday != null && password != null && passowrdconfirm != null && gender != null  && password==passowrdconfirm) {
+                    // photo = "ZDfxgcv";  for testing
+                    System.out.println("firstname" + firstname + " " + "lastname" + lastname + " " + "email" + email + " " + " birthday" + birthday + " " + "password" + password + " " + "gender" + gender); //testing
                     String result = newUserInfo.createAccount(firstname, lastname, birthday, email, gender, password, photo);
-                    System.out.println("Result "+ result);  //for testing
-                    Toast success = Toast.makeText(getApplicationContext(), "User Info Saved Successfully!", Toast.LENGTH_SHORT);
-                    success.show();
+                    System.out.println("Result " + result);  //for testing
+                    if (result == "done") {
+                        Toast success = Toast.makeText(getApplicationContext(), "User Info Saved Successfully!", Toast.LENGTH_SHORT);
+                        success.show();
+                    } else {
+                        Toast success = Toast.makeText(getApplicationContext(), "Email Id already exist", Toast.LENGTH_SHORT);
+                        success.show();
+                    }
+                    Bundle bundle = new Bundle();
+                    bundle.putString("userEmail", email);
                     Intent next = new Intent(CreateAccount1.this, EditPrefernces.class);
-                    next.putExtra(EXTRA_EMAIL, email);
+                    next.putExtras(bundle);
                     startActivity(next);
                 }
 
