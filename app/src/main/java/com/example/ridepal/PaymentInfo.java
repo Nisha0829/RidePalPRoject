@@ -38,7 +38,8 @@ public class PaymentInfo extends AppCompatActivity {
                 sCCV = iCCV.getText().toString();
                 sZip = iZip.getText().toString();
                 Intent getEmail = getIntent();
-                email = getEmail.getStringExtra(CreateAccount1.EXTRA_EMAIL);
+                Bundle bundle = getEmail.getExtras();
+                email = bundle.getString("userEmail");
                 cardNum=Integer.parseInt(sCardnum);
                 ccv=Integer.parseInt(sCCV);
                 zip=Integer.parseInt(sZip);
