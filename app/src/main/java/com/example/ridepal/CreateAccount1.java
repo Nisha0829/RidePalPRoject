@@ -109,7 +109,7 @@ public class CreateAccount1 extends AppCompatActivity {
 
 
                 //Adding information and moving to next screen if all fields are entered.
-                if (firstname != null && lastname != null && email != null && birthday != null && password != null && passowrdconfirm != null && gender != null)
+                if (firstname != null && lastname != null && email != null && birthday != null && password != null && passowrdconfirm != null && gender != null && password==passowrdconfirm)
                 {
                    // photo = "ZDfxgcv";  for testing
                     System.out.println("firstname" +firstname +" " + "lastname" + lastname+ " " + "email" + email + " "+ " birthday" + birthday + " " + "password"+ password+ " "+ "gender" + gender); //testing
@@ -119,7 +119,6 @@ public class CreateAccount1 extends AppCompatActivity {
                     success.show();
                     Intent next = new Intent(CreateAccount1.this, EditPrefernces.class);
                     next.putExtra(EXTRA_EMAIL, email);
-
                     startActivity(next);
                 }
 
