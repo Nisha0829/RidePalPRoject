@@ -7,12 +7,10 @@ import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.EditText;
 import android.widget.TextView;
 
-import com.google.android.gms.common.util.ProcessUtils;
-
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class DataBaseHelper extends SQLiteOpenHelper {
@@ -38,7 +36,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE IF NOT EXISTS customerInfo(FIRSTNAME TEXT not null,LASTNAME TEXT not null,BIRTHDAY DATE not null,EMAILID TEXT PRIMARY KEY,GENDER TEXT, PASSWORD TEXT not null, PHOTO TEXT);");
         db.execSQL("CREATE TABLE IF NOT EXISTS vehicleInfo(MAKE TEXT,MODEL TEXT,YEAR INTEGER, COLOR TEXT,LICENCEPLATE TEXT, EMAILID TEXT not null, FOREIGN KEY(EMAILID) REFERENCES customerInfo(EMAILID) );");
         db.execSQL("CREATE TABLE IF NOT EXISTS customer_preference(MAXAGE INTEGER,MINRANGE INTEGER,GENDER TEXT, EMAILID TEXT not null, FOREIGN KEY(EMAILID) REFERENCES customerInfo(EMAILID) );");
-        db.execSQL("CREATE TABLE IF NOT EXISTS cust_destination(ORIGIN TEXT,DESTINATION TEXT,SEARCHMILES INTEGER, EMAILID TEXT not null, FOREIGN KEY(EMAILID) REFERENCES customerInfo(EMAILID) );");
+        db.execSQL("CREATE TABLE IF NOT EXISTS cust_destination(NAME TEXT, ORIGIN TEXT,DESTINATION TEXT, LATITUDE INTEGER,  LONGITUDE INTEGER,SEARCHMILES INTEGER, EMAILID TEXT not null, FOREIGN KEY(EMAILID) REFERENCES customerInfo(EMAILID) );");
         db.execSQL("CREATE TABLE IF NOT EXISTS payment_info(CARDNAME TEXT, CCNUMBER INTEGER, EXPDATE DATE, CCV INTEGER, ZIPCODE INTEGER, EMAILID TEXT not null, FOREIGN KEY(EMAILID) REFERENCES customerInfo(EMAILID) );");
         //db.execSQL("create table if not exists imageTb ( a blob )");
 
@@ -141,14 +139,56 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return result;
     }
 
-    public Object DestinationMatch(String destination, String emailId) { // 5 is the password // 3 is emailId
-        return "result";
-    }
-    public String cust_Destination (int lat, int log, String emailId)
-    { //Entry latitutde and longitude in tabale with email ID
+    public List<DestinationValues> DestinationMatch(String email, double latitude, double longitude)//String destination, String emailId) { // 5 is the password // 3 is emailId
+    {
+        double userLatG = latitude * Math.PI / 180;
+        double userLonG = longitude * Math.PI / 180;
+        List<DestinationValues> listDestinationValues=null;
+        Cursor cursorInfo = this.getReadableDatabase().rawQuery("Select * from cust_destination where EMAILID =" + email + "; ", null);
+        while (cursorInfo.moveToNext()){
+            DestinationValues destinationValues = null;
+            double destLatg = cursorInfo.getDouble(0) * Math.PI /180;
+            double destLong = cursorInfo.getDouble(1) * Math.PI /180;
+            double phi = Math.abs(destLatg - destLong);
+            double distance = (Math.acos(Math.cos(phi) * Math.cos(userLatG) * Math.cos(destLatg) + Math.sin(userLonG) * Math.sin(destLong))) * 6387;
+            if(distance <= 5){
+                destinationValues= new DestinationValues( cursorInfo.getString(0), cursorInfo.getString(1), cursorInfo.getString(2));
+            }
+            if(listDestinationValues.isEmpty()){
+                listDestinationValues = new ArrayList<DestinationValues>();
+            }
+            if(null!=destinationValues)
+            listDestinationValues.add(destinationValues);
 
-        return "result";
+        }
+        return listDestinationValues;
     }
+
+    public Object cust_Destination(String name, String origin, String destination, double latitude, double longitude, int searchMiles, String email) {
+        Object result = "";
+        Cursor cursorInfo = this.getReadableDatabase().rawQuery("Select * from cust_destination where EMAILID =" + email + "; ", null);
+        if (!cursorInfo.moveToNext()) {
+            try {
+                this.getWritableDatabase().execSQL("update student_table set ORIGIN = '" + origin + ",' DESTINATION = ' " + destination + " ,'LATITUDE = ' " + latitude + " , 'LONGITUDE ='" + longitude + ",'SEARCHMILES ='" + searchMiles + "'  WHERE EMAILID ='" + email + "'", null);
+            } catch (SQLiteException ex) {
+
+            }
+
+        } else {
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("Name", name);
+            contentValues.put("ORIGIN", origin);
+            contentValues.put("DESTINATION", destination);
+            contentValues.put("LATITUDE", latitude);
+            contentValues.put("LONGITUDE", longitude);
+            contentValues.put("SEARCHMILES", searchMiles);
+            contentValues.put("EMAILID", email);
+            this.getWritableDatabase().insert("payment_info", null, contentValues);
+
+        }
+        return result =DestinationMatch(email, latitude,longitude) ;
+    }
+
     public void list(TextView textView) { // For testing purpose
         // column 0,1 and 2 for respectively max, min and emailId
         //this.getReadableDatabase().rawQuery("Delete from customer_preference where EMAILID ='12345@gmail.com'", null);
