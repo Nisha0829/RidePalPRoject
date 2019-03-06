@@ -124,7 +124,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     public String logIn(String emailId, String pwd)  //Success // Password is wrong, user does not exist
     {
-        Cursor cursorInfo = this.getReadableDatabase().rawQuery("Select * from customerInfo", null);
+        Cursor cursorInfo = this.getReadableDatabase().rawQuery("Select * from customerInfo;", null);
         String result = "User Does Not Exist";
         while (cursorInfo.moveToNext()) {
             if (emailId.equalsIgnoreCase(cursorInfo.getString(3)) && pwd.equals(cursorInfo.getString(5))) {
@@ -192,9 +192,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public void list(TextView textView) { // For testing purpose
         // column 0,1 and 2 for respectively max, min and emailId
         //this.getReadableDatabase().rawQuery("Delete from customer_preference where EMAILID ='12345@gmail.com'", null);
-        Cursor cursorInfo = this.getReadableDatabase().rawQuery("Select * from vehicleInfo where EMAILID = 'ad'", null);
+        String email="af";
+        String sqlQuery = "Select * from customerInfo where EMAILID = '"+email+"';";
+        Cursor cursorInfo = this.getReadableDatabase().rawQuery(sqlQuery, null);// where EMAILID = 'ad'", null);
         while (cursorInfo.moveToNext()) {
-            textView.append(cursorInfo.getString(0) + " " + cursorInfo.getString(1) + " " + cursorInfo.getString(2) + " " + cursorInfo.getString(3));
+            textView.append(cursorInfo.getString(3) + " " + cursorInfo.getString(5) + " " + cursorInfo.getString(1));// + " " + cursorInfo.getString(3));
 //                    " " + cursorInfo.getString(4)+" " + cursorInfo.getString(5)+" " + cursorInfo.getString(6));
         }
 //        Cursor cursorPref = this.getReadableDatabase().rawQuery("Select * from customer_preference", null);
