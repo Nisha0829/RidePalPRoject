@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="@string/ccname" />
+            android:hint="@string/ccname" />
 
         <EditText
             android:id="@+id/ccnum"
@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="number"
-            android:text="@string/ccnum" />
+            android:hint="@string/ccnum" />
 
         <EditText
             android:id="@+id/ccexpdate"
@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="date"
-            android:text="@string/ccexp" />
+            android:hint="@string/ccexp" />
 
         <EditText
             android:id="@+id/ccccv"
@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="number"
-            android:text="@string/ccccv" />
+            android:hint="@string/ccccv" />
 
         <EditText
             android:id="@+id/cczip"
@@ -63,7 +63,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="number"
-            android:text="@string/cczip" />
+            android:hint="@string/cczip" />
 
         <Space
             android:layout_width="match_parent"

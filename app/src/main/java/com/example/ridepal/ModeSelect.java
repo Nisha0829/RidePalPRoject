@@ -18,11 +18,14 @@ public class ModeSelect extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mode_select);
+        Intent intent = getIntent();
+        String userName = intent.getStringExtra("userName");
 
         drive = (Button)findViewById(R.id.drivebutton);
         ride = (Button)findViewById(R.id.ridebutton);
         signOut = (Button)findViewById(R.id.signoutbutton);
         welcome = (TextView)findViewById(R.id.hellotext);
+        welcome.append("Hello " +userName);
 
         drive.setOnClickListener(new View.OnClickListener() {
             @Override

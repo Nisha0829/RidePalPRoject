@@ -115,11 +115,18 @@
         </RadioGroup>
 
 
-
         <Button
             android:id="@+id/nextbutton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/next" />
+            android:text="@string/next"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="20dp"/>
+
+        <Button
+            android:id="@+id/skipButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Skip" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

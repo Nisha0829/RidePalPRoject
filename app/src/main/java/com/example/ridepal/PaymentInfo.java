@@ -21,34 +21,37 @@ public class PaymentInfo extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_info);
+        newPaymentInfo = new DataBaseHelper(this);
 
-        iCardName = (EditText)findViewById(R.id.ccname);
-        iCardnum = (EditText)findViewById(R.id.ccnum);
-        iCCV = (EditText)findViewById(R.id.ccccv);
-        iZip = (EditText)findViewById(R.id.cczip);
-        iExpDate = (EditText)findViewById(R.id.ccexpdate);
-        finish = (Button)findViewById(R.id.finishbutton);
+        iCardName = (EditText) findViewById(R.id.ccname);
+        iCardnum = (EditText) findViewById(R.id.ccnum);
+        iCCV = (EditText) findViewById(R.id.ccccv);
+        iZip = (EditText) findViewById(R.id.cczip);
+        iExpDate = (EditText) findViewById(R.id.ccexpdate);
+        finish = (Button) findViewById(R.id.finishbutton);
 
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cardName=iCardName.getText().toString();
+                cardName = iCardName.getText().toString();
                 expDate = iExpDate.getText().toString();
                 sCardnum = iCardnum.getText().toString();
                 sCCV = iCCV.getText().toString();
                 sZip = iZip.getText().toString();
                 Intent getEmail = getIntent();
                 Bundle bundle = getEmail.getExtras();
-                email = bundle.getString("userEmail");
-                cardNum=Integer.parseInt(sCardnum);
-                ccv=Integer.parseInt(sCCV);
-                zip=Integer.parseInt(sZip);
+                email = bundle.getString("vehEmail");
+                cardNum = Integer.parseInt(sCardnum);
+                ccv = Integer.parseInt(sCCV);
+                zip = Integer.parseInt(sZip);
 
-                if(cardName==null||expDate==null||sCardnum==null||sCCV==null||sZip==null){
+                if (cardName == null || expDate == null || sCardnum == null || sCCV == null || sZip == null) {
                     Toast missingInfo = Toast.makeText(getApplicationContext(), "Please Fill in all fields.", Toast.LENGTH_SHORT);
                     missingInfo.show();
-                }else{
-                    newPaymentInfo.paymentInfo(cardName,cardNum,expDate,ccv,zip,email);
+                } else {
+                    newPaymentInfo.paymentInfo(cardName, cardNum, expDate, ccv, zip, email);
+                    Intent next = new Intent(PaymentInfo.this, LogInPage.class);
+                    startActivity(next);
                 }
             }
         });
