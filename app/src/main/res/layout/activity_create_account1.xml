@@ -5,11 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CreateAccount1">
-
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="110dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ridepallogo" />
     <LinearLayout
         android:layout_width="321dp"
         android:layout_height="472dp"
         android:orientation="vertical"
+        android:layout_marginTop="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -17,33 +34,44 @@
 
         <EditText
             android:id="@+id/firstname"
+            android:textColorHint="#551A8B"
+            android:textColor="#551A8B"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
+            android:textSize="10sp"
             android:hint="@string/Firstname"
             android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/lastname"
+            android:textColorHint="#551A8B"
+            android:textColor="#551A8B"
+            android:textSize="10sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
+            android:ems="6"
             android:hint="@string/Lastname"
             android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/newemail"
+            android:textColorHint="#551A8B"
+            android:textColor="#551A8B"
+            android:textSize="10sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
+            android:ems="6"
             android:hint="@string/Email"
             android:inputType="textEmailAddress" />
 
         <EditText
             android:id="@+id/bday"
+            android:textSize="10sp"
+            android:textColorHint="#551A8B"
+            android:textColor="#551A8B"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
+            android:ems="6"
             android:hint="@string/birthday"
             android:inputType="date" />
 
@@ -52,8 +80,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/gender"
-            android:textColor="@android:color/black"
-            android:textSize="18sp" />
+            android:textColor="#551A8B"
+            android:textSize="14sp" />
 
         <RadioGroup
             android:id="@+id/setgender"
@@ -63,13 +91,17 @@
 
             <RadioButton
                 android:id="@+id/malebutton"
+                android:textColor="#551A8B"
+                android:textSize="10sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/male" />
 
             <RadioButton
+                android:textSize="10sp"
                 android:id="@+id/femalebutton"
+                android:textColor="#551A8B"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -80,15 +112,21 @@
             android:id="@+id/createpassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
+            android:ems="6"
             android:hint="@string/password"
+            android:textColorHint="#551A8B"
+            android:textColor="#551A8B"
+            android:textSize="10sp"
             android:inputType="textPassword" />
 
         <EditText
+            android:textSize="10sp"
             android:id="@+id/comfirmpassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
+            android:ems="6"
+            android:textColorHint="#551A8B"
+            android:textColor="#551A8B"
             android:hint="@string/confirmpassword"
             android:inputType="textPassword" />
 
@@ -122,9 +160,14 @@
 
         <Button
             android:id="@+id/nextbutton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/next" />
+            android:layout_width="132dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:background="#551A8B"
+            android:text="@string/next"
+            android:textColor="#FFF"
+            android:textSize="14sp" />
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

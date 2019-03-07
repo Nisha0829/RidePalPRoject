@@ -5,11 +5,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".PaymentInfo">
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="110dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ridepallogo" />
 
     <LinearLayout
+
         android:layout_width="309dp"
         android:layout_height="427dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="5dp"
         android:layout_marginTop="8dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -22,46 +40,57 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:textColor="#551A8B"
             android:text="@string/paymentinfo"
-            android:textSize="24sp" />
+            android:textSize="14sp" />
 
         <EditText
             android:id="@+id/ccname"
+            android:textColorHint="#551A8B"
+            android:textColor="#551A8B"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
+            android:textSize="10sp"
             android:inputType="textPersonName"
             android:hint="@string/ccname" />
 
         <EditText
             android:id="@+id/ccnum"
+            android:textColorHint="#551A8B"
+            android:textColor="#551A8B"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
+            android:textSize="10sp"
             android:inputType="number"
             android:hint="@string/ccnum" />
 
         <EditText
+            android:textColorHint="#551A8B"
+            android:textColor="#551A8B"
             android:id="@+id/ccexpdate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
+            android:textSize="10sp"
             android:inputType="date"
             android:hint="@string/ccexp" />
 
         <EditText
+            android:textColorHint="#551A8B"
+            android:textColor="#551A8B"
             android:id="@+id/ccccv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
+            android:textSize="10sp"
             android:inputType="number"
             android:hint="@string/ccccv" />
 
         <EditText
+            android:textColorHint="#551A8B"
+            android:textColor="#551A8B"
             android:id="@+id/cczip"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
+            android:textSize="10sp"
             android:inputType="number"
             android:hint="@string/cczip" />
 
@@ -70,9 +99,12 @@
             android:layout_height="150px" />
 
         <Button
+            android:background="#551A8B"
+            android:textColor="#FFF"
+            android:layout_gravity="center"
             android:id="@+id/finishbutton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="132dp"
+            android:layout_height="25dp"
             android:text="@string/finish" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

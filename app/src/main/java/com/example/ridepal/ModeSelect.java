@@ -25,12 +25,12 @@ public class ModeSelect extends AppCompatActivity {
         ride = (Button)findViewById(R.id.ridebutton);
         signOut = (Button)findViewById(R.id.signoutbutton);
         welcome = (TextView)findViewById(R.id.hellotext);
-        welcome.append("Hello " +userName);
+        welcome.append("Hello " +userName+"!");
 
         drive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent driveMode = new Intent (ModeSelect.this, DriverDestinationSearch.class);
+                Intent driveMode = new Intent (ModeSelect.this, DriverDestSearch.class);
                 startActivity(driveMode);
             }
         });

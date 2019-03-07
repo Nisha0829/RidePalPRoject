@@ -108,7 +108,7 @@ public class CreateAccount1 extends AppCompatActivity {
 
 
                 //Adding information and moving to next screen if all fields are entered.
-                if (firstname != null && lastname != null && email != null && birthday != null && password != null && passowrdconfirm != null && gender != null  && password.equals(passowrdconfirm)) {
+                if (firstname != null && lastname != null && email != null && birthday != null && password != null && passowrdconfirm != null && gender != null  && password.equals(passowrdconfirm) && photoSelected) {
                     // photo = "ZDfxgcv";  for testing
                     System.out.println("firstname" + firstname + " " + "lastname" + lastname + " " + "email" + email + " " + " birthday" + birthday + " " + "password" + password + " " + "gender" + gender); //testing
                     String result = newUserInfo.createAccount(firstname, lastname, birthday, email, gender, password, photo);

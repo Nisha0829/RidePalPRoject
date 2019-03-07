@@ -5,9 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".EditPrefernces">
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="110dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ridepallogo" />
 
     <LinearLayout
+        android:layout_marginLeft="25dp"
         android:layout_width="341dp"
+        android:layout_marginBottom="20dp"
         android:layout_height="468dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -15,6 +34,7 @@
         app:layout_constraintHorizontal_bias="0.511"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="20dp"
         app:layout_constraintVertical_bias="0.372">
 
         <TextView
@@ -22,8 +42,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:textColor="#551A8B"
             android:text="@string/preference"
-            android:textSize="24sp" />
+            android:textSize="14sp" />
 
         <Space
             android:layout_width="match_parent"
@@ -34,7 +55,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/agerange"
-            android:textSize="18sp" />
+            android:textColor="#551A8B"
+            android:textSize="14sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -51,8 +73,10 @@
                 android:layout_width="52dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:ems="10"
+                android:textSize="10sp"
                 android:hint="@string/min"
+                android:textColorHint="#551A8B"
+                android:textColor="#551A8B"
                 android:inputType="number" />
 
             <Space
@@ -65,8 +89,10 @@
                 android:layout_width="44dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:ems="10"
+                android:textSize="10sp"
                 android:hint="@string/max"
+                android:textColorHint="#551A8B"
+                android:textColor="#551A8B"
                 android:inputType="number" />
 
             <Space
@@ -84,7 +110,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/genderpref"
-            android:textSize="18sp" />
+            android:textColor="#551A8B"
+            android:textSize="14sp" />
 
         <RadioGroup
             android:id="@+id/genderprefset"
@@ -97,6 +124,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textSize="10sp"
+                android:textColor="#551A8B"
                 android:text="@string/male" />
 
             <RadioButton
@@ -104,6 +133,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="#551A8B"
+                android:textSize="10sp"
                 android:text="@string/female" />
 
             <RadioButton
@@ -111,22 +142,35 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textSize="10sp"
+                android:textColor="#551A8B"
                 android:text="@string/either" />
         </RadioGroup>
 
 
         <Button
             android:id="@+id/nextbutton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:text="@string/next"
+            android:gravity="center"
             android:layout_marginBottom="15dp"
-            android:layout_marginTop="20dp"/>
+            android:background="#551A8B"
+            android:textSize="14sp"
+            android:textColor="#FFF"
+            android:layout_width="132dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"/>
 
         <Button
             android:id="@+id/skipButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="132dp"
+            android:layout_height="25dp"
+            android:gravity="center"
+            android:textSize="14sp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="#551A8B"
+            android:textColor="#FFF"
             android:text="Skip" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

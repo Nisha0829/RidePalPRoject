@@ -16,6 +16,7 @@ import java.util.List;
 public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String Database_Name = "passenger.db";
     private static final int DATABASE_VERSION = 4;
+    private SQLiteDatabase sqLliteDatabase;
 
 
     public DataBaseHelper(Context context) {
@@ -123,19 +124,33 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     public String logIn(String emailId, String pwd)  //Success // Password is wrong, user does not exist
-    {
-        Cursor cursorInfo = this.getReadableDatabase().rawQuery("Select * from customerInfo;", null);
-        String result = "User Does Not Exist";
-        while (cursorInfo.moveToNext()) {
-            if (emailId.equalsIgnoreCase(cursorInfo.getString(3)) && pwd.equals(cursorInfo.getString(5))) {
-                result = cursorInfo.getString(1);
-                break;
-            } else if (emailId.equalsIgnoreCase(cursorInfo.getString(3))) {
-                result = "Invalid Password";
-                break;
-            }
 
+    {
+        String result = "User Does Not Exist";
+        Cursor cursor = this.getReadableDatabase().query("customerInfo", new String[]{"EMAILID", "PASSWORD"}, null, null, null, null, null, null);
+        if (cursor != null & cursor.getCount() > 0) {
+            while(cursor.moveToNext()){
+                if (emailId.equalsIgnoreCase(cursor.getString(0)) && pwd.equals(cursor.getString(1))) {
+               result = cursor.getString(1);
+               break;
+           } else if (emailId.equalsIgnoreCase(cursor.getString(0))) {
+              result = "Invalid Password";
+               break;
+           }
+            }
         }
+//        Cursor cursorInfo = this.getReadableDatabase().rawQuery("Select * from customerInfo;", null);
+//
+//        while (cursorInfo.moveToNext()) {
+//            if (emailId.equalsIgnoreCase(cursorInfo.getString(3)) && pwd.equals(cursorInfo.getString(5))) {
+//                result = cursorInfo.getString(1);
+//                break;
+//            } else if (emailId.equalsIgnoreCase(cursorInfo.getString(3))) {
+//                result = "Invalid Password";
+//                break;
+//            }
+//
+//        }
         return result;
     }
 
@@ -143,22 +158,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     {
         double userLatG = latitude * Math.PI / 180;
         double userLonG = longitude * Math.PI / 180;
-        List<DestinationValues> listDestinationValues=null;
+        List<DestinationValues> listDestinationValues = null;
         Cursor cursorInfo = this.getReadableDatabase().rawQuery("Select * from cust_destination where EMAILID =" + email + "; ", null);
-        while (cursorInfo.moveToNext()){
+        while (cursorInfo.moveToNext()) {
             DestinationValues destinationValues = null;
-            double destLatg = cursorInfo.getDouble(0) * Math.PI /180;
-            double destLong = cursorInfo.getDouble(1) * Math.PI /180;
+            double destLatg = cursorInfo.getDouble(0) * Math.PI / 180;
+            double destLong = cursorInfo.getDouble(1) * Math.PI / 180;
             double phi = Math.abs(destLatg - destLong);
             double distance = (Math.acos(Math.cos(phi) * Math.cos(userLatG) * Math.cos(destLatg) + Math.sin(userLonG) * Math.sin(destLong))) * 6387;
-            if(distance <= 5){
-                destinationValues= new DestinationValues( cursorInfo.getString(0), cursorInfo.getString(1), cursorInfo.getString(2));
+            if (distance <= 5) {
+                destinationValues = new DestinationValues(cursorInfo.getString(0), cursorInfo.getString(1), cursorInfo.getString(2));
             }
-            if(listDestinationValues.isEmpty()){
+            if (listDestinationValues.isEmpty()) {
                 listDestinationValues = new ArrayList<DestinationValues>();
             }
-            if(null!=destinationValues)
-            listDestinationValues.add(destinationValues);
+            if (null != destinationValues)
+                listDestinationValues.add(destinationValues);
 
         }
         return listDestinationValues;
@@ -186,14 +201,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             this.getWritableDatabase().insert("payment_info", null, contentValues);
 
         }
-        return result =DestinationMatch(email, latitude,longitude) ;
+        return result = DestinationMatch(email, latitude, longitude);
     }
 
     public void list(TextView textView) { // For testing purpose
         // column 0,1 and 2 for respectively max, min and emailId
         //this.getReadableDatabase().rawQuery("Delete from customer_preference where EMAILID ='12345@gmail.com'", null);
-        String email="af";
-        String sqlQuery = "Select * from customerInfo where EMAILID = '"+email+"';";
+        String email = "af";
+        String sqlQuery = "Select * from customerInfo where EMAILID = '" + email + "';";
         Cursor cursorInfo = this.getReadableDatabase().rawQuery(sqlQuery, null);// where EMAILID = 'ad'", null);
         while (cursorInfo.moveToNext()) {
             textView.append(cursorInfo.getString(3) + " " + cursorInfo.getString(5) + " " + cursorInfo.getString(1));// + " " + cursorInfo.getString(3));
