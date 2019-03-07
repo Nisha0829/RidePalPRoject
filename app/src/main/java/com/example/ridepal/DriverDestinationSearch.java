@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -27,6 +28,7 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -39,16 +41,14 @@ public class DriverDestinationSearch extends AppCompatActivity implements OnMapR
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
 
-    public GoogleMap map;
-    Button modeSelect, search;
-    EditText inputLocation;
-    TextView seekMiles;
-    SeekBar searchMiles;
-    String currentMiles;
+    private GoogleMap map;
+    private Button modeSelect, search;
+    private EditText inputLocation;
     SupportMapFragment mapFragment;
     private GoogleApiClient googleApiClient;
     private LocationRequest locationRequest;
-    private Location lastLocation;
+    protected Location lastLocation;
+    private static final int Request_User_Location_Code = 99;
 
     private Marker currentUserLocationMarker;
 
@@ -59,8 +59,11 @@ public class DriverDestinationSearch extends AppCompatActivity implements OnMapR
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver_destination_search);
-        mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.destinationmap);
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            checkUserLocationPermission();
+        }
+        mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.destinationmap);
         mapFragment.getMapAsync(this);
 
 
@@ -84,28 +87,6 @@ public class DriverDestinationSearch extends AppCompatActivity implements OnMapR
             }
         });
 
-        //Miles Seekbar and display of current seekbar miles.
-        seekMiles = (TextView) findViewById(R.id.miles);
-        searchMiles = (SeekBar) findViewById(R.id.milesbar);
-        currentMiles = searchMiles.getProgress() + " Miles";
-        seekMiles.setText(currentMiles);
-        searchMiles.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                currentMiles = searchMiles.getProgress() + " Miles";
-                seekMiles.setText(currentMiles);
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
 
         inputLocation = (EditText) findViewById(R.id.desinationinput);
         search = (Button) findViewById(R.id.searchbutton);
@@ -124,17 +105,48 @@ public class DriverDestinationSearch extends AppCompatActivity implements OnMapR
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        this.map = googleMap;
+        map = googleMap;
         //System.out.println("Value of map is " + map);
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)==PackageManager.PERMISSION_GRANTED) {
+
             buildGoogleApiClient();
 
             map.setMyLocationEnabled(true);
         }
 
 
+    }
+
+    public boolean checkUserLocationPermission(){
+        if(ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            if(ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.ACCESS_FINE_LOCATION)){
+                ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, Request_User_Location_Code);
+            }else{
+                ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, Request_User_Location_Code);
+            }
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode){
+            case Request_User_Location_Code:
+                if(grantResults.length>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
+                    if(ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION)==PackageManager.PERMISSION_GRANTED){
+                        if(googleApiClient==null){
+                            buildGoogleApiClient();
+                        }
+                        map.setMyLocationEnabled(true);
+                    }
+                }else{
+                    Toast.makeText(this, "Permission Denied...",Toast.LENGTH_SHORT).show();
+
+                }return;
+        }
     }
 
     protected synchronized void buildGoogleApiClient(){
@@ -153,7 +165,7 @@ public class DriverDestinationSearch extends AppCompatActivity implements OnMapR
         LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
-        markerOptions.title("user Current Location");
+        markerOptions.title("Current Location");
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET));
 
         currentUserLocationMarker = map.addMarker(markerOptions);
@@ -177,10 +189,6 @@ public class DriverDestinationSearch extends AppCompatActivity implements OnMapR
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)==PackageManager.PERMISSION_GRANTED){
             LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient,locationRequest,this);
         }
-
-
-
-
     }
 
     @Override

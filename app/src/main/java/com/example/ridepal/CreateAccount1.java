@@ -97,7 +97,7 @@ public class CreateAccount1 extends AppCompatActivity {
                     Toast completeFields = Toast.makeText(getApplicationContext(), "Please fill in all fields", Toast.LENGTH_SHORT);
                     completeFields.show();
                 }
-                if (password != null && passowrdconfirm != null && password != passowrdconfirm) {
+                if (password != null && passowrdconfirm != null && !password.equals(passowrdconfirm)) {
                     Toast passwordMismatch = Toast.makeText(getApplicationContext(), "Passwords do not match.", Toast.LENGTH_SHORT);
                     passwordMismatch.show();
                 }
@@ -108,7 +108,7 @@ public class CreateAccount1 extends AppCompatActivity {
 
 
                 //Adding information and moving to next screen if all fields are entered.
-                if (firstname != null && lastname != null && email != null && birthday != null && password != null && passowrdconfirm != null && gender != null  && password==passowrdconfirm) {
+                if (firstname != null && lastname != null && email != null && birthday != null && password != null && passowrdconfirm != null && gender != null  && password.equals(passowrdconfirm)) {
                     // photo = "ZDfxgcv";  for testing
                     System.out.println("firstname" + firstname + " " + "lastname" + lastname + " " + "email" + email + " " + " birthday" + birthday + " " + "password" + password + " " + "gender" + gender); //testing
                     String result = newUserInfo.createAccount(firstname, lastname, birthday, email, gender, password, photo);

@@ -30,7 +30,7 @@ public class ModeSelect extends AppCompatActivity {
         drive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent driveMode = new Intent (ModeSelect.this, DriverDestinationSearch.class);
+                Intent driveMode = new Intent (ModeSelect.this, DriverDestSearch.class);
                 startActivity(driveMode);
             }
         });

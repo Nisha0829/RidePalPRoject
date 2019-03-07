@@ -45,4 +45,10 @@
     <string name="google_android_map_api_key">AIzaSyBcf6w9AuEzxBJAmRisNzMBCQ-sCAd-8Zw</string>
     <string name="riding">Riding</string>
     <string name="signout">Sign Out</string>
+    <string name="title_activity_driver_dest_search">Map</string>
+    <string name="to">TO</string>
+    <string name="searchforpassengers">Search for Passengers</string>
+    <string name="searchfordrivers">Search for Drivers</string>
+    <string name="timeofdeparture">Time of Departure</string>
+    <string name="changepref">Change Preferences</string>
 </resources>

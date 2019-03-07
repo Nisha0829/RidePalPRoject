@@ -6,4 +6,125 @@
     android:layout_height="match_parent"
     tools:context=".DriverComfirmRoute">
 
+    <LinearLayout
+        android:layout_width="369dp"
+        android:layout_height="63dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.533"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.013">
+
+        <Button
+            android:id="@+id/modeselect"
+            android:layout_width="212dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/modeselectreturn" />
+
+        <TextView
+            android:id="@+id/drivermodetitle"
+            android:layout_width="305dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/driving"
+            android:textSize="24sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="380dp"
+        android:layout_height="337dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.386">
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="15dp" />
+
+        <Button
+            android:id="@+id/originbutton"
+            android:layout_width="match_parent"
+            android:layout_height="82dp"
+            android:text="[origin]" />
+
+        <TextView
+            android:id="@+id/totext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/to"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/destinationbutton"
+            android:layout_width="match_parent"
+            android:layout_height="82dp"
+            android:text="[Destination]" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="15dp" />
+
+        <TextView
+            android:id="@+id/searchwithintitile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/searchwithin"
+            android:textSize="18sp" />
+
+        <SeekBar
+            android:id="@+id/milesbar"
+            android:layout_width="match_parent"
+            android:layout_height="75px"
+            android:max="50"
+            android:progress="5" />
+
+        <TextView
+            android:id="@+id/miles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="TextView"
+            android:textSize="18sp"
+            android:visibility="visible" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="380dp"
+        android:layout_height="97dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+        <Button
+            android:id="@+id/passengersearch"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:text="@string/searchforpassengers" />
+
+        <Button
+            android:id="@+id/changeprefbutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/changepref" />
+    </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>

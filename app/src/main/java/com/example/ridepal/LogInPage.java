@@ -13,6 +13,7 @@ public class LogInPage extends AppCompatActivity {
     Button createAccount;
     Button logIn;
     Button showBtn;
+    Button mapTest;
     String Email;
     EditText email;
     TextView displayList;
@@ -27,6 +28,16 @@ public class LogInPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         logInPage = new DataBaseHelper(this);
         setContentView(R.layout.activity_log_in_page);
+
+
+        mapTest = (Button)findViewById(R.id.maptestbutton);
+        mapTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent maptesting = new Intent(LogInPage.this, DriverDestSearch.class);
+                startActivity(maptesting);
+            }
+        });
         createAccount = (Button) findViewById(R.id.createaccount);
         createAccount.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,11 +68,11 @@ public class LogInPage extends AppCompatActivity {
                 if (!emailValue.isEmpty() && !pwdValue.isEmpty()) {
 
                     String result = logInPage.logIn(emailValue, pwdValue);
-                    if (result != "Invalid Password" && result != "User Does Not Exist") {
+                    if (!result.equals("Invalid Password") && !result.equals("User Does Not Exist")) {
                         Intent next = new Intent(LogInPage.this, ModeSelect.class);
                         next.putExtra("userName", result);
                         startActivity(next);
-                    } else if (result == "Invalid Password") {
+                    } else if (result.equals("Invalid Password") ) {
                         Toast.makeText(getApplicationContext(), "Invalid password, Please try again", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(getApplicationContext(), "User does not exist", Toast.LENGTH_SHORT).show();
