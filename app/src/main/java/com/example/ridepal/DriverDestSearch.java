@@ -185,7 +185,7 @@ public class DriverDestSearch extends FragmentActivity implements OnMapReadyCall
                 Intent next = new Intent(DriverDestSearch.this, DriverComfirmRoute.class);
                 Bundle destID = new Bundle();
                 destID.putString("DestPlaceID", destinationID);
-                destID.putString("CurrentLocLatLng", currentLocationLatLng.toString());
+                //destID.putString("CurrentLocLatLng", currentLocationLatLng.toString());
                 next.putExtras(destID);
                 startActivity(next);
             }
