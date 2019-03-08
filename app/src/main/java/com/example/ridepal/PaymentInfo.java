@@ -38,9 +38,9 @@ public class PaymentInfo extends AppCompatActivity {
                 sCardnum = iCardnum.getText().toString();
                 sCCV = iCCV.getText().toString();
                 sZip = iZip.getText().toString();
-                Intent getEmail = getIntent();
-                Bundle bundle = getEmail.getExtras();
-                email = bundle.getString("vehEmail");
+                Intent intent = getIntent();
+                Bundle bundle = intent.getExtras();
+               // email = bundle.getString("vehEmail");
                 cardNum = Integer.parseInt(sCardnum);
                 ccv = Integer.parseInt(sCCV);
                 zip = Integer.parseInt(sZip);
@@ -49,9 +49,13 @@ public class PaymentInfo extends AppCompatActivity {
                     Toast missingInfo = Toast.makeText(getApplicationContext(), "Please Fill in all fields.", Toast.LENGTH_SHORT);
                     missingInfo.show();
                 } else {
-                    newPaymentInfo.paymentInfo(cardName, cardNum, expDate, ccv, zip, email);
-                    Intent next = new Intent(PaymentInfo.this, LogInPage.class);
-                    startActivity(next);
+                    Intent logInIntent = new Intent(PaymentInfo.this, LogInPage.class);
+                    Toast login = Toast.makeText(getApplicationContext(),"You've directed to  Login page!", Toast.LENGTH_SHORT);
+                    login.show();
+                    startActivity(logInIntent);
+                   // newPaymentInfo.paymentInfo(cardName, cardNum, expDate, ccv, zip, email);
+//                    Intent next = new Intent(PaymentInfo.this, LogInPage.class);
+//                    startActivity(next);
                 }
             }
         });

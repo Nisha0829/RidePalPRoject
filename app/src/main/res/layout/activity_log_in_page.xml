@@ -6,13 +6,33 @@
     android:layout_height="match_parent"
     tools:context=".LogInPage">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="321dp"
+        android:layout_height="156dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.118"
+        app:srcCompat="@drawable/ridepallogo" />
     <EditText
+
         android:id="@+id/emailSignIn"
+        android:textColor="#551A8B"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
+        android:textColorHint="#551A8B"
         android:hint="@string/Email"
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -24,16 +44,18 @@
 
     <Button
         android:id="@+id/signInButton"
-        android:layout_width="215dp"
-        android:layout_height="53dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="200dp"
+        android:layout_height="35dp"
         android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="#551A8B"
+        android:textColor="#fff"
         android:text="@string/SignIn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.809" />
+        app:layout_constraintVertical_bias="0.791" />
 
     <EditText
         android:id="@+id/passwordSignIn"
@@ -41,7 +63,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
+        android:inputType="textPassword"
         android:ems="10"
+        android:textColor="#551A8B"
+        android:textColorHint="#551A8B"
         android:hint="@string/password"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -51,6 +76,7 @@
         app:layout_constraintVertical_bias="0.665" />
 
     <TextView
+        android:visibility="gone"
         android:id="@+id/displayValue"
         android:layout_width="372dp"
         android:layout_height="134dp"
@@ -69,6 +95,7 @@
 
     <TextView
         android:id="@+id/textView"
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -85,7 +112,7 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="368dp"
-        android:layout_height="42dp"
+        android:layout_height="46dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -102,20 +129,26 @@
 
         <Button
             android:id="@+id/forgetpassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/forgetpassword" />
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="1dp"
+            android:layout_marginLeft="5dp"
+            android:background="#551A8B"
+            android:text="@string/forgetpassword"
+            android:textColor="#fff" />
 
         <Button
             android:id="@+id/createaccount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/createaccount" />
+            android:layout_width="150dp"
+            android:layout_marginRight="10dp"
+            android:layout_height="30dp"
+            android:background="#551A8B"
+            android:text="@string/createaccount"
+            android:textColor="#fff" />
     </LinearLayout>
 
     <Button
+        android:visibility="gone"
         android:id="@+id/show"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -128,18 +161,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/maptestbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
-        android:text="testmap"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/show"
-        app:layout_constraintVertical_bias="0.341" />
 
 </android.support.constraint.ConstraintLayout>
