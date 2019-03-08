@@ -28,6 +28,9 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_android_map_api_key" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
 
         <activity android:name=".LogInPage">
             <intent-filter>
@@ -41,13 +44,10 @@
         <activity android:name=".VehicleInfo" />
         <activity android:name=".PaymentInfo" />
         <activity android:name=".ModeSelect" />
-        <activity android:name=".DriverDestinationSearch" />
-        <activity android:name=".DriverDestinationResults" />
-        <activity android:name=".PassengerDesinationSearch" />
         <activity
             android:name=".DriverDestSearch"
-            android:label="@string/title_activity_driver_dest_search"
-            android:exported="true"/>
+            android:exported="true"
+            android:label="@string/title_activity_driver_dest_search" />
 
         <uses-library
             android:name="org.apache.http.legacy"
@@ -60,6 +60,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".DriverOriginSearch"
+            android:label="@string/title_activity_driver_origin_search" />
+        <activity
+            android:name=".PassengerDestSearch"
+            android:label="@string/title_activity_passenger_dest_search" />
+        <activity android:name=".PassengerComfirmRoute" />
+        <activity
+            android:name=".PassengerOriginSearch"
+            android:label="@string/title_activity_passenger_origin_search"></activity>
     </application>
 
 </manifest>

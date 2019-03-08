@@ -42,7 +42,7 @@
     <string name="destinationquestion">Where are you going?</string>
     <string name="searchbutton">Search</string>
     <string name="mapsearchinput">Enter an address or place</string>
-    <string name="google_android_map_api_key">AIzaSyBcf6w9AuEzxBJAmRisNzMBCQ-sCAd-8Zw</string>
+    <string name="google_android_map_api_key">AIzaSyB42SLMvdvtN6_P-GcgObIyf-u0S7Yu14Y</string>
     <string name="riding">Riding</string>
     <string name="signout">Sign Out</string>
     <string name="title_activity_driver_dest_search">Map</string>
@@ -51,4 +51,8 @@
     <string name="searchfordrivers">Search for Drivers</string>
     <string name="timeofdeparture">Time of Departure</string>
     <string name="changepref">Change Preferences</string>
+    <string name="cont">Continue</string>
+    <string name="title_activity_driver_origin_search">Map</string>
+    <string name="title_activity_passenger_dest_search">Map</string>
+    <string name="title_activity_passenger_origin_search">Map</string>
 </resources>

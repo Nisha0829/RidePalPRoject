@@ -3,14 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/map"
-    android:name="com.google.android.gms.maps.SupportMapFragment"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".DriverDestSearch" />
-    
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".DriverDestSearch" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -21,26 +21,12 @@
         android:background="@drawable/white_border"
         android:id="@+id/relLayout1">
 
-        <ImageView
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:id="@+id/ic_magnify"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:src="@drawable/ic_magnify"/>
 
-        <EditText
+        <fragment
+            android:id="@+id/autocomplete_fragment"
+            android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_toRightOf="@id/ic_magnify"
-            android:layout_centerVertical="true"
-            android:textSize="15sp"
-            android:textColor="#000"
-            android:id="@+id/input_search"
-            android:background="@null"
-            android:hint="@string/destinationquestion"
-            android:imeOptions="actionSearch"
-            android:singleLine="true"/>
+            android:layout_height="match_parent" />
 
     </RelativeLayout>
 
@@ -54,6 +40,24 @@
         android:scaleType="centerCrop"
         android:id="@+id/ic_gps"
         android:src="@drawable/ic_gps"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/contbutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+
+            android:text="@string/cont"
+            android:textSize="30sp"
+            android:visibility="invisible" />
+    </LinearLayout>
 
 
 </RelativeLayout>
