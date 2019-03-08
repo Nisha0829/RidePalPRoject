@@ -38,7 +38,7 @@ public class ModeSelect extends AppCompatActivity {
         ride.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent rideMode = new Intent(ModeSelect.this, PassengerDesinationSearch.class);
+                Intent rideMode = new Intent(ModeSelect.this, PassengerDestSearch.class);
                 startActivity(rideMode);
             }
         });
