@@ -71,11 +71,12 @@ import java.util.List;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
-public class DriverDestSearch extends FragmentActivity implements OnMapReadyCallback,
-        GoogleApiClient.OnConnectionFailedListener,
-        com.google.android.gms.location.LocationListener{
 
-    private static final String TAG = "DriverDestSearch";
+public class PassengerOriginSearch extends FragmentActivity implements OnMapReadyCallback,
+        GoogleApiClient.OnConnectionFailedListener,
+        com.google.android.gms.location.LocationListener {
+
+    private static final String TAG = "DriverOriginSearch";
     private static final String FINE_LOCATION = ACCESS_FINE_LOCATION;
     private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
@@ -98,7 +99,6 @@ public class DriverDestSearch extends FragmentActivity implements OnMapReadyCall
     private PlaceInfo mPlace;
     private String destinationID;
     private String originID;
-    private LatLng currentLocationLatLng;
 
     //widgets
     private AutoCompleteTextView mSearchText;
@@ -109,21 +109,17 @@ public class DriverDestSearch extends FragmentActivity implements OnMapReadyCall
 
     private Button cont;
 
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_driver_dest_search);
-        //mSearchText = (AutoCompleteTextView)findViewById(R.id.input_search);
+        setContentView(R.layout.activity_passenger_origin_search);
         mGps=(ImageView)findViewById(R.id.ic_gps);
         cont=(Button)findViewById(R.id.contbutton);
+        destinationID  = getIntent().getExtras().getString("DestPlaceID");
 
 
         autocompleteSupportFragment = (AutocompleteSupportFragment)
-            getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
+                getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
 
         autocompleteSupportFragment.setPlaceFields(Arrays.asList(Place.Field.ID,Place.Field.NAME,Place.Field.ADDRESS, Place.Field.LAT_LNG));
 
@@ -133,7 +129,7 @@ public class DriverDestSearch extends FragmentActivity implements OnMapReadyCall
                 if(place.getLatLng()!=null || place.getAddress()!=null || place.getId()!=null || place.getName()!=null) {
                     Log.i(TAG, "Place " + place.getName() + ", " + place.getId() + ", " + place.getAddress() + ", " + place.getLatLng());
                     moveCamera(place.getLatLng(), DEFAULT_ZOOM, place.getName());
-                    destinationID = place.getId();
+                    originID = place.getId();
                     cont.setVisibility(View.VISIBLE);
                 }else{
                     Toast.makeText(getApplicationContext(),"Error getting location data. Please try Again",Toast.LENGTH_SHORT).show();
@@ -182,11 +178,11 @@ public class DriverDestSearch extends FragmentActivity implements OnMapReadyCall
         cont.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent next = new Intent(DriverDestSearch.this, DriverComfirmRoute.class);
-                Bundle destID = new Bundle();
-                destID.putString("DestPlaceID", destinationID);
-                destID.putString("CurrentLocLatLng", currentLocationLatLng.toString());
-                next.putExtras(destID);
+                Intent next = new Intent(PassengerOriginSearch.this, PassengerComfirmRoute.class);
+                Bundle oID = new Bundle();
+                oID.putString("OriginID", originID);
+                oID.putString("DestPlaceID", destinationID);
+                next.putExtras(oID);
                 startActivity(next);
             }
         });
@@ -234,7 +230,7 @@ public class DriverDestSearch extends FragmentActivity implements OnMapReadyCall
 
 
 
-        Geocoder geocoder = new Geocoder(DriverDestSearch.this);
+        Geocoder geocoder = new Geocoder(PassengerOriginSearch.this);
         List<Address> list = new ArrayList<>();
         try{
             list = geocoder.getFromLocationName(place.getName(),1);
@@ -270,13 +266,13 @@ public class DriverDestSearch extends FragmentActivity implements OnMapReadyCall
                         if(task.isSuccessful()){
                             Log.d(TAG, "onComplete: found location!");
                             Location currentLocation = (Location) task.getResult();
-                            currentLocationLatLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
 
-                            moveCamera(currentLocationLatLng, DEFAULT_ZOOM, "Current Location");
+                            moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),
+                                    DEFAULT_ZOOM, "Current Location");
 
                         }else{
                             Log.d(TAG, "onComplete: current location is null");
-                            Toast.makeText(DriverDestSearch.this, "unable to get current location", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(PassengerOriginSearch.this, "unable to get current location", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -304,7 +300,7 @@ public class DriverDestSearch extends FragmentActivity implements OnMapReadyCall
         Log.d(TAG, "initMap: initializing map");
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 
-        mapFragment.getMapAsync(DriverDestSearch.this);
+        mapFragment.getMapAsync(PassengerOriginSearch.this);
     }
 
     private void getLocationPermission(){
@@ -435,7 +431,7 @@ public class DriverDestSearch extends FragmentActivity implements OnMapReadyCall
     }
 
     /*
-    ********************** google places api autocomplete suggestions *********************
+     ********************** google places api autocomplete suggestions *********************
      */
 
    /* private AdapterView.OnItemClickListener mAutocompleteClickListener = new AdapterView.OnItemClickListener() {

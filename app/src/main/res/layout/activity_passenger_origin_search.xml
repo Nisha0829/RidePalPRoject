@@ -9,7 +9,7 @@
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".DriverDestSearch" />
+        tools:context=".PassengerOriginSearch" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -55,11 +55,8 @@
             android:layout_alignParentBottom="true"
 
             android:text="@string/cont"
-            android:background="#551A8B"
-            android:textColor="#FFF"
-            android:textSize="14sp"
+            android:textSize="30sp"
             android:visibility="invisible" />
     </LinearLayout>
-
 
 </RelativeLayout>

@@ -22,7 +22,7 @@ import java.sql.Array;
 import java.util.Arrays;
 import java.util.List;
 
-public class DriverComfirmRoute extends AppCompatActivity {
+public class PassengerComfirmRoute extends AppCompatActivity {
 
     private TextView seekMiles;
     private SeekBar searchMiles;
@@ -40,15 +40,12 @@ public class DriverComfirmRoute extends AppCompatActivity {
     private String originAddress;
     private String origPlaceID;
 
-
-
-    private static final String TAG = "DriverComfirmRoute";
-
+    private static final String TAG = "PassengerComfirmRoute";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_driver_comfirm_route);
+        setContentView(R.layout.activity_passenger_comfirm_route);
 
         seekMiles = (TextView) findViewById(R.id.miles);
         searchMiles = (SeekBar) findViewById(R.id.milesbar);
@@ -121,7 +118,7 @@ public class DriverComfirmRoute extends AppCompatActivity {
         changeDest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent selectDest = new Intent(DriverComfirmRoute.this, DriverDestSearch.class);
+                Intent selectDest = new Intent(PassengerComfirmRoute.this, PassengerDestSearch.class);
                 startActivity(selectDest);
 
             }
@@ -130,7 +127,7 @@ public class DriverComfirmRoute extends AppCompatActivity {
         changeOrigin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent setO = new Intent (DriverComfirmRoute.this, DriverOriginSearch.class);
+                Intent setO = new Intent (PassengerComfirmRoute.this, PassengerOriginSearch.class);
                 Bundle desID = new Bundle();
                 desID.putString("DestPlaceID", destPlaceID);
                 setO.putExtras(desID);
@@ -161,12 +158,12 @@ public class DriverComfirmRoute extends AppCompatActivity {
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO Create method to input Driver Status, UserEmail, Destination Name, Destination LatLng, Origin Name, Origin LatLng, and Current Miles into Search Table.
+                //TODO Create method to input Passenger Status, UserEmail, Destination Name, Destination LatLng, Origin Name, Origin LatLng, and Current Miles into Search Table.
 
-                //TODO Create method to start search database for matching Passengers with above criteria.
+                //TODO Create method to start search database for matching Drivers with above criteria.
             }
         });
     }
 
-
 }
+
