@@ -69,7 +69,8 @@
         <activity android:name=".PassengerComfirmRoute" />
         <activity
             android:name=".PassengerOriginSearch"
-            android:label="@string/title_activity_passenger_origin_search"></activity>
+            android:label="@string/title_activity_passenger_origin_search" />
+        <activity android:name=".DriverSearchResults"></activity>
     </application>
 
 </manifest>

@@ -26,7 +26,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.ridepal.models.PlaceInfo;
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -81,12 +81,9 @@ public class DriverDestSearch extends FragmentActivity implements OnMapReadyCall
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
     private static final float DEFAULT_ZOOM = 15f;
 
-    private static final LatLngBounds LAT_LNG_BOUNDS=new LatLngBounds(
-            new LatLng(-40, -168), new LatLng(71, 136)
-    );
     private GoogleMap mMap;
     GoogleApiClient mGoogleApiClient;
-    LocationRequest mLocationRequest;
+
     PlacesClient placesClient;
     AutocompleteSupportFragment autocompleteSupportFragment;
 
@@ -94,18 +91,16 @@ public class DriverDestSearch extends FragmentActivity implements OnMapReadyCall
     Marker mCurrLocationMarker;
     private Boolean mLocationPermissionsGranted = false;
     private FusedLocationProviderClient mFusedLocationProviderClient;
-    private PlaceAutocompleteAdapter mPlaceAutocompleteAdapter;
-    private PlaceInfo mPlace;
+
+
     private String destinationID;
-    private String originID;
+
     private LatLng currentLocationLatLng;
 
-    //widgets
-    private AutoCompleteTextView mSearchText;
+
+
     private ImageView mGps;
 
-    private GeoDataClient mGeoDataClient;
-    private PlaceDetectionClient mPlaceDetectionClient;
 
     private Button cont;
 
@@ -117,7 +112,6 @@ public class DriverDestSearch extends FragmentActivity implements OnMapReadyCall
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver_dest_search);
-        //mSearchText = (AutoCompleteTextView)findViewById(R.id.input_search);
         mGps=(ImageView)findViewById(R.id.ic_gps);
         cont=(Button)findViewById(R.id.contbutton);
 
@@ -185,38 +179,16 @@ public class DriverDestSearch extends FragmentActivity implements OnMapReadyCall
                 Intent next = new Intent(DriverDestSearch.this, DriverComfirmRoute.class);
                 Bundle destID = new Bundle();
                 destID.putString("DestPlaceID", destinationID);
-                //destID.putString("CurrentLocLatLng", currentLocationLatLng.toString());
+
                 next.putExtras(destID);
                 startActivity(next);
             }
         });
 
-
-
-
-
-
-        /*if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            checkLocationPermission();
-        }
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);*/
     }
 
     private void init(){
         Log.d(TAG, "init: initializing");
-
-        //mGoogleApiClient = new GoogleApiClient.Builder(this).addApi()
-
-        //mSearchText.setOnItemClickListener(mAutocompleteClickListener);
-
-        //PlaceAutocompleteAdapter = new PlaceAutocompleteAdapter(this, mGoogleApiClient,LAT_LNG_BOUNDS, null);
-
-        //mSearchText.setAdapter(mPlaceAutocompleteAdapter);
-
-
 
         mGps.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -227,32 +199,6 @@ public class DriverDestSearch extends FragmentActivity implements OnMapReadyCall
         });
 
         hideSoftKeyboard();
-    }
-
-    private void geoLocate(Place place){
-        Log.d(TAG, "geoLocate:geolocating");
-
-
-
-        Geocoder geocoder = new Geocoder(DriverDestSearch.this);
-        List<Address> list = new ArrayList<>();
-        try{
-            list = geocoder.getFromLocationName(place.getName(),1);
-
-        }catch (IOException e){
-            Log.e(TAG, "geoLocate: IOException: " +e.getMessage());
-        }
-
-        if(list.size()>0){
-            Address address = list.get(0);
-
-            Log.d(TAG, "geoLocate: found a location: "+address.toString());
-
-            //Toast.makeText(this, address.toString(), Toast.LENGTH_SHORT).show();
-
-            moveCamera(new LatLng(address.getLatitude(),address.getLongitude()), DEFAULT_ZOOM,place.getName());
-
-        }
     }
 
     private void getDeviceLocation(){
@@ -289,21 +235,16 @@ public class DriverDestSearch extends FragmentActivity implements OnMapReadyCall
     private void moveCamera(LatLng latLng, float zoom, String title){
         Log.d(TAG, "moveCamera: moving the camera to: lat: " + latLng.latitude + ", lng: " + latLng.longitude );
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
-
         if(!title.equals("Current Location")){
             MarkerOptions options = new MarkerOptions().position(latLng).title(title);
             mMap.addMarker(options);
         }
-
         hideSoftKeyboard();
-
-
     }
 
     private void initMap(){
         Log.d(TAG, "initMap: initializing map");
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-
         mapFragment.getMapAsync(DriverDestSearch.this);
     }
 
@@ -311,7 +252,6 @@ public class DriverDestSearch extends FragmentActivity implements OnMapReadyCall
         Log.d(TAG, "getLocationPermission: getting location permissions");
         String[] permissions = {ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION};
-
         if(ContextCompat.checkSelfPermission(this.getApplicationContext(),
                 FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
             if(ContextCompat.checkSelfPermission(this.getApplicationContext(),
@@ -330,23 +270,11 @@ public class DriverDestSearch extends FragmentActivity implements OnMapReadyCall
         }
     }
 
-
-
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         Toast.makeText(this, "Map is Ready", Toast.LENGTH_SHORT).show();
         Log.d(TAG, "onMapReady: map is ready");
         mMap = googleMap;
-
         if (mLocationPermissionsGranted) {
             getDeviceLocation();
 
@@ -357,15 +285,9 @@ public class DriverDestSearch extends FragmentActivity implements OnMapReadyCall
             }
             mMap.setMyLocationEnabled(true);
             mMap.getUiSettings().setMyLocationButtonEnabled(false);
-
             init();
         }
     }
-
-
-
-
-
 
     @Override
     public void onLocationChanged(Location location) {
@@ -373,7 +295,6 @@ public class DriverDestSearch extends FragmentActivity implements OnMapReadyCall
         if (mCurrLocationMarker != null) {
             mCurrLocationMarker.remove();
         }
-
         //Place current location marker
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
         MarkerOptions markerOptions = new MarkerOptions();
@@ -381,11 +302,9 @@ public class DriverDestSearch extends FragmentActivity implements OnMapReadyCall
         markerOptions.title("Your Location");
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
         mCurrLocationMarker = mMap.addMarker(markerOptions);
-
         //move map camera
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(11));
-
         //stop location updates
         if (mGoogleApiClient != null) {
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
@@ -393,24 +312,16 @@ public class DriverDestSearch extends FragmentActivity implements OnMapReadyCall
 
     }
 
-
-
-
-
-
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
-
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
         Log.d(TAG, "onRequestPermissionsResult: called.");
         mLocationPermissionsGranted = false;
-
         switch(requestCode){
             case LOCATION_PERMISSION_REQUEST_CODE:{
                 if(grantResults.length > 0){
@@ -433,57 +344,4 @@ public class DriverDestSearch extends FragmentActivity implements OnMapReadyCall
     private void hideSoftKeyboard(){
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
-
-    /*
-    ********************** google places api autocomplete suggestions *********************
-     */
-
-   /* private AdapterView.OnItemClickListener mAutocompleteClickListener = new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
-            hideSoftKeyboard();
-
-            final AutocompletePrediction item = mPlaceAutocompleteAdapter.getItem(i);
-            final String placeId = item.getPlaceId();
-
-            PendingResult<PlaceBuffer> placeResult = Places.GeoDataApi
-                    .getPlaceById(mGoogleApiClient, placeId);
-            placeResult.setResultCallback(mUpdatePlaceDetailsCallback);
-        }
-    };
-
-   /*( private ResultCallback<PlaceBuffer> mUpdatePlaceDetailsCallback = new ResultCallback<PlaceBuffer>() {
-        @Override
-        public void onResult(@NonNull PlaceBuffer places) {
-            if(!places.getStatus().isSuccess()){
-                Log.d(TAG, "onResult: Place query did not complete successfully: "+ places.getStatus().toString());
-                places.release();
-                return;
-            }
-            //final Places place = places.
-
-            try{
-                mPlace = new PlaceInfo();
-                mPlace.setName(place.getName().toString());
-                //mPlace.setAttributions(place.getAttributions().toString());
-                mPlace.setAddress(place.getAddress().toString());
-                mPlace.setId(place.getId());
-                mPlace.setLatlng(place.getLatLng());
-                mPlace.setRating(place.getRating());
-                mPlace.setPhoneNumber(place.getPhoneNumber().toString());
-                mPlace.setWebsiteUri(place.getWebsiteUri());
-
-                Log.d(TAG, "OnResult: place: " + mPlace.toString());
-            }catch (NullPointerException e){
-                Log.e(TAG, "onResult: NullPointerException: "+e.getMessage());
-            }
-
-            moveCamera(new LatLng(place.getViewport().getCenter().latitude,place.getViewport().getCenter().longitude), DEFAULT_ZOOM, mPlace.getName());
-
-
-        }
-    };*/
-
-
-
 }

@@ -82,7 +82,7 @@ public class DriverComfirmRoute extends AppCompatActivity {
 
         changeDest = (Button)findViewById(R.id.destinationbutton);
         changeOrigin = (Button)findViewById(R.id.originbutton);
-        search = (Button)findViewById(R.id.searchbutton);
+        search = (Button)findViewById(R.id.passengersearch);
 
         modeSelect = (Button)findViewById(R.id.modeselect);
         modeSelect.setOnClickListener(new View.OnClickListener() {
@@ -103,15 +103,12 @@ public class DriverComfirmRoute extends AppCompatActivity {
         destPlaceID = getIntent().getExtras().getString("DestPlaceID");
         origPlaceID = getIntent().getExtras().getString("OriginID");
 
+
+
         Log.i(TAG, "destPlaceID is "+destPlaceID);
 
         if(origPlaceID==null){
             changeOrigin.setText("Current Location");
-            //String currentLocLatLng = getIntent().getExtras().getString("CurrentLocLatLng");
-            //String[] latlong = currentLocLatLng.split(",");
-            //double latitude = Double.parseDouble(latlong[0]);
-            //double longitude = Double.parseDouble(latlong[1]);
-            //originLatLng = new LatLng(latitude,longitude);
             getDeviceLocation();
             originLatLng = currentLocationLatLng;
 
@@ -201,14 +198,17 @@ public class DriverComfirmRoute extends AppCompatActivity {
             }
         });
 
-        /*search.setOnClickListener(new View.OnClickListener() {
+        search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Intent searchForPassengers = new Intent(DriverComfirmRoute.this, DriverSearchResults.class);
+                startActivity(searchForPassengers);
                 //TODO Create method to input Driver Status, UserEmail, Destination Name, Destination LatLng, Origin Name, Origin LatLng, and Current Miles into Search Table.
 
                 //TODO Create method to start search database for matching Passengers with above criteria.
             }
-        });*/
+        });
     }
 
     private void getDeviceLocation(){

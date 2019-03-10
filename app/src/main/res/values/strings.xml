@@ -55,4 +55,5 @@
     <string name="title_activity_driver_origin_search">Map</string>
     <string name="title_activity_passenger_dest_search">Map</string>
     <string name="title_activity_passenger_origin_search">Map</string>
+    <string name="goback">Edit Search</string>
 </resources>

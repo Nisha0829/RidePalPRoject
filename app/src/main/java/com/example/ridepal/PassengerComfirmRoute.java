@@ -94,17 +94,13 @@ public class PassengerComfirmRoute extends AppCompatActivity {
 
 
 
+
+
         destPlaceID = getIntent().getExtras().getString("DestPlaceID");
         origPlaceID = getIntent().getExtras().getString("OriginID");
 
         if(origPlaceID==null){
             changeOrigin.setText("Current Location");
-            String currentLocLatLng = getIntent().getExtras().getString("CurrentLocLatLng");
-            //String currentLocLatLng = getIntent().getExtras().getString("CurrentLocLatLng");
-            //String[] latlong = currentLocLatLng.split(",");
-            //double latitude = Double.parseDouble(latlong[0]);
-            //double longitude = Double.parseDouble(latlong[1]);
-            //originLatLng = new LatLng(latitude,longitude);
             getDeviceLocation();
             originLatLng = currentLocationLatLng;
 

@@ -26,7 +26,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.ridepal.models.PlaceInfo;
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -95,7 +95,6 @@ public class DriverOriginSearch extends FragmentActivity implements OnMapReadyCa
     private Boolean mLocationPermissionsGranted = false;
     private FusedLocationProviderClient mFusedLocationProviderClient;
     private PlaceAutocompleteAdapter mPlaceAutocompleteAdapter;
-    private PlaceInfo mPlace;
     private String destinationID;
     private String originID;
 

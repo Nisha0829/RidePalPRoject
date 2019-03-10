@@ -34,7 +34,7 @@ public class LogInPage extends AppCompatActivity {
         mapTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent maptesting = new Intent(LogInPage.this, DriverDestSearch.class);
+                Intent maptesting = new Intent(LogInPage.this, DriverSearchResults.class);
                 startActivity(maptesting);
             }
         });
