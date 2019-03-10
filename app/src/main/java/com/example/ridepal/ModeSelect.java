@@ -25,7 +25,7 @@ public class ModeSelect extends AppCompatActivity {
         ride = (Button)findViewById(R.id.ridebutton);
         signOut = (Button)findViewById(R.id.signoutbutton);
         welcome = (TextView)findViewById(R.id.hellotext);
-        welcome.append("Hello " +userName+"!");
+        welcome.append("Hello, " +userName+"!");
 
         drive.setOnClickListener(new View.OnClickListener() {
             @Override
