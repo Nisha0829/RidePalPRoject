@@ -55,7 +55,9 @@
             android:layout_alignParentBottom="true"
 
             android:text="@string/cont"
-            android:textSize="30sp"
+            android:background="#551A8B"
+            android:textColor="#FFF"
+            android:textSize="14sp"
             android:visibility="invisible" />
     </LinearLayout>
 

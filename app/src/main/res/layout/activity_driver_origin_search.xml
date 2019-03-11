@@ -53,9 +53,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-
+            android:background="#551A8B"
+            android:textColor="#FFF"
+            android:textSize="14sp"
             android:text="@string/cont"
-            android:textSize="30sp"
             android:visibility="invisible" />
     </LinearLayout>
 

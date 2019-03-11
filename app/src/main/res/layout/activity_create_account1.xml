@@ -164,8 +164,8 @@
             android:layout_height="30dp"
             android:layout_gravity="center"
             android:layout_marginTop="15dp"
-            android:background="#551A8B"
             android:text="@string/next"
+            android:background="#551A8B"
             android:textColor="#FFF"
             android:textSize="14sp" />
 
