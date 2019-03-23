@@ -56,4 +56,9 @@
     <string name="title_activity_passenger_dest_search">Map</string>
     <string name="title_activity_passenger_origin_search">Map</string>
     <string name="goback">Edit Search</string>
+    <string name="editroute">Change Origin/Destination</string>
+    <string name="backtoresults">Go Back to Results</string>
+    <string name="sendrequest">Send Request</string>
+    <string name="reqeustaccepted">Request Accepted!</string>
+    <string name="driveto">Drive To </string>
 </resources>

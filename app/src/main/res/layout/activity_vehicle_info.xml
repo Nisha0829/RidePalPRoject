@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -22,17 +22,19 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/ridepallogo" />
+
     <LinearLayout
-        android:layout_width="295dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginTop="8dp"
-        android:layout_height="456dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.49">
+        app:layout_constraintVertical_bias="0.49"
+        android:layout_below="@+id/imageView">
 
         <TextView
             android:id="@+id/vehicleinfotitle"
@@ -41,27 +43,27 @@
             android:gravity="center"
             android:text="@string/vehicleinfo"
             android:textColor="#551A8B"
-            android:textSize="14sp" />
+            android:textSize="18sp" />
 
         <EditText
             android:id="@+id/vehiclemake"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="10sp"
+            android:hint="@string/make"
             android:inputType="textPersonName"
-            android:textColorHint="#551A8B"
             android:textColor="#551A8B"
-            android:hint="@string/make" />
+            android:textColorHint="#551A8B"
+            android:textSize="14sp" />
 
         <EditText
             android:id="@+id/vehiclemodel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="@string/model"
             android:inputType="textPersonName"
-            android:textColorHint="#551A8B"
             android:textColor="#551A8B"
-            android:textSize="10sp"
-            android:hint="@string/model" />
+            android:textColorHint="#551A8B"
+            android:textSize="14sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -70,18 +72,14 @@
 
             <TextView
                 android:id="@+id/yeartitle"
-                android:layout_width="192dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:hint="@string/year"
-                android:textColorHint="#551A8B"
                 android:textColor="#551A8B"
-                android:textSize="10sp" />
-
-            <Space
-                android:layout_width="161dp"
-                android:layout_height="66dp"
-                android:layout_weight="1" />
+                android:textColorHint="#551A8B"
+                android:textSize="18sp" />
 
             <EditText
                 android:id="@+id/vehicleyear"
@@ -89,9 +87,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:textColorHint="#551A8B"
+                android:inputType="number"
                 android:textColor="#551A8B"
-                android:inputType="number" />
+                android:textColorHint="#551A8B" />
         </LinearLayout>
 
         <EditText
@@ -99,22 +97,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:hint="@string/color"
             android:inputType="textPersonName"
-            android:textColorHint="#551A8B"
             android:textColor="#551A8B"
-            android:textSize="10sp"
-            android:hint="@string/color" />
+            android:textColorHint="#551A8B"
+            android:textSize="14sp" />
 
         <EditText
             android:id="@+id/platenumber"
-            android:textSize="10sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:hint="@string/platenumber"
             android:inputType="textPersonName"
-            android:textColorHint="#551A8B"
             android:textColor="#551A8B"
-            android:hint="@string/platenumber" />
+            android:textColorHint="#551A8B"
+            android:textSize="14sp" />
 
         <Space
             android:layout_width="match_parent"
@@ -122,12 +120,12 @@
 
         <Button
             android:id="@+id/nextbutton"
-            android:layout_gravity="center"
-            android:background="#551A8B"
-            android:textColor="#FFF"
             android:layout_width="132dp"
             android:layout_height="25dp"
-            android:text="@string/next" />
+            android:layout_gravity="center"
+            android:background="#551A8B"
+            android:text="@string/next"
+            android:textColor="#FFF" />
 
         <Space
             android:layout_width="match_parent"
@@ -135,11 +133,11 @@
 
         <Button
             android:id="@+id/skipbutton"
-            android:layout_gravity="center"
             android:layout_width="132dp"
             android:layout_height="25dp"
+            android:layout_gravity="center"
             android:background="#551A8B"
-            android:textColor="#FFF"
-            android:text="@string/skip" />
+            android:text="@string/skip"
+            android:textColor="#FFF" />
     </LinearLayout>
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>

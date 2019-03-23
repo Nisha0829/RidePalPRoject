@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -35,7 +35,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="20dp"
-        app:layout_constraintVertical_bias="0.372">
+        app:layout_constraintVertical_bias="0.372"
+        android:layout_alignParentBottom="true">
 
         <TextView
             android:id="@+id/preftitle"
@@ -73,11 +74,11 @@
                 android:layout_width="52dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textSize="10sp"
                 android:hint="@string/min"
-                android:textColorHint="#551A8B"
+                android:inputType="number"
                 android:textColor="#551A8B"
-                android:inputType="number" />
+                android:textColorHint="#551A8B"
+                android:textSize="14sp" />
 
             <Space
                 android:layout_width="wrap_content"
@@ -89,11 +90,11 @@
                 android:layout_width="44dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textSize="10sp"
                 android:hint="@string/max"
-                android:textColorHint="#551A8B"
+                android:inputType="number"
                 android:textColor="#551A8B"
-                android:inputType="number" />
+                android:textColorHint="#551A8B"
+                android:textSize="14sp" />
 
             <Space
                 android:layout_width="wrap_content"
@@ -124,27 +125,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textSize="10sp"
+                android:text="@string/male"
                 android:textColor="#551A8B"
-                android:text="@string/male" />
+                android:textSize="12sp" />
 
             <RadioButton
                 android:id="@+id/femalebutton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:text="@string/female"
                 android:textColor="#551A8B"
-                android:textSize="10sp"
-                android:text="@string/female" />
+                android:textSize="12sp" />
 
             <RadioButton
                 android:id="@+id/eitherbutton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textSize="10sp"
+                android:text="@string/either"
                 android:textColor="#551A8B"
-                android:text="@string/either" />
+                android:textSize="12sp" />
         </RadioGroup>
 
 
@@ -173,4 +174,4 @@
             android:textColor="#FFF"
             android:text="Skip" />
     </LinearLayout>
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>

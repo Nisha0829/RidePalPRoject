@@ -13,7 +13,7 @@ public class LogInPage extends AppCompatActivity {
     Button createAccount;
     Button logIn;
     Button showBtn;
-    Button mapTest;
+    Button test;
     String Email;
     EditText email;
     TextView displayList;
@@ -30,14 +30,7 @@ public class LogInPage extends AppCompatActivity {
         setContentView(R.layout.activity_log_in_page);
 
 
-        mapTest = (Button)findViewById(R.id.maptestbutton);
-        mapTest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent maptesting = new Intent(LogInPage.this, DriverSearchResults.class);
-                startActivity(maptesting);
-            }
-        });
+
         createAccount = (Button) findViewById(R.id.createaccount);
         createAccount.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,14 +41,14 @@ public class LogInPage extends AppCompatActivity {
             }
         });
 
-        showBtn = (Button) findViewById(R.id.show);
+        /*showBtn = (Button) findViewById(R.id.show);
         showBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 displayList = (TextView) findViewById(R.id.displayValue);
                 logInPage.list(displayList);
             }
-        });
+        });*/
 
         logIn = (Button) findViewById(R.id.signInButton);
         logIn.setOnClickListener(new View.OnClickListener() {

@@ -70,7 +70,9 @@
         <activity
             android:name=".PassengerOriginSearch"
             android:label="@string/title_activity_passenger_origin_search" />
-        <activity android:name=".DriverSearchResults"></activity>
+        <activity android:name=".DriverSearchResults" />
+        <activity android:name=".DriverSelectedPassInfo" />
+        <activity android:name=".DriverReqeustAccepted"></activity>
     </application>
 
 </manifest>

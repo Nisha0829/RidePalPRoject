@@ -127,11 +127,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     {
         String result = "User Does Not Exist";
-        Cursor cursor = this.getReadableDatabase().query("customerInfo", new String[]{"EMAILID", "PASSWORD"}, null, null, null, null, null, null);
+        Cursor cursor = this.getReadableDatabase().query("customerInfo", new String[]{"EMAILID", "PASSWORD", "FIRSTNAME"}, null, null, null, null, null, null);
         if (cursor != null & cursor.getCount() > 0) {
             while(cursor.moveToNext()){
                 if (emailId.equalsIgnoreCase(cursor.getString(0)) && pwd.equals(cursor.getString(1))) {
-               result = cursor.getString(1);
+               result = cursor.getString(2);
                break;
            } else if (emailId.equalsIgnoreCase(cursor.getString(0))) {
               result = "Invalid Password";

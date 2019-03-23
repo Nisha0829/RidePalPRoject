@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DriverSelectedPassInfo">
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="63dp"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.533"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.013">
+
+        <Button
+            android:id="@+id/modeselect"
+            android:layout_width="212dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#551A8B"
+            android:text="@string/modeselectreturn"
+            android:textColor="#FFF"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/drivermodetitle"
+            android:layout_width="305dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/driving"
+            android:textColor="#551A8B"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <Space
+        android:id="@+id/topspace"
+        android:layout_width="360dp"
+        android:layout_height="29dp"
+        android:layout_below="@+id/linearLayout2"
+        android:layout_centerHorizontal="true" />
+
+    <LinearLayout
+        android:id="@+id/infoblock"
+        android:layout_width="match_parent"
+        android:layout_height="127dp"
+        android:layout_alignParentTop="true"
+        android:layout_below="@+id/topspace"
+        android:layout_marginTop="132dp"
+        android:orientation="horizontal"
+        android:weightSum="100">
+
+
+        <ImageView
+            android:id="@+id/passengerimage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="50"
+            app:srcCompat="@android:drawable/btn_star_big_off" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="50"
+            android:orientation="vertical"
+            android:weightSum="100">
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="25"
+                android:gravity="center"
+                android:text="TextView"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/age"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="25"
+                android:gravity="center"
+                android:text="TextView"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/origin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="25"
+                android:gravity="center"
+                android:text="TextView"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/destination"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="25"
+                android:gravity="center"
+                android:text="TextView"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/preferences"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/changepref" />
+
+    <Button
+        android:id="@+id/changeroute"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_above="@+id/preferences"
+
+        android:text="@string/editroute" />
+
+    <Button
+        android:id="@+id/backtoresults"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_above="@+id/changeroute"
+        android:layout_centerHorizontal="true"
+        android:text="@string/backtoresults" />
+
+    <Button
+        android:id="@+id/sendrequest"
+        android:layout_width="236dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="135dp"
+        android:text="@string/sendrequest" />
+
+</RelativeLayout>
