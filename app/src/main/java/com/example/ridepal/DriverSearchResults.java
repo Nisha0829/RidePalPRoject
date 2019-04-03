@@ -50,7 +50,8 @@ public class DriverSearchResults extends AppCompatActivity {
 
         passengerList = (ListView)findViewById(R.id.listview);
 
-        /*TODO take serach results from database query and create PassengerObjects with data pulled from DB*/
+        /*TODO take serach results from database query and create PassengerObjects with data pulled from DB
+        * Each passenger result needs email, name, picture string, desination name, origin name, destionation LatLng, origin LatLng*/
 
         //Test passenger objects for use until database queries on implemented.
 

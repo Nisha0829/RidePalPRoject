@@ -61,4 +61,7 @@
     <string name="sendrequest">Send Request</string>
     <string name="reqeustaccepted">Request Accepted!</string>
     <string name="driveto">Drive To </string>
+    <string name="usegooglenav">Use Google Navigation</string>
+    <string name="call">Call</string>
+    <string name="pickup">Pick Up</string>
 </resources>

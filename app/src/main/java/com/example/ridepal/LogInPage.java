@@ -29,6 +29,16 @@ public class LogInPage extends AppCompatActivity {
         logInPage = new DataBaseHelper(this);
         setContentView(R.layout.activity_log_in_page);
 
+        //test button code. remove before demo.
+        test = (Button)findViewById(R.id.test);
+        test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent testmap = new Intent(LogInPage.this, DriverDriveToPassenger.class);
+                startActivity(testmap);
+            }
+        });
+
 
 
         createAccount = (Button) findViewById(R.id.createaccount);
