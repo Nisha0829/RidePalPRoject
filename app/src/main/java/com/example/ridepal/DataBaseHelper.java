@@ -39,6 +39,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE IF NOT EXISTS customer_preference(MAXAGE INTEGER,MINRANGE INTEGER,GENDER TEXT, EMAILID TEXT not null, FOREIGN KEY(EMAILID) REFERENCES customerInfo(EMAILID) );");
         db.execSQL("CREATE TABLE IF NOT EXISTS cust_destination(NAME TEXT, ORIGIN TEXT,DESTINATION TEXT, LATITUDE INTEGER,  LONGITUDE INTEGER,SEARCHMILES INTEGER, EMAILID TEXT not null, FOREIGN KEY(EMAILID) REFERENCES customerInfo(EMAILID) );");
         db.execSQL("CREATE TABLE IF NOT EXISTS payment_info(CARDNAME TEXT, CCNUMBER INTEGER, EXPDATE DATE, CCV INTEGER, ZIPCODE INTEGER, EMAILID TEXT not null, FOREIGN KEY(EMAILID) REFERENCES customerInfo(EMAILID) );");
+        db.execSQL("CREATE TABLE IF NOT EXISTS feature_Info(FEATURE TEXT, EMAILID TEXT not null, FOREIGN KEY(EMAILID) REFERENCES customerInfo(EMAILID) );");
+        db.execSQL("CREATE TABLE IF NOT EXISTS feedback_Info(FEATURE TEXT, STAR INTEGER, EMAILID TEXT not null, FOREIGN KEY(EMAILID) REFERENCES customerInfo(EMAILID) );");
         //db.execSQL("create table if not exists imageTb ( a blob )");
 
     }
@@ -121,6 +123,20 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         contentValues4.put("ZIPCODE", zipCode);
         contentValues4.put("EMAILID", emailId);
         this.getWritableDatabase().insert("payment_info", null, contentValues4);
+    }
+
+    public void addFeature(String feature, String email){
+        ContentValues contentValues4 = new ContentValues();
+        contentValues4.put("FEATURE", feature);
+        contentValues4.put("EMAILID", email);
+        this.getWritableDatabase().insert("feature_Info", null, contentValues4);
+    }
+    public void addFeedBack(String feedBack, int star, String email){
+        ContentValues contentValues4 = new ContentValues();
+        contentValues4.put("FEATURE", feedBack);
+        contentValues4.put("STAR", star);
+        contentValues4.put("EMAILID", email);
+        this.getWritableDatabase().insert("feedback_Info", null, contentValues4);
     }
 
     public String logIn(String emailId, String pwd)  //Success // Password is wrong, user does not exist

@@ -1,6 +1,11 @@
 package com.example.ridepal;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,10 +14,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import static android.Manifest.permission.CALL_PHONE;
+
 public class LogInPage extends AppCompatActivity {
     Button createAccount;
     Button logIn;
-    Button showBtn;
+    Button showBtn, callButton;
     Button test;
     String Email;
     EditText email;
@@ -30,7 +37,8 @@ public class LogInPage extends AppCompatActivity {
         setContentView(R.layout.activity_log_in_page);
 
         //test button code. remove before demo.
-        test = (Button)findViewById(R.id.test);
+        test = (Button) findViewById(R.id.test);
+        callButton = (Button) findViewById(R.id.call);
         test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -38,7 +46,6 @@ public class LogInPage extends AppCompatActivity {
                 startActivity(testmap);
             }
         });
-
 
 
         createAccount = (Button) findViewById(R.id.createaccount);
@@ -75,7 +82,7 @@ public class LogInPage extends AppCompatActivity {
                         Intent next = new Intent(LogInPage.this, ModeSelect.class);
                         next.putExtra("userName", result);
                         startActivity(next);
-                    } else if (result.equals("Invalid Password") ) {
+                    } else if (result.equals("Invalid Password")) {
                         Toast.makeText(getApplicationContext(), "Invalid password, Please try again", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(getApplicationContext(), "User does not exist", Toast.LENGTH_SHORT).show();
@@ -111,5 +118,22 @@ public class LogInPage extends AppCompatActivity {
 //                }
 //}
 //        });
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public void callMethod(View view) {
+        Intent i = new Intent(Intent.ACTION_CALL);
+        i.setData(Uri.parse("tel:123"));
+                    /*
+                    Intent i = new Intent(Intent.ACTION_DIAL);
+                    i.setData(Uri.parse("tel:0612312312"));
+                    if (i.resolveActivity(getPackageManager()) != null) {
+                          startActivity(i);
+                    }*/
+        if (ContextCompat.checkSelfPermission(getApplicationContext(), CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+            startActivity(i);
+        } else {
+            requestPermissions(new String[]{CALL_PHONE}, 1);
+        }
     }
 }
