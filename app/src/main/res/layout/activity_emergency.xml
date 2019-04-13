@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Emergency">
+
+    <LinearLayout
+        android:id="@+id/buttoncontainer"
+        android:layout_width="match_parent"
+        android:layout_height="478dp"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/nineoneone"
+            android:layout_width="match_parent"
+            android:layout_height="247dp"
+            android:text="@string/call911" />
+
+        <Space
+            android:id="@+id/space1"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+
+        <Button
+            android:id="@+id/servicesbutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/roadsideassistance" />
+
+        <Button
+            android:id="@+id/gobackbutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/back" />
+    </LinearLayout>
+</RelativeLayout>

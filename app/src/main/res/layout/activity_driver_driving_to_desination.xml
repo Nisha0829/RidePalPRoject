@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DriverDrivingToDesination"
+    android:orientation="vertical"
+    android:weightSum="100">
+
+    <fragment
+        android:id="@+id/mapFrag"
+        android:name="com.google.android.gms.maps.MapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="312dp"
+        android:layout_weight="25" />
+
+    <Button
+        android:id="@+id/tripdetailsbutton"
+        android:layout_width="match_parent"
+        android:layout_height="85dp"
+        android:text="@string/tripdetails" />
+
+    <Button
+        android:id="@+id/endtripbutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/endtrip" />
+
+    <Button
+        android:id="@+id/emergencybutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="25"
+        android:text="@string/emergency" />
+
+
+</LinearLayout>

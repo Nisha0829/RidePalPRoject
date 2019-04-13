@@ -92,7 +92,28 @@ public class PassengerComfirmRoute extends AppCompatActivity {
         Places.initialize(getApplicationContext(),"AIzaSyB42SLMvdvtN6_P-GcgObIyf-u0S7Yu14Y");
         placesClient = Places.createClient(this);
 
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+
+                double originlat = originLatLng.latitude;
+                double orginlong = originLatLng.longitude;
+                double destlat = destLatLng.latitude;
+                double deslong = destLatLng.longitude;
+
+
+
+
+                Intent searchForPassengers = new Intent(PassengerComfirmRoute.this, PassengerSearchResults.class);
+                startActivity(searchForPassengers);
+
+
+                //TODO Create method to input Driver Status, UserEmail, Destination Name, Destination LatLng, Origin Name, Origin LatLng, and Current Miles into Search Table.
+
+                //TODO Create method to start search database for matching Passengers with above criteria.
+            }
+        });
 
 
 

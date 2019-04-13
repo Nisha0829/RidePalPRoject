@@ -6,24 +6,22 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class DriverReqeustAccepted extends AppCompatActivity {
+public class PassengerRequestAccepted extends AppCompatActivity {
 
-    private Button driveTo;
-
+    Button driveTo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_driver_reqeust_accepted);
+        setContentView(R.layout.activity_passenger_request_accepted);
 
         driveTo = (Button)findViewById(R.id.drivebutton);
         driveTo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent drive = new Intent(DriverReqeustAccepted.this, DriverDriveToPassenger.class);
+                Intent drive = new Intent(PassengerRequestAccepted.this, PassengerDriverEnRoute.class);
                 startActivity(drive);
             }
         });
-
     }
 }

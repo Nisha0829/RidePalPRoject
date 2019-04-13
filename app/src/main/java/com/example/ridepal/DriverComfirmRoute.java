@@ -1,6 +1,7 @@
 package com.example.ridepal;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -54,6 +55,9 @@ public class DriverComfirmRoute extends AppCompatActivity {
     String originAddress;
     String origPlaceID;
     LatLng currentLocationLatLng;
+    DataBaseHelper dataBaseHelper;
+    String emailID;
+
 
     Location mLastLocation;
     Marker mCurrLocationMarker;
@@ -79,6 +83,11 @@ public class DriverComfirmRoute extends AppCompatActivity {
         searchMiles = (SeekBar) findViewById(R.id.milesbar);
         currentMiles = searchMiles.getProgress() + " Miles";
         seekMiles.setText(currentMiles);
+
+        ModeSelect activity = new ModeSelect();
+        emailID = activity.getEmailID();
+
+
 
         changeDest = (Button)findViewById(R.id.destinationbutton);
         changeOrigin = (Button)findViewById(R.id.originbutton);
@@ -202,8 +211,19 @@ public class DriverComfirmRoute extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+
+                double originlat = originLatLng.latitude;
+                double orginlong = originLatLng.longitude;
+                double destlat = destLatLng.latitude;
+                double deslong = destLatLng.longitude;
+
+
+
+
                 Intent searchForPassengers = new Intent(DriverComfirmRoute.this, DriverSearchResults.class);
                 startActivity(searchForPassengers);
+
+
                 //TODO Create method to input Driver Status, UserEmail, Destination Name, Destination LatLng, Origin Name, Origin LatLng, and Current Miles into Search Table.
 
                 //TODO Create method to start search database for matching Passengers with above criteria.

@@ -74,7 +74,17 @@
         <activity android:name=".DriverSearchResults" />
         <activity android:name=".DriverSelectedPassInfo" />
         <activity android:name=".DriverReqeustAccepted" />
-        <activity android:name=".DriverDriveToPassenger"></activity>
+        <activity android:name=".DriverDriveToPassenger" />
+        <activity android:name=".DriverDrivingToDesination" />
+        <activity android:name=".TripDetails" />
+        <activity android:name=".Emergency" />
+        <activity android:name=".DriverEndTrip" />
+        <activity android:name=".PassengerSearchResults" />
+        <activity android:name=".PassengerSelectedDriverInfo" />
+        <activity android:name=".PassengerRequestAccepted" />
+        <activity android:name=".PassengerDriverEnRoute" />
+        <activity android:name=".PassengerDrivingToDesination" />
+        <activity android:name=".PassengerEndTrip"></activity>
     </application>
 
 </manifest>

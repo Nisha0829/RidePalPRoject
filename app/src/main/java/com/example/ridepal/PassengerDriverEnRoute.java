@@ -11,29 +11,30 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
-import java.sql.Driver;
-import java.util.Map;
-
-public class DriverDriveToPassenger extends AppCompatActivity implements OnMapReadyCallback, TaskLoadedCallback {
+public class PassengerDriverEnRoute extends AppCompatActivity implements OnMapReadyCallback, TaskLoadedCallback {
 
     GoogleMap map;
-    Button getDirection, call, pickUp;
+    Button signalDriver, call, startTrip;
     MarkerOptions driver, passenger;
     Polyline currentPolyline;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_driver_drive_to_passenger);
+        setContentView(R.layout.activity_passenger_driver_en_route);
 
-        getDirection = (Button)findViewById(R.id.btnGetDirections);
+        signalDriver = (Button)findViewById(R.id.signaldriver);
+        signalDriver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO Implement flashlight flash for signalling driver.
+            }
+        });
         MapFragment mapFragment = (MapFragment)getFragmentManager().findFragmentById(R.id.mapFrag);
         mapFragment.getMapAsync(this);
 
@@ -41,18 +42,17 @@ public class DriverDriveToPassenger extends AppCompatActivity implements OnMapRe
 
         driver = new MarkerOptions().position(new LatLng(33.8808, -84.4691)).title("Driver");
         passenger = new MarkerOptions().position(new LatLng(33.9426, -84.5368)).title("Passenger");
-        pickUp=(Button)findViewById(R.id.pickupbutton);
-        pickUp.setOnClickListener(new View.OnClickListener() {
+        startTrip=(Button)findViewById(R.id.starttrip);
+        startTrip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent pickup= new Intent(DriverDriveToPassenger.this, DriverDrivingToDesination.class);
+                Intent pickup= new Intent(PassengerDriverEnRoute.this, PassengerDrivingToDesination.class);
                 startActivity(pickup);
             }
         });
 
-
-
     }
+
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -64,7 +64,7 @@ public class DriverDriveToPassenger extends AppCompatActivity implements OnMapRe
         map.moveCamera(update);
 
         String url = getUrl(driver.getPosition(), passenger.getPosition(), "driving");
-        new FetchURL(DriverDriveToPassenger.this).execute(url, "driving");
+        new FetchURL(PassengerDriverEnRoute.this).execute(url, "driving");
     }
 
     private String getUrl(LatLng origin, LatLng dest, String directionMode) {
@@ -95,4 +95,3 @@ public class DriverDriveToPassenger extends AppCompatActivity implements OnMapRe
 
     }
 }
-//https://goo.gl/pTbDBG
