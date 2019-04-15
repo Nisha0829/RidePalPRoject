@@ -12,6 +12,14 @@ public class ModeSelect extends AppCompatActivity {
     Button drive, ride, signOut;
     TextView welcome;
     String hello;
+    private String emailID;
+
+    public String getEmailID(){
+        return emailID;
+    }
+
+
+
 
 
     @Override
@@ -20,6 +28,7 @@ public class ModeSelect extends AppCompatActivity {
         setContentView(R.layout.activity_mode_select);
         Intent intent = getIntent();
         String userName = intent.getStringExtra("userName");
+        emailID = intent.getStringExtra("emailID");
 
         drive = (Button)findViewById(R.id.drivebutton);
         ride = (Button)findViewById(R.id.ridebutton);

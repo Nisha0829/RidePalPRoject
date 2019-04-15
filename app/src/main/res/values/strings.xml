@@ -64,4 +64,13 @@
     <string name="usegooglenav">Use Google Navigation</string>
     <string name="call">Call</string>
     <string name="pickup">Pick Up</string>
+    <string name="tripdetails">Trip Details</string>
+    <string name="endtrip">End Trip</string>
+    <string name="emergency">Emergency</string>
+    <string name="call911">Call 911</string>
+    <string name="roadsideassistance">Roadside Assistance</string>
+    <string name="back">Go Back</string>
+    <string name="seedriverroute">See Driver Route</string>
+    <string name="signaldriver">Signal Driver</string>
+    <string name="driverhere">Driver is Here</string>
 </resources>

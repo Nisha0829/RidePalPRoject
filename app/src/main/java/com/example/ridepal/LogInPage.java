@@ -81,6 +81,7 @@ public class LogInPage extends AppCompatActivity {
                     if (!result.equals("Invalid Password") && !result.equals("User Does Not Exist")) {
                         Intent next = new Intent(LogInPage.this, ModeSelect.class);
                         next.putExtra("userName", result);
+                        next.putExtra("emailID", emailValue);
                         startActivity(next);
                     } else if (result.equals("Invalid Password")) {
                         Toast.makeText(getApplicationContext(), "Invalid password, Please try again", Toast.LENGTH_SHORT).show();
