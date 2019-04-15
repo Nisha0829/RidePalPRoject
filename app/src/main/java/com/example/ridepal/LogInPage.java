@@ -175,7 +175,7 @@ public class LogInPage extends AppCompatActivity {
                 e.printStackTrace();
             }
                 try {
-                    mCameraManager.setTorchMode(mCameraId, flashLightChecked);
+                    mCameraManager.setTorchMode(mCameraId, isFlashAvailable);
                 } catch (CameraAccessException e) {
                     e.printStackTrace();
                 }
