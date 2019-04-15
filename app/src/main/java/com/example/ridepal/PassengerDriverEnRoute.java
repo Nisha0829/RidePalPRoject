@@ -1,6 +1,15 @@
 package com.example.ridepal;
 
+import android.annotation.TargetApi;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.hardware.camera2.CameraAccessException;
+import android.hardware.camera2.CameraManager;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -22,19 +31,51 @@ public class PassengerDriverEnRoute extends AppCompatActivity implements OnMapRe
     Button signalDriver, call, startTrip;
     MarkerOptions driver, passenger;
     Polyline currentPolyline;
+    String mCameraId;
+    CameraManager mCameraManager;
+    boolean isFlashAvailable;
+    boolean flashLightChecked = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_passenger_driver_en_route);
+        isFlashAvailable = getApplicationContext().getPackageManager()
+                .hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
 
         signalDriver = (Button)findViewById(R.id.signaldriver);
         signalDriver.setOnClickListener(new View.OnClickListener() {
+            @TargetApi(Build.VERSION_CODES.M)
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View v) {
                 //TODO Implement flashlight flash for signalling driver.
+                if (!isFlashAvailable) {
+                    AlertDialog alert = new AlertDialog.Builder(PassengerDriverEnRoute.this).create();
+                    alert.setTitle("Oops!");
+                    alert.setMessage("Flash not available in this device...");
+                    alert.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+                    });
+                    alert.show();
+                }
+
+                mCameraManager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
+                try {
+                    mCameraId = mCameraManager.getCameraIdList()[0];
+                } catch (CameraAccessException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    mCameraManager.setTorchMode(mCameraId, flashLightChecked);
+                } catch (CameraAccessException e) {
+                    e.printStackTrace();
+                }
+                flashLightChecked= false;
             }
-        });
+            });
         MapFragment mapFragment = (MapFragment)getFragmentManager().findFragmentById(R.id.mapFrag);
         mapFragment.getMapAsync(this);
 
