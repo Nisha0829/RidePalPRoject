@@ -7,31 +7,51 @@
     tools:context=".DriverDriveToPassenger"
     android:orientation="vertical"
     android:weightSum="100">
-
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="54dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ridepallogo" />
     <fragment
         android:id="@+id/mapFrag"
         android:name="com.google.android.gms.maps.MapFragment"
         android:layout_width="match_parent"
-        android:layout_height="312dp"
+        android:layout_height="315dp"
         android:layout_weight="25" />
 
     <Button
         android:id="@+id/btnGetDirections"
         android:layout_width="match_parent"
-        android:layout_height="85dp"
-        android:text="@string/usegooglenav" />
+        android:layout_height="55dp"
+        android:background="#551A8B"
+        android:text="@string/usegooglenav"
+        android:textColor="#FFF" />
 
     <Button
         android:id="@+id/callbutton"
         android:layout_width="match_parent"
-        android:layout_height="66dp"
+        android:layout_height="55dp"
+        android:background="#551A8B"
+        android:textColor="#FFF"
         android:layout_weight="1"
         android:text="@string/call" />
 
     <LinearLayout
         android:id="@+id/passcontainter"
         android:layout_width="match_parent"
-        android:layout_height="103dp"
+        android:layout_height="80dp"
         android:layout_weight="1"
         android:orientation="horizontal">
 
@@ -46,6 +66,8 @@
             android:id="@+id/pickupbutton"
             android:layout_width="219dp"
             android:layout_height="match_parent"
+            android:background="#551A8B"
+            android:textColor="#FFF"
             android:layout_weight="1"
             android:text="@string/pickup" />
     </LinearLayout>

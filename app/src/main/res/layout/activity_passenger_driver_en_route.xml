@@ -18,7 +18,10 @@
     <Button
         android:id="@+id/signaldriver"
         android:layout_width="match_parent"
+        android:background="#551A8B"
+        android:textColor="#FFF"
         android:layout_height="85dp"
+
         android:text="@string/signaldriver" />
 
     <Button
@@ -26,6 +29,8 @@
         android:layout_width="match_parent"
         android:layout_height="66dp"
         android:layout_weight="1"
+        android:background="#551A8B"
+        android:textColor="#FFF"
         android:text="@string/call" />
 
     <LinearLayout
@@ -44,6 +49,8 @@
 
         <Button
             android:id="@+id/starttrip"
+            android:background="#551A8B"
+            android:textColor="#FFF"
             android:layout_width="219dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

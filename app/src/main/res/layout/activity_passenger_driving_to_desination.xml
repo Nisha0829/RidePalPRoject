@@ -7,6 +7,23 @@
     tools:context=".PassengerDrivingToDesination"
     android:orientation="vertical"
     android:weightSum="100">
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="54dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ridepallogo" />
 
     <fragment
         android:id="@+id/mapFrag"
@@ -19,13 +36,17 @@
         android:id="@+id/tripdetailsbutton"
         android:layout_width="match_parent"
         android:layout_height="85dp"
-        android:text="@string/tripdetails" />
+        android:text="@string/tripdetails"
+        android:background="#551A8B"
+        android:textColor="#FFF"/>
 
     <Button
         android:id="@+id/endtripbutton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:background="#551A8B"
+        android:textColor="#FFF"
         android:text="@string/endtrip" />
 
     <Button
@@ -33,7 +54,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="25"
-        android:text="@string/emergency" />
+        android:text="@string/emergency"
+        android:background="#551A8B"
+        android:textColor="#FFF"/>
 
 
 </LinearLayout>
