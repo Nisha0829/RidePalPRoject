@@ -48,7 +48,7 @@ public class DriverDrivingToDesination extends AppCompatActivity implements OnMa
             public void onClick(View v) {
                 String status = "driver";
                 Bundle stat =new Bundle();
-                stat.putString(status, "status");
+                stat.putString("status", status);
                 Intent goToEmergency = new Intent(DriverDrivingToDesination.this, Emergency.class);
                 goToEmergency.putExtras(stat);
                 startActivity(goToEmergency);

@@ -16,7 +16,7 @@ public class DriverReqeustAccepted extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver_reqeust_accepted);
 
-        driveTo = (Button)findViewById(R.id.drivebutton);
+        driveTo = (Button)findViewById(R.id.drivetobutton);
         driveTo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

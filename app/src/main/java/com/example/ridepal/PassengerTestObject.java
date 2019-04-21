@@ -9,15 +9,16 @@ public class PassengerTestObject {
     private String picture;
     private String destName;
     private String originName;
-    private LatLng latLng;
+    private LatLng destLatLng, originLatLng;
 
-    public PassengerTestObject(String emailID, String name, String picture, String destName, String originName, LatLng latLng) {
+    public PassengerTestObject(String emailID, String name, String picture, String destName, String originName, LatLng originLatLng, LatLng destLatLng) {
         this.emailID = emailID;
         this.name = name;
         this.picture = picture;
         this.destName = destName;
         this.originName = originName;
-        this.latLng = latLng;
+        this.destLatLng = destLatLng;
+        this.originLatLng = originLatLng;
     }
 
     public PassengerTestObject(){
@@ -64,11 +65,19 @@ public class PassengerTestObject {
         this.originName = originName;
     }
 
-    public LatLng getLatLng() {
-        return latLng;
+    public LatLng getDestLatLng() {
+        return destLatLng;
     }
 
-    public void setLatLng(LatLng latLng) {
-        this.latLng = latLng;
+    public void setDestLatLng(LatLng destLatLng) {
+        this.destLatLng = destLatLng;
+    }
+
+    public LatLng getOriginLatLng() {
+        return originLatLng;
+    }
+
+    public void setOriginLatLng(LatLng originLatLng) {
+        this.originLatLng = originLatLng;
     }
 }

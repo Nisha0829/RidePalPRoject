@@ -54,6 +54,7 @@ public class PassengerComfirmRoute extends AppCompatActivity {
     String originAddress;
     String origPlaceID;
     LatLng currentLocationLatLng;
+    String emailID;
 
     private static final String TAG = "PassengerComfirmRoute";
 
@@ -74,6 +75,9 @@ public class PassengerComfirmRoute extends AppCompatActivity {
         searchMiles = (SeekBar) findViewById(R.id.milesbar);
         currentMiles = searchMiles.getProgress() + " Miles";
         seekMiles.setText(currentMiles);
+
+        ModeSelect activity = new ModeSelect();
+        emailID = activity.getEmailID();
 
         getLocationPermission();
 
@@ -102,16 +106,17 @@ public class PassengerComfirmRoute extends AppCompatActivity {
                 double destlat = destLatLng.latitude;
                 double deslong = destLatLng.longitude;
 
-
-
+                Bundle sendDriverInfo = new Bundle();
+                sendDriverInfo.putString("emailID", emailID);
+                sendDriverInfo.putString("orinlat", String.valueOf(originlat));
+                sendDriverInfo.putString("originlong", String.valueOf(orginlong));
+                sendDriverInfo.putString("destlat", String.valueOf(destlat));
+                sendDriverInfo.putString("deslong", String.valueOf(deslong));
 
                 Intent searchForPassengers = new Intent(PassengerComfirmRoute.this, PassengerSearchResults.class);
+                searchForPassengers.putExtras(sendDriverInfo);
                 startActivity(searchForPassengers);
 
-
-                //TODO Create method to input Driver Status, UserEmail, Destination Name, Destination LatLng, Origin Name, Origin LatLng, and Current Miles into Search Table.
-
-                //TODO Create method to start search database for matching Passengers with above criteria.
             }
         });
 
@@ -209,14 +214,7 @@ public class PassengerComfirmRoute extends AppCompatActivity {
             }
         });
 
-        /*search.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //TODO Create method to input Passenger Status, UserEmail, Destination Name, Destination LatLng, Origin Name, Origin LatLng, and Current Miles into Search Table.
 
-                //TODO Create method to start search database for matching Drivers with above criteria.
-            }
-        });*/
     }
     private void getDeviceLocation(){
         Log.d(TAG, "getDeviceLocation: getting the devices current location");
