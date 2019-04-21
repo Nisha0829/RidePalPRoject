@@ -64,11 +64,7 @@ public class PassengerSelectedDriverInfo extends AppCompatActivity {
         iOrigin = (TextView)findViewById(R.id.origin);
         iDestination = (TextView)findViewById(R.id.destination);
 
-        //Hardcoded passenger test object for testing. to be removed when database queries are in place
 
-
-
-        //end test code
 
         iName.setText(name);
         iAge.setText(age);

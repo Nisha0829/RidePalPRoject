@@ -67,13 +67,7 @@ public class DriverSelectedPassInfo extends AppCompatActivity {
 
         //Hardcoded passenger test object for testing. to be removed when database queries are in place
 
-        testPassenger = new PassengerTestObject("testEmail1@email.com","Molly Randall", "PUT PIC STRING HERE", "Fox Theater", "Cobb Civic Center", new LatLng(33.9426, -84.5368));
-        name = testPassenger.getName();
-        age = "25";
-        origin = testPassenger.getOriginName();
-        destination = testPassenger.getDestName();
 
-        //end test code
 
         iName.setText(name);
         iAge.setText(age);

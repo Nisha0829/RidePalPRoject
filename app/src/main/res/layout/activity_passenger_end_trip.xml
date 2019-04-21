@@ -1,9 +1,268 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".PassengerEndTrip">
 
-</android.support.constraint.ConstraintLayout>
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="54dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ridepallogo" />
+
+    <Space
+        android:id="@+id/startspace"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true" />
+    <LinearLayout
+        android:layout_width="352dp"
+        android:layout_height="462dp"
+        android:layout_below="@+id/imageView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="11dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tripdetailsheader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/startspace"
+            android:gravity="center"
+            android:text="@string/tripsummaryheader"
+            android:textSize="18sp" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:id="@+id/titlespace"
+            android:layout_below="@id/tripdetailsheader"/>
+
+        <LinearLayout
+            android:id="@+id/drivernamecontainter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/titlespace"
+            android:layout_marginTop="0dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/drivernameheader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/drivername" />
+
+            <TextView
+                android:id="@+id/drivername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="TextView" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/driverdestcontainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/drivernamecontainter"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/driverdesinationheader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/driverdestinationheader" />
+
+            <TextView
+                android:id="@+id/driverdestination"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="TextView" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/drivermilestotalcontainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/driverdestcontainer"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/drivermilesheader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/drivermilesto" />
+
+            <TextView
+                android:id="@+id/drivermiles"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="TextView" />
+        </LinearLayout>
+
+        <Space
+            android:id="@+id/topspace"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_below="@+id/drivermilestotalcontainer" />
+
+        <LinearLayout
+            android:id="@+id/passengernamecontainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/topspace"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/passengernameheader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/passengernameheader" />
+
+            <TextView
+                android:id="@+id/passengername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="TextView" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/passengerdestinationcontainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/passengernamecontainer"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/passengerdestinationheader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/passengerdestinationheader" />
+
+            <TextView
+                android:id="@+id/passengerdestination"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="TextView" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/passengermilescontainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/passengerdestinationcontainer"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/passengermilesheader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/passengermilesto" />
+
+            <TextView
+                android:id="@+id/passengermiles"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="TextView" />
+        </LinearLayout>
+
+        <Space
+            android:id="@+id/gaspricespace"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:labelFor="@+id/passengermilescontainer"/>
+
+        <LinearLayout
+            android:id="@+id/gaspriceatdesinationacontainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/gaspricespace"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/destinationgaspriceheader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/gaspriceatdestination" />
+
+            <TextView
+                android:id="@+id/destinationgasprice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="TextView" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/totalgaspricecontainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/gaspriceatdesinationacontainer"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/totalgaspriceheader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/totalgaspricefrotrip" />
+
+            <TextView
+                android:id="@+id/totalgasprice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="TextView" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/sendmoneybutton"
+        android:layout_width="match_parent"
+        android:layout_height="125dp"
+        android:layout_alignParentBottom="true"
+        android:layout_weight="1"
+        android:background="#551A8B"
+        android:text="@string/paygasbutton"
+        android:textColor="#FFF" />
+
+</RelativeLayout>

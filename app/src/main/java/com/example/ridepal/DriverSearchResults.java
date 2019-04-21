@@ -86,16 +86,20 @@ public class DriverSearchResults extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String passName = testList.get(position).getName();
+                String destination = testList.get(position).getDestName();
+                String origin = testList.get(position).getOriginName();
                 passoriginlat = String.valueOf(testList.get(position).getOriginLatLng().latitude);
                 passoriginlong = String.valueOf(testList.get(position).getOriginLatLng().longitude);
                 passdestlat = String.valueOf(testList.get(position).getDestLatLng().latitude);
                 passdestlong = String.valueOf(testList.get(position).getDestLatLng().longitude);
 
-                sendInfo.putString("passoriginlat", passdestlat);
+                sendInfo.putString("passoriginlat", passoriginlat);
                 sendInfo.putString("passoriginlong", passoriginlong);
                 sendInfo.putString("passdestlat", passdestlat);
                 sendInfo.putString("passdestlong", passdestlong);
                 sendInfo.putString("passName", passName);
+                sendInfo.putString("passdest", destination);
+                sendInfo.putString("passorigin", origin);
 
 
 

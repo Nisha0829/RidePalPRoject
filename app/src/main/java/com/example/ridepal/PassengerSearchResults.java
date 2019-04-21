@@ -87,12 +87,16 @@ public class PassengerSearchResults extends AppCompatActivity {
                 passoriginlong = String.valueOf(testList.get(position).getOriginLatLng().longitude);
                 passdestlat = String.valueOf(testList.get(position).getDestLatLng().latitude);
                 passdestlong = String.valueOf(testList.get(position).getDestLatLng().longitude);
+                String destination = testList.get(position).getDestName();
+                String origin = testList.get(position).getOriginName();
 
                 sendInfo.putString("passoriginlat", passdestlat);
                 sendInfo.putString("passoriginlong", passoriginlong);
                 sendInfo.putString("passdestlat", passdestlat);
                 sendInfo.putString("passdestlong", passdestlong);
                 sendInfo.putString("passName", passName);
+                sendInfo.putString("passdest", destination);
+                sendInfo.putString("passorigin", origin);
 
                 Intent passengerInfo = new Intent(PassengerSearchResults.this, PassengerSelectedDriverInfo.class);
                 passengerInfo.putExtras(sendInfo);
