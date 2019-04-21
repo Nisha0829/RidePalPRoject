@@ -218,15 +218,18 @@ public class DriverComfirmRoute extends AppCompatActivity {
                 double deslong = destLatLng.longitude;
 
 
+                Bundle sendDriverInfo = new Bundle();
+                sendDriverInfo.putString("emailID", emailID);
+                sendDriverInfo.putString("orinlat", String.valueOf(originlat));
+                sendDriverInfo.putString("originlong", String.valueOf(orginlong));
+                sendDriverInfo.putString("destlat", String.valueOf(destlat));
+                sendDriverInfo.putString("deslong", String.valueOf(deslong));
 
 
                 Intent searchForPassengers = new Intent(DriverComfirmRoute.this, DriverSearchResults.class);
+                searchForPassengers.putExtras(sendDriverInfo);
                 startActivity(searchForPassengers);
 
-
-                //TODO Create method to input Driver Status, UserEmail, Destination Name, Destination LatLng, Origin Name, Origin LatLng, and Current Miles into Search Table.
-
-                //TODO Create method to start search database for matching Passengers with above criteria.
             }
         });
     }

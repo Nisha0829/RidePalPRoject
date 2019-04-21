@@ -21,6 +21,8 @@ public class DriverSearchResults extends AppCompatActivity {
     ListView passengerList;
     PassengerTestObject testOne, testTwo, testThree;
     Button modeSelect, editSearch;
+    private String originlat, originlong, destlat, destlong, passoriginlat, passoriginlong, passdestlat, passdestlong, emailID;
+    private Bundle sendInfo;
 
 
     @Override
@@ -30,6 +32,20 @@ public class DriverSearchResults extends AppCompatActivity {
 
         modeSelect = (Button)findViewById(R.id.modeselect);
         editSearch = (Button)findViewById(R.id.gobackbutton);
+
+        Bundle getInfo = getIntent().getExtras();
+        originlat = getInfo.getString("originlat");
+        originlong = getInfo.getString("originlong");
+        destlat = getInfo.getString("destlat");
+        destlong = getInfo.getString("destlong");
+        emailID = getInfo.getString("emailID");
+
+        sendInfo = new Bundle();
+        sendInfo.putString("originlat", originlat);
+        sendInfo.putString("originlong", originlong);
+        sendInfo.putString("destlat", destlat);
+        sendInfo.putString("destlong", destlong);
+        sendInfo.putString("emailID", emailID);
 
         modeSelect.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,14 +66,11 @@ public class DriverSearchResults extends AppCompatActivity {
 
         passengerList = (ListView)findViewById(R.id.listview);
 
-        /*TODO take serach results from database query and create PassengerObjects with data pulled from DB
-        * Each passenger result needs email, name, picture string, desination name, origin name, destionation LatLng, origin LatLng*/
 
-        //Test passenger objects for use until database queries on implemented.
 
-        testOne = new PassengerTestObject("testEmail1@email.com","Molly Randall", "PUT PIC STRING HERE", "Fox Theater", "Cobb Civic Center", new LatLng(33.9426, -84.5368));
-        testTwo = new PassengerTestObject("testEmail2@email.com", "Chris Minton", "PUT PIC STRING HERE", "Georgia Aquarium", "Cobb Galleria Centre", new LatLng(33.8833, -84.4666));
-        testThree = new PassengerTestObject("testEmail3@email.com", "Wyatt Cary", "PUT PIC STRING HERE","Zoo Atlanta" , "Cumberland Mall", new LatLng(33.8808, -84.4691));
+        testOne = new PassengerTestObject("testEmail1@email.com","Molly Randall", "PUT PIC STRING HERE", "Fox Theater", "Cobb Civic Center", new LatLng(33.9426, -84.5368), new LatLng(33.7725, 84.3858));
+        testTwo = new PassengerTestObject("testEmail2@email.com", "Chris Minton", "PUT PIC STRING HERE", "Georgia Aquarium", "Cobb Galleria Centre",new LatLng(33.8833, -84.4666), new LatLng(33.7634, 84.3951));
+        testThree = new PassengerTestObject("testEmail3@email.com", "Wyatt Cary", "PUT PIC STRING HERE","Zoo Atlanta" , "Cumberland Mall",new LatLng(33.8808, -84.4691), new LatLng(33.7341, 84.3723));
 
         ArrayList<PassengerTestObject> testList = new ArrayList<>();
 
@@ -72,7 +85,22 @@ public class DriverSearchResults extends AppCompatActivity {
         passengerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String passName = testList.get(position).getName();
+                passoriginlat = String.valueOf(testList.get(position).getOriginLatLng().latitude);
+                passoriginlong = String.valueOf(testList.get(position).getOriginLatLng().longitude);
+                passdestlat = String.valueOf(testList.get(position).getDestLatLng().latitude);
+                passdestlong = String.valueOf(testList.get(position).getDestLatLng().longitude);
+
+                sendInfo.putString("passoriginlat", passdestlat);
+                sendInfo.putString("passoriginlong", passoriginlong);
+                sendInfo.putString("passdestlat", passdestlat);
+                sendInfo.putString("passdestlong", passdestlong);
+                sendInfo.putString("passName", passName);
+
+
+
                 Intent passengerInfo = new Intent(DriverSearchResults.this, DriverSelectedPassInfo.class);
+                passengerInfo.putExtras(sendInfo);
                 startActivity(passengerInfo);
             }
         });
