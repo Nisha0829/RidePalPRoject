@@ -12,9 +12,12 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+
+import java.util.ArrayList;
 
 public class DriverDrivingToDesination extends AppCompatActivity implements OnMapReadyCallback, TaskLoadedCallback {
 
@@ -22,11 +25,56 @@ public class DriverDrivingToDesination extends AppCompatActivity implements OnMa
     MarkerOptions start, end;
     Polyline currentPolyline;
     Button tripDetails, emergency, endTrip;
+    private String originlat, originlong, destlat, destlong, emailID, passoriginlat, passoriginlong, passdestlat, passdestlong, passName, passdestination, passorigin;
+    private Bundle sendInfo;
+    private String driverName, driverOriginName, driverDestName;
+    private LatLng driverOriginLatLng, passOriginLatLng, driverDestLatLng, passDestLatLng;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver_driving_to_desination);
+        Bundle getInfo = getIntent().getExtras();
+        originlat = getInfo.getString("originlat");
+        originlong = getInfo.getString("originlong");
+        destlat = getInfo.getString("destlat");
+        destlong = getInfo.getString("destlong");
+        emailID = getInfo.getString("emailID");
+        passoriginlat = getInfo.getString("passoriginlat");
+        passoriginlong = getInfo.getString("passoriginlong");
+        passdestlat = getInfo.getString("passdestlat");
+        passdestlong = getInfo.getString("passdestlong");
+        passName = getInfo.getString("passname");
+        passdestination = getInfo.getString("passdest");
+        passorigin = getInfo.getString("passorigin");
+        driverName = getInfo.getString("drivername");
+        driverDestName = getInfo.getString("driverdestname");
+        driverOriginName = getInfo.getString("driveroriginname");
+
+
+
+        sendInfo = new Bundle();
+        sendInfo.putString("originlat", originlat);
+        sendInfo.putString("originlong", originlong);
+        sendInfo.putString("destlat", destlat);
+        sendInfo.putString("destlong", destlong);
+        sendInfo.putString("emailID", emailID);
+        sendInfo.putString("passoriginlat", passoriginlat);
+        sendInfo.putString("passoriginlong", passoriginlong);
+        sendInfo.putString("passdestlat", passdestlat);
+        sendInfo.putString("passdestlong", passdestlong);
+        sendInfo.putString("passname", passName);
+        sendInfo.putString("passdest", passdestination);
+        sendInfo.putString("passorigin", passorigin);
+        sendInfo.putString("drivername", driverName);
+        sendInfo.putString("driverdestname", driverDestName);
+        sendInfo.putString("driveroriginname", driverOriginName);
+
+        driverOriginLatLng = new LatLng(Double.parseDouble(originlat), Double.parseDouble(originlong));
+        driverDestLatLng = new LatLng(Double.parseDouble(destlat), Double.parseDouble(destlong));
+        passOriginLatLng = new LatLng(Double.parseDouble(passoriginlat), Double.parseDouble(passoriginlong));
+        passDestLatLng = new LatLng(Double.parseDouble(passdestlat), Double.parseDouble(passdestlong));
+
 
         MapFragment mapFragment = (MapFragment)getFragmentManager().findFragmentById(R.id.mapFrag);
         mapFragment.getMapAsync(this);
@@ -38,7 +86,11 @@ public class DriverDrivingToDesination extends AppCompatActivity implements OnMa
         tripDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String status = "driver";
+
+                sendInfo.putString("status", status);
                 Intent tripdets = new Intent(DriverDrivingToDesination.this, TripDetails.class);
+                tripdets.putExtras(sendInfo);
                 startActivity(tripdets);
             }
         });
@@ -47,10 +99,10 @@ public class DriverDrivingToDesination extends AppCompatActivity implements OnMa
             @Override
             public void onClick(View v) {
                 String status = "driver";
-                Bundle stat =new Bundle();
-                stat.putString("status", status);
+
+                sendInfo.putString("status", status);
                 Intent goToEmergency = new Intent(DriverDrivingToDesination.this, Emergency.class);
-                goToEmergency.putExtras(stat);
+                goToEmergency.putExtras(sendInfo);
                 startActivity(goToEmergency);
             }
         });
@@ -59,6 +111,7 @@ public class DriverDrivingToDesination extends AppCompatActivity implements OnMa
             @Override
             public void onClick(View v) {
                 Intent end=new Intent(DriverDrivingToDesination.this, DriverEndTrip.class);
+                end.putExtras(sendInfo);
                 startActivity(end);
             }
         });
@@ -66,8 +119,8 @@ public class DriverDrivingToDesination extends AppCompatActivity implements OnMa
 
         //Test LatLng values. Must input actual Origin LatLng values when complete.
 
-        start = new MarkerOptions().position(new LatLng(33.8808, -84.4691)).title("Start");
-        end = new MarkerOptions().position(new LatLng(33.9426, -84.5368)).title("End");
+        start = new MarkerOptions().position(passOriginLatLng).title("Start");
+        end = new MarkerOptions().position(passDestLatLng).title("End");
     }
 
     @Override
@@ -85,8 +138,17 @@ public class DriverDrivingToDesination extends AppCompatActivity implements OnMa
         map = googleMap;
         map.addMarker(start);
         map.addMarker(end);
+        ArrayList<LatLng> points = new ArrayList<>();
+        points.add(passOriginLatLng);
+        points.add(passDestLatLng);
+        LatLngBounds.Builder bc = new LatLngBounds.Builder();
 
-        CameraUpdate update = CameraUpdateFactory.newLatLngZoom(new LatLng(33.8808, -84.4691),15);
+        for (LatLng point:points){
+            bc.include(point);
+        }
+        CameraUpdate update = CameraUpdateFactory.newLatLngBounds(bc.build(),50);
+
+        //CameraUpdate update = CameraUpdateFactory.newLatLngZoom(new LatLng(33.8808, -84.4691),15);
         map.moveCamera(update);
 
         String url = getUrl(start.getPosition(), end.getPosition(), "driving");

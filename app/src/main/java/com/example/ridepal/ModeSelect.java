@@ -35,11 +35,15 @@ public class ModeSelect extends AppCompatActivity {
         signOut = (Button)findViewById(R.id.signoutbutton);
         welcome = (TextView)findViewById(R.id.hellotext);
         welcome.append("Hello, " +userName+"!");
+        Bundle sendInfo = new Bundle();
+        sendInfo.putString("username", userName);
+
 
         drive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent driveMode = new Intent (ModeSelect.this, DriverDestSearch.class);
+                driveMode.putExtras(sendInfo);
                 startActivity(driveMode);
             }
         });
@@ -48,6 +52,7 @@ public class ModeSelect extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent rideMode = new Intent(ModeSelect.this, PassengerDestSearch.class);
+                rideMode.putExtras(sendInfo);
                 startActivity(rideMode);
             }
         });
