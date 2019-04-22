@@ -51,7 +51,7 @@
         <Button
             android:id="@+id/modeselect"
             android:layout_width="212dp"
-            android:layout_height="match_parent"
+            android:layout_height="80dp"
             android:layout_weight="1"
             android:background="#551A8B"
             android:text="@string/modeselectreturn"
@@ -89,9 +89,10 @@
         <Button
             android:id="@+id/drivetobutton"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="60dp"
             android:background="#551A8B"
             android:textColor="#FFF"
+            android:textSize="14sp"
             android:text="@string/seedriverroute" />
     </LinearLayout>
 

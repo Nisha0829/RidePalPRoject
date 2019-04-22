@@ -58,14 +58,14 @@
 
     <Button
         android:id="@+id/submitFeedback"
-        android:layout_width="116dp"
-        android:layout_height="45dp"
+        android:layout_width="132dp"
+        android:layout_height="30dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:background="#551A8B"
         android:text="Submit"
         android:textColor="#fff"
-        android:textSize="12sp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

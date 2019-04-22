@@ -83,14 +83,16 @@
         <ImageView
             android:id="@+id/passengerimage"
             android:layout_width="match_parent"
-            android:layout_height="153dp"
+            android:layout_height="103dp"
             app:srcCompat="@android:drawable/btn_star_big_off" />
 
         <Button
             android:id="@+id/drivetobutton"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="65dp"
+            android:layout_marginTop="50dp"
             android:background="#551A8B"
+            android:textSize="14sp"
             android:text="@string/driveto"
             android:textColor="#FFF" />
     </LinearLayout>

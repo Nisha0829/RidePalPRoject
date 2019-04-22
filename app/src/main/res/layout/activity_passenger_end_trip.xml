@@ -258,10 +258,12 @@
     <Button
         android:id="@+id/sendmoneybutton"
         android:layout_width="match_parent"
-        android:layout_height="125dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="5dp"
         android:layout_alignParentBottom="true"
         android:layout_weight="1"
         android:background="#551A8B"
+        android:textSize="14sp"
         android:text="@string/paygasbutton"
         android:textColor="#FFF" />
 

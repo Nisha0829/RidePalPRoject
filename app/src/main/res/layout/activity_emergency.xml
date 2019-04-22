@@ -34,9 +34,11 @@
         <Button
             android:id="@+id/nineoneone"
             android:layout_width="match_parent"
-            android:layout_height="247dp"
+            android:layout_height="100dp"
             android:background="#551A8B"
+            android:layout_marginTop="100dp"
             android:text="@string/call911"
+            android:textSize="16dp"
             android:textColor="#FFF" />
 
         <Space
@@ -47,16 +49,19 @@
         <Button
             android:id="@+id/servicesbutton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="55dp"
             android:background="#551A8B"
+            android:textSize="14sp"
             android:text="@string/roadsideassistance"
             android:textColor="#FFF" />
 
         <Button
             android:id="@+id/gobackbutton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_height="55dp"
             android:background="#551A8B"
+            android:layout_marginTop="10dp"
             android:text="@string/back"
             android:textColor="#FFF" />
     </LinearLayout>
