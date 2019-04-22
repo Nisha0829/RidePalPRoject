@@ -26,12 +26,51 @@ public class DriverDriveToPassenger extends AppCompatActivity implements OnMapRe
     Button getDirection, call, pickUp;
     MarkerOptions driver, passenger;
     Polyline currentPolyline;
+    private String originlat, originlong, destlat, destlong, emailID, passoriginlat, passoriginlong, passdestlat, passdestlong, passName, passdestination, passorigin;
+    private Bundle sendInfo;
+    private String driverName, driverOriginName, driverDestName;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver_drive_to_passenger);
+
+        Bundle getInfo = getIntent().getExtras();
+        originlat = getInfo.getString("originlat");
+        originlong = getInfo.getString("originlong");
+        destlat = getInfo.getString("destlat");
+        destlong = getInfo.getString("destlong");
+        emailID = getInfo.getString("emailID");
+        passoriginlat = getInfo.getString("passoriginlat");
+        passoriginlong = getInfo.getString("passoriginlong");
+        passdestlat = getInfo.getString("passdestlat");
+        passdestlong = getInfo.getString("passdestlong");
+        passName = getInfo.getString("passname");
+        passdestination = getInfo.getString("passdest");
+        passorigin = getInfo.getString("passorigin");
+        driverName = getInfo.getString("drivername");
+        driverDestName = getInfo.getString("driverdestname");
+        driverOriginName = getInfo.getString("driveroriginname");
+
+
+
+        sendInfo = new Bundle();
+        sendInfo.putString("originlat", originlat);
+        sendInfo.putString("originlong", originlong);
+        sendInfo.putString("destlat", destlat);
+        sendInfo.putString("destlong", destlong);
+        sendInfo.putString("emailID", emailID);
+        sendInfo.putString("passoriginlat", passoriginlat);
+        sendInfo.putString("passoriginlong", passoriginlong);
+        sendInfo.putString("passdestlat", passdestlat);
+        sendInfo.putString("passdestlong", passdestlong);
+        sendInfo.putString("passname", passName);
+        sendInfo.putString("passdest", passdestination);
+        sendInfo.putString("passorigin", passorigin);
+        sendInfo.putString("drivername", driverName);
+        sendInfo.putString("driverdestname", driverDestName);
+        sendInfo.putString("driveroriginname", driverOriginName);
 
         getDirection = (Button)findViewById(R.id.btnGetDirections);
         MapFragment mapFragment = (MapFragment)getFragmentManager().findFragmentById(R.id.mapFrag);
@@ -46,6 +85,7 @@ public class DriverDriveToPassenger extends AppCompatActivity implements OnMapRe
             @Override
             public void onClick(View v) {
                 Intent pickup= new Intent(DriverDriveToPassenger.this, DriverDrivingToDesination.class);
+                pickup.putExtras(sendInfo);
                 startActivity(pickup);
             }
         });

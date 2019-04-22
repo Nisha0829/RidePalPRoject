@@ -57,6 +57,7 @@ public class DriverComfirmRoute extends AppCompatActivity {
     LatLng currentLocationLatLng;
     DataBaseHelper dataBaseHelper;
     String emailID;
+    String driverName;
 
 
     Location mLastLocation;
@@ -111,6 +112,7 @@ public class DriverComfirmRoute extends AppCompatActivity {
 
         destPlaceID = getIntent().getExtras().getString("DestPlaceID");
         origPlaceID = getIntent().getExtras().getString("OriginID");
+        driverName = getIntent().getExtras().getString("drivername");
 
 
 
@@ -182,6 +184,7 @@ public class DriverComfirmRoute extends AppCompatActivity {
                 Intent setO = new Intent (DriverComfirmRoute.this, DriverOriginSearch.class);
                 Bundle desID = new Bundle();
                 desID.putString("DestPlaceID", destPlaceID);
+                desID.putSerializable("drivername", driverName);
                 setO.putExtras(desID);
                 startActivity(setO);
 
@@ -224,6 +227,9 @@ public class DriverComfirmRoute extends AppCompatActivity {
                 sendDriverInfo.putString("originlong", String.valueOf(orginlong));
                 sendDriverInfo.putString("destlat", String.valueOf(destlat));
                 sendDriverInfo.putString("deslong", String.valueOf(deslong));
+                sendDriverInfo.putString("drivername", driverName);
+                sendDriverInfo.putString("driverdestname", destName);
+                sendDriverInfo.putString("driveroriginname", originName);
 
 
                 Intent searchForPassengers = new Intent(DriverComfirmRoute.this, DriverSearchResults.class);

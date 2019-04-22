@@ -55,6 +55,8 @@ public class PassengerComfirmRoute extends AppCompatActivity {
     String origPlaceID;
     LatLng currentLocationLatLng;
     String emailID;
+    String driverName;
+
 
     private static final String TAG = "PassengerComfirmRoute";
 
@@ -112,6 +114,9 @@ public class PassengerComfirmRoute extends AppCompatActivity {
                 sendDriverInfo.putString("originlong", String.valueOf(orginlong));
                 sendDriverInfo.putString("destlat", String.valueOf(destlat));
                 sendDriverInfo.putString("deslong", String.valueOf(deslong));
+                sendDriverInfo.putString("drivername", driverName);
+                sendDriverInfo.putString("driverdestname", destName);
+                sendDriverInfo.putString("driveroriginname", originName);
 
                 Intent searchForPassengers = new Intent(PassengerComfirmRoute.this, PassengerSearchResults.class);
                 searchForPassengers.putExtras(sendDriverInfo);
@@ -189,6 +194,7 @@ public class PassengerComfirmRoute extends AppCompatActivity {
                 Intent setO = new Intent (PassengerComfirmRoute.this, PassengerOriginSearch.class);
                 Bundle desID = new Bundle();
                 desID.putString("DestPlaceID", destPlaceID);
+                desID.putSerializable("drivername", driverName);
                 setO.putExtras(desID);
                 startActivity(setO);
 

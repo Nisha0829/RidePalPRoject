@@ -21,7 +21,7 @@ public class DriverSearchResults extends AppCompatActivity {
     ListView passengerList;
     PassengerTestObject testOne, testTwo, testThree;
     Button modeSelect, editSearch;
-    private String originlat, originlong, destlat, destlong, passoriginlat, passoriginlong, passdestlat, passdestlong, emailID;
+    private String originlat, originlong, destlat, destlong, passoriginlat, passoriginlong, passdestlat, passdestlong, emailID, driverDestName, driverOriginName, driverName;
     private Bundle sendInfo;
 
 
@@ -39,6 +39,9 @@ public class DriverSearchResults extends AppCompatActivity {
         destlat = getInfo.getString("destlat");
         destlong = getInfo.getString("destlong");
         emailID = getInfo.getString("emailID");
+        driverName = getInfo.getString("drivername");
+        driverDestName = getInfo.getString("driverdestname");
+        driverOriginName = getInfo.getString("driveroriginname");
 
         sendInfo = new Bundle();
         sendInfo.putString("originlat", originlat);
@@ -46,6 +49,9 @@ public class DriverSearchResults extends AppCompatActivity {
         sendInfo.putString("destlat", destlat);
         sendInfo.putString("destlong", destlong);
         sendInfo.putString("emailID", emailID);
+        sendInfo.putString("drivername", driverName);
+        sendInfo.putString("driverdestname", driverDestName);
+        sendInfo.putString("driveroriginname", driverOriginName);
 
         modeSelect.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,8 +92,8 @@ public class DriverSearchResults extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String passName = testList.get(position).getName();
-                String destination = testList.get(position).getDestName();
-                String origin = testList.get(position).getOriginName();
+                String passdestination = testList.get(position).getDestName();
+                String passorigin = testList.get(position).getOriginName();
                 passoriginlat = String.valueOf(testList.get(position).getOriginLatLng().latitude);
                 passoriginlong = String.valueOf(testList.get(position).getOriginLatLng().longitude);
                 passdestlat = String.valueOf(testList.get(position).getDestLatLng().latitude);
@@ -97,9 +103,9 @@ public class DriverSearchResults extends AppCompatActivity {
                 sendInfo.putString("passoriginlong", passoriginlong);
                 sendInfo.putString("passdestlat", passdestlat);
                 sendInfo.putString("passdestlong", passdestlong);
-                sendInfo.putString("passName", passName);
-                sendInfo.putString("passdest", destination);
-                sendInfo.putString("passorigin", origin);
+                sendInfo.putString("passname", passName);
+                sendInfo.putString("passdest", passdestination);
+                sendInfo.putString("passorigin", passorigin);
 
 
 

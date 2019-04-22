@@ -19,7 +19,7 @@ public class PassengerSearchResults extends AppCompatActivity {
     ListView driverList;
     PassengerTestObject testOne, testTwo, testThree;
     Button modeSelect, editSearch;
-    private String originlat, originlong, destlat, destlong, passoriginlat, passoriginlong, passdestlat, passdestlong, emailID;
+    private String originlat, originlong, destlat, destlong, passoriginlat, passoriginlong, passdestlat, passdestlong, emailID, driverDestName, driverOriginName, driverName;
     private Bundle sendInfo;
 
     @Override
@@ -36,6 +36,9 @@ public class PassengerSearchResults extends AppCompatActivity {
         destlat = getInfo.getString("destlat");
         destlong = getInfo.getString("destlong");
         emailID = getInfo.getString("emailID");
+        driverName = getInfo.getString("drivername");
+        driverDestName = getInfo.getString("driverdestname");
+        driverOriginName = getInfo.getString("driveroriginname");
 
         sendInfo = new Bundle();
         sendInfo.putString("originlat", originlat);
@@ -43,6 +46,9 @@ public class PassengerSearchResults extends AppCompatActivity {
         sendInfo.putString("destlat", destlat);
         sendInfo.putString("destlong", destlong);
         sendInfo.putString("emailID", emailID);
+        sendInfo.putString("drivername", driverName);
+        sendInfo.putString("driverdestname", driverDestName);
+        sendInfo.putString("driveroriginname", driverOriginName);
 
         modeSelect.setOnClickListener(new View.OnClickListener() {
             @Override

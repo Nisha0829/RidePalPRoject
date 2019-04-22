@@ -13,14 +13,51 @@ public class DriverSelectedPassInfo extends AppCompatActivity {
 
     private Button modeSelect, changePref, backToResults, changeRoute, sendRequest;
     private TextView iName, iAge, iOrigin, iDestination;
-    private String name, age, origin, destination;
+    private String originlat, originlong, destlat, destlong, emailID, passoriginlat, passoriginlong, passdestlat, passdestlong, passName, passdestination, passorigin, driverName, driverOriginName, driverDestName;
     private PassengerTestObject testPassenger;
+    private Bundle sendInfo;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver_selected_pass_info);
+        Bundle getInfo = getIntent().getExtras();
+        originlat = getInfo.getString("originlat");
+        originlong = getInfo.getString("originlong");
+        destlat = getInfo.getString("destlat");
+        destlong = getInfo.getString("destlong");
+        emailID = getInfo.getString("emailID");
+        passoriginlat = getInfo.getString("passoriginlat");
+        passoriginlong = getInfo.getString("passoriginlong");
+        passdestlat = getInfo.getString("passdestlat");
+        passdestlong = getInfo.getString("passdestlong");
+        passName = getInfo.getString("passname");
+        passdestination = getInfo.getString("passdest");
+        passorigin = getInfo.getString("passorigin");
+        driverName = getInfo.getString("drivername");
+        driverDestName = getInfo.getString("driverdestname");
+        driverOriginName = getInfo.getString("driveroriginname");
+
+
+
+        sendInfo = new Bundle();
+        sendInfo.putString("originlat", originlat);
+        sendInfo.putString("originlong", originlong);
+        sendInfo.putString("destlat", destlat);
+        sendInfo.putString("destlong", destlong);
+        sendInfo.putString("emailID", emailID);
+        sendInfo.putString("passoriginlat", passoriginlat);
+        sendInfo.putString("passoriginlong", passoriginlong);
+        sendInfo.putString("passdestlat", passdestlat);
+        sendInfo.putString("passdestlong", passdestlong);
+        sendInfo.putString("passname", passName);
+        sendInfo.putString("passdest", passdestination);
+        sendInfo.putString("passorigin", passorigin);
+        sendInfo.putString("drivername", driverName);
+        sendInfo.putString("driverdestname", driverDestName);
+        sendInfo.putString("driveroriginname", driverOriginName);
 
         modeSelect =(Button)findViewById(R.id.modeselect);
 
@@ -69,16 +106,17 @@ public class DriverSelectedPassInfo extends AppCompatActivity {
 
 
 
-        iName.setText(name);
-        iAge.setText(age);
-        iOrigin.setText(origin);
-        iDestination.setText(destination);
+        iName.setText(passName);
+
+        iOrigin.setText(passorigin);
+        iDestination.setText(passdestination);
 
         sendRequest = (Button)findViewById(R.id.sendrequest);
         sendRequest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent request = new Intent(DriverSelectedPassInfo.this, DriverReqeustAccepted.class);
+                request.putExtras(sendInfo);
                 startActivity(request);
             }
         });

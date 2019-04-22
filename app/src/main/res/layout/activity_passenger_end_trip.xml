@@ -70,7 +70,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/drivername" />
+                android:text="@string/passengernameheader" />
 
             <TextView
                 android:id="@+id/drivername"
@@ -92,7 +92,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/driverdestinationheader" />
+                android:text="@string/passengerdestinationheader" />
 
             <TextView
                 android:id="@+id/driverdestination"
@@ -115,7 +115,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/drivermilesto" />
+                android:text="@string/passengermilesto" />
 
             <TextView
                 android:id="@+id/drivermiles"
@@ -143,7 +143,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/passengernameheader" />
+                android:text="@string/drivername" />
 
             <TextView
                 android:id="@+id/passengername"
@@ -165,7 +165,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/passengerdestinationheader" />
+                android:text="@string/driverdestinationheader" />
 
             <TextView
                 android:id="@+id/passengerdestination"
@@ -188,7 +188,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/passengermilesto" />
+                android:text="@string/drivermilesto" />
 
             <TextView
                 android:id="@+id/passengermiles"

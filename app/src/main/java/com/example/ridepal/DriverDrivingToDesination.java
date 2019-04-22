@@ -22,11 +22,49 @@ public class DriverDrivingToDesination extends AppCompatActivity implements OnMa
     MarkerOptions start, end;
     Polyline currentPolyline;
     Button tripDetails, emergency, endTrip;
+    private String originlat, originlong, destlat, destlong, emailID, passoriginlat, passoriginlong, passdestlat, passdestlong, passName, passdestination, passorigin;
+    private Bundle sendInfo;
+    private String driverName, driverOriginName, driverDestName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver_driving_to_desination);
+        Bundle getInfo = getIntent().getExtras();
+        originlat = getInfo.getString("originlat");
+        originlong = getInfo.getString("originlong");
+        destlat = getInfo.getString("destlat");
+        destlong = getInfo.getString("destlong");
+        emailID = getInfo.getString("emailID");
+        passoriginlat = getInfo.getString("passoriginlat");
+        passoriginlong = getInfo.getString("passoriginlong");
+        passdestlat = getInfo.getString("passdestlat");
+        passdestlong = getInfo.getString("passdestlong");
+        passName = getInfo.getString("passname");
+        passdestination = getInfo.getString("passdest");
+        passorigin = getInfo.getString("passorigin");
+        driverName = getInfo.getString("drivername");
+        driverDestName = getInfo.getString("driverdestname");
+        driverOriginName = getInfo.getString("driveroriginname");
+
+
+
+        sendInfo = new Bundle();
+        sendInfo.putString("originlat", originlat);
+        sendInfo.putString("originlong", originlong);
+        sendInfo.putString("destlat", destlat);
+        sendInfo.putString("destlong", destlong);
+        sendInfo.putString("emailID", emailID);
+        sendInfo.putString("passoriginlat", passoriginlat);
+        sendInfo.putString("passoriginlong", passoriginlong);
+        sendInfo.putString("passdestlat", passdestlat);
+        sendInfo.putString("passdestlong", passdestlong);
+        sendInfo.putString("passname", passName);
+        sendInfo.putString("passdest", passdestination);
+        sendInfo.putString("passorigin", passorigin);
+        sendInfo.putString("drivername", driverName);
+        sendInfo.putString("driverdestname", driverDestName);
+        sendInfo.putString("driveroriginname", driverOriginName);
 
         MapFragment mapFragment = (MapFragment)getFragmentManager().findFragmentById(R.id.mapFrag);
         mapFragment.getMapAsync(this);
@@ -38,7 +76,11 @@ public class DriverDrivingToDesination extends AppCompatActivity implements OnMa
         tripDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String status = "driver";
+
+                sendInfo.putString("status", status);
                 Intent tripdets = new Intent(DriverDrivingToDesination.this, TripDetails.class);
+                tripdets.putExtras(sendInfo);
                 startActivity(tripdets);
             }
         });
@@ -47,10 +89,10 @@ public class DriverDrivingToDesination extends AppCompatActivity implements OnMa
             @Override
             public void onClick(View v) {
                 String status = "driver";
-                Bundle stat =new Bundle();
-                stat.putString("status", status);
+
+                sendInfo.putString("status", status);
                 Intent goToEmergency = new Intent(DriverDrivingToDesination.this, Emergency.class);
-                goToEmergency.putExtras(stat);
+                goToEmergency.putExtras(sendInfo);
                 startActivity(goToEmergency);
             }
         });
@@ -59,6 +101,7 @@ public class DriverDrivingToDesination extends AppCompatActivity implements OnMa
             @Override
             public void onClick(View v) {
                 Intent end=new Intent(DriverDrivingToDesination.this, DriverEndTrip.class);
+                end.putExtras(sendInfo);
                 startActivity(end);
             }
         });
