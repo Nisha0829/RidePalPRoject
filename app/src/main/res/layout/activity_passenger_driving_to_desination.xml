@@ -35,7 +35,8 @@
     <Button
         android:id="@+id/tripdetailsbutton"
         android:layout_width="match_parent"
-        android:layout_height="85dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="5dp"
         android:text="@string/tripdetails"
         android:background="#551A8B"
         android:textColor="#FFF"/>
@@ -43,19 +44,23 @@
     <Button
         android:id="@+id/endtripbutton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
         android:layout_weight="1"
         android:background="#551A8B"
+        android:layout_marginBottom="5dp"
         android:textColor="#FFF"
-        android:text="@string/endtrip" />
+        android:text="@string/endtrip"
+        android:textSize="14sp"/>
 
     <Button
         android:id="@+id/emergencybutton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
         android:layout_weight="25"
         android:text="@string/emergency"
         android:background="#551A8B"
+        android:textSize="14sp"
+        android:layout_marginBottom="5dp"
         android:textColor="#FFF"/>
 
 
