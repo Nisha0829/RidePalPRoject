@@ -107,7 +107,8 @@
                 android:layout_weight="25"
                 android:gravity="center"
                 android:text="TextView"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:visibility="invisible" />
 
             <TextView
                 android:id="@+id/origin"

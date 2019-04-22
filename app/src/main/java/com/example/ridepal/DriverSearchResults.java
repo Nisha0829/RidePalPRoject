@@ -72,11 +72,13 @@ public class DriverSearchResults extends AppCompatActivity {
 
         passengerList = (ListView)findViewById(R.id.listview);
 
+        String chrisImageUri = "android.resource://com.example.ridepal/drawable/chris.png";
+        String wyattImageUri = "android.resource://com.example.ridepal/drawable/wyatt.png";
+        String mollyImageUri = "android.resource://com.example.ridepal/drawable/molly.png";
 
-
-        testOne = new PassengerTestObject("testEmail1@email.com","Molly Randall", "PUT PIC STRING HERE", "Fox Theater", "Cobb Civic Center", new LatLng(33.9426, -84.5368), new LatLng(33.7725, 84.3858));
-        testTwo = new PassengerTestObject("testEmail2@email.com", "Chris Minton", "PUT PIC STRING HERE", "Georgia Aquarium", "Cobb Galleria Centre",new LatLng(33.8833, -84.4666), new LatLng(33.7634, 84.3951));
-        testThree = new PassengerTestObject("testEmail3@email.com", "Wyatt Cary", "PUT PIC STRING HERE","Zoo Atlanta" , "Cumberland Mall",new LatLng(33.8808, -84.4691), new LatLng(33.7341, 84.3723));
+        testOne = new PassengerTestObject("testEmail1@email.com","Molly Randall", mollyImageUri, "Fox Theater", "Cobb Civic Center", new LatLng(33.9426, -84.5368), new LatLng(33.7725, 84.3858));
+        testTwo = new PassengerTestObject("testEmail2@email.com", "Chris Minton", chrisImageUri, "Georgia Aquarium", "Cobb Galleria Centre",new LatLng(33.8833, -84.4666), new LatLng(33.7634, 84.3951));
+        testThree = new PassengerTestObject("testEmail3@email.com", "Wyatt Cary", wyattImageUri,"Zoo Atlanta" , "Cumberland Mall",new LatLng(33.8808, -84.4691), new LatLng(33.7341, 84.3723));
 
         ArrayList<PassengerTestObject> testList = new ArrayList<>();
 
@@ -98,6 +100,7 @@ public class DriverSearchResults extends AppCompatActivity {
                 passoriginlong = String.valueOf(testList.get(position).getOriginLatLng().longitude);
                 passdestlat = String.valueOf(testList.get(position).getDestLatLng().latitude);
                 passdestlong = String.valueOf(testList.get(position).getDestLatLng().longitude);
+                String image = testList.get(position).getPicture();
 
                 sendInfo.putString("passoriginlat", passoriginlat);
                 sendInfo.putString("passoriginlong", passoriginlong);
@@ -106,6 +109,7 @@ public class DriverSearchResults extends AppCompatActivity {
                 sendInfo.putString("passname", passName);
                 sendInfo.putString("passdest", passdestination);
                 sendInfo.putString("passorigin", passorigin);
+                sendInfo.putString("picture", image);
 
 
 
