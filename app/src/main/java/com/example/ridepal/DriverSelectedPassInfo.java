@@ -1,10 +1,13 @@
 package com.example.ridepal;
 
 import android.content.Intent;
+import android.media.Image;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -16,6 +19,8 @@ public class DriverSelectedPassInfo extends AppCompatActivity {
     private String originlat, originlong, destlat, destlong, emailID, passoriginlat, passoriginlong, passdestlat, passdestlong, passName, passdestination, passorigin, driverName, driverOriginName, driverDestName;
     private PassengerTestObject testPassenger;
     private Bundle sendInfo;
+    private String pic;
+    private ImageView profilePic;
 
 
 
@@ -39,6 +44,7 @@ public class DriverSelectedPassInfo extends AppCompatActivity {
         driverName = getInfo.getString("drivername");
         driverDestName = getInfo.getString("driverdestname");
         driverOriginName = getInfo.getString("driveroriginname");
+        pic = getInfo.getString("picture");
 
 
 
@@ -58,8 +64,12 @@ public class DriverSelectedPassInfo extends AppCompatActivity {
         sendInfo.putString("drivername", driverName);
         sendInfo.putString("driverdestname", driverDestName);
         sendInfo.putString("driveroriginname", driverOriginName);
+        sendInfo.putString("picture", pic);
 
         modeSelect =(Button)findViewById(R.id.modeselect);
+        profilePic = (ImageView)findViewById(R.id.passengerimage);
+
+        profilePic.setImageURI(Uri.parse(pic));
 
         modeSelect.setOnClickListener(new View.OnClickListener() {
             @Override

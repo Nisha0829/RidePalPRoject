@@ -80,11 +80,25 @@
             android:layout_width="match_parent"
             android:layout_height="30dp" />
 
-        <ImageView
-            android:id="@+id/passengerimage"
-            android:layout_width="match_parent"
-            android:layout_height="103dp"
-            app:srcCompat="@android:drawable/btn_star_big_off" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="150dp"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/passengerimage"
+                android:layout_width="100dp"
+                android:layout_height="103dp"
+                app:srcCompat="@android:drawable/btn_star_big_off" />
+
+            <Space
+                android:layout_width="150dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
 
         <Button
             android:id="@+id/drivetobutton"
