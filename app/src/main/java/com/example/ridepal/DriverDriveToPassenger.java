@@ -13,11 +13,13 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.sql.Driver;
+import java.util.ArrayList;
 import java.util.Map;
 
 public class DriverDriveToPassenger extends AppCompatActivity implements OnMapReadyCallback, TaskLoadedCallback {
@@ -29,6 +31,7 @@ public class DriverDriveToPassenger extends AppCompatActivity implements OnMapRe
     private String originlat, originlong, destlat, destlong, emailID, passoriginlat, passoriginlong, passdestlat, passdestlong, passName, passdestination, passorigin;
     private Bundle sendInfo;
     private String driverName, driverOriginName, driverDestName;
+    private LatLng driverOriginLatLng, passOriginLatLng, driverDestLatLng, passDestLatLng;
 
 
     @Override
@@ -72,14 +75,19 @@ public class DriverDriveToPassenger extends AppCompatActivity implements OnMapRe
         sendInfo.putString("driverdestname", driverDestName);
         sendInfo.putString("driveroriginname", driverOriginName);
 
+        driverOriginLatLng = new LatLng(Double.parseDouble(originlat), Double.parseDouble(originlong));
+        driverDestLatLng = new LatLng(Double.parseDouble(destlat), Double.parseDouble(destlong));
+        passOriginLatLng = new LatLng(Double.parseDouble(passoriginlat), Double.parseDouble(passoriginlong));
+        passDestLatLng = new LatLng(Double.parseDouble(passdestlat), Double.parseDouble(passdestlong));
+
         getDirection = (Button)findViewById(R.id.btnGetDirections);
         MapFragment mapFragment = (MapFragment)getFragmentManager().findFragmentById(R.id.mapFrag);
         mapFragment.getMapAsync(this);
 
         //Test LatLng values. Must input actual Origin LatLng values when complete.
 
-        driver = new MarkerOptions().position(new LatLng(33.8808, -84.4691)).title("Driver");
-        passenger = new MarkerOptions().position(new LatLng(33.9426, -84.5368)).title("Passenger");
+        driver = new MarkerOptions().position(driverOriginLatLng).title("Driver");
+        passenger = new MarkerOptions().position(passOriginLatLng).title("Passenger");
         pickUp=(Button)findViewById(R.id.pickupbutton);
         pickUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,8 +107,15 @@ public class DriverDriveToPassenger extends AppCompatActivity implements OnMapRe
         map = googleMap;
         map.addMarker(driver);
         map.addMarker(passenger);
+        ArrayList<LatLng> points = new ArrayList<>();
+        points.add(driverOriginLatLng);
+        points.add(passOriginLatLng);
+        LatLngBounds.Builder bc = new LatLngBounds.Builder();
 
-        CameraUpdate update = CameraUpdateFactory.newLatLngZoom(new LatLng(33.8808, -84.4691),15);
+        for (LatLng point:points){
+            bc.include(point);
+        }
+        CameraUpdate update = CameraUpdateFactory.newLatLngBounds(bc.build(),50);
         map.moveCamera(update);
 
         String url = getUrl(driver.getPosition(), passenger.getPosition(), "driving");
