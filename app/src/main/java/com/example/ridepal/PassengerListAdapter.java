@@ -38,9 +38,10 @@ public class PassengerListAdapter extends ArrayAdapter<PassengerTestObject>{
         String origin = getItem(position).getOriginName();
         String desination = getItem(position).getDestName();
         String emailID = getItem(position).getEmailID();
-        LatLng latLng = getItem(position).getLatLng();
+        LatLng distlatLng = getItem(position).getOriginLatLng(); //getLatLng
+        LatLng originlatLng = getItem(position).getDestLatLng();
 
-        PassengerTestObject passenger = new PassengerTestObject(emailID,name,picture,desination,origin, latLng);
+        PassengerTestObject passenger = new PassengerTestObject(emailID,name,picture,desination,origin, originlatLng, distlatLng);
 
         LayoutInflater inflater = LayoutInflater.from(mContext);
 
