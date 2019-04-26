@@ -12,12 +12,13 @@ import com.google.maps.android.SphericalUtil;
 
 public class PassengerEndTrip extends AppCompatActivity {
 
-    private String originlat, originlong, destlat, destlong, emailID, passoriginlat, passoriginlong, passdestlat, passdestlong, passName, passdestination, passorigin;
+    private double originlat, originlong, destlat, destlong, passoriginlat, passoriginlong, passdestlat;
     private Bundle sendInfo;
+    double driverOriginlat,driverOriginlong,driverDestlat,driverDestLong;
     private TextView driverNameTV, driverDestTV, driverMilesTV, passNameTV, passDestTV, passMilesTV, avgGasPriceTV, totalGasTV;
     private Button pay;
     private LatLng driverOriginLatLng, passOriginLatLng, driverDestLatLng, passDestLatLng;
-    private String driverName, driverOriginName, driverDestName;
+    private String driverName, emailID, driverOriginName, driverDestName, driverEmailID, passdestlong, passName, passdestination, passorigin;;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,34 +32,35 @@ public class PassengerEndTrip extends AppCompatActivity {
         passMilesTV = (TextView)findViewById(R.id.passengermiles);
         avgGasPriceTV = (TextView)findViewById(R.id.destinationgasprice);
         totalGasTV = (TextView)findViewById(R.id.totalgasprice);
-        pay= (Button)findViewById(R.id.sendrequestbutton);
 
         Bundle getInfo = getIntent().getExtras();
-        originlat = getInfo.getString("originlat");
-        originlong = getInfo.getString("originlong");
-        destlat = getInfo.getString("destlat");
-        destlong = getInfo.getString("destlong");
+        originlat = getInfo.getDouble("originlat");
+        originlong = getInfo.getDouble("originlong");
+        destlat = getInfo.getDouble("destlat");
+        destlong = getInfo.getDouble("destlong");
         emailID = getInfo.getString("emailID");
-        passoriginlat = getInfo.getString("passoriginlat");
-        passoriginlong = getInfo.getString("passoriginlong");
-        passdestlat = getInfo.getString("passdestlat");
-        passdestlong = getInfo.getString("passdestlong");
         passName = getInfo.getString("passname");
         passdestination = getInfo.getString("passdest");
         passorigin = getInfo.getString("passorigin");
-        driverName = getInfo.getString("drivername");
-        driverDestName = getInfo.getString("driverdestname");
-        driverOriginName = getInfo.getString("driveroriginname");
+        driverOriginlat = getInfo.getDouble("driverOrigingLat");
+        driverOriginlong = getInfo.getDouble("driverOrigingLong");
+        driverDestlat = getInfo.getDouble("driverDestLat");
+        driverDestLong = getInfo.getDouble("driverDestLong");
+        driverName = getInfo.getString("driverName");
+        driverOriginName = getInfo.getString("driverOrigin");
+        driverDestName = getInfo.getString("driverDest");
+        driverEmailID = getInfo.getString("driverEmailId");
 
         driverNameTV.setText(driverName);
         driverDestTV.setText(driverDestName);
         passNameTV.setText(passName);
         passDestTV.setText(passdestination);
 
-        driverOriginLatLng = new LatLng(Double.parseDouble(originlat), Double.parseDouble(originlong));
-        driverDestLatLng = new LatLng(Double.parseDouble(destlat), Double.parseDouble(destlong));
-        passOriginLatLng = new LatLng(Double.parseDouble(passoriginlat), Double.parseDouble(passoriginlong));
-        passDestLatLng = new LatLng(Double.parseDouble(passdestlat), Double.parseDouble(passdestlong));
+        driverOriginLatLng = new LatLng(originlat, originlong);
+        driverDestLatLng = new LatLng(destlat,destlong);
+        passOriginLatLng = new LatLng(driverOriginlat, driverOriginlong);
+        passDestLatLng = new LatLng(driverDestlat, driverDestLong);
+
 
         double driverDistanceMeters = SphericalUtil.computeDistanceBetween(driverOriginLatLng, driverDestLatLng);
         double driverDistanceMiles = driverDistanceMeters*0.00062171;
@@ -72,25 +74,28 @@ public class PassengerEndTrip extends AppCompatActivity {
 
 
         sendInfo = new Bundle();
-        sendInfo.putString("originlat", originlat);
-        sendInfo.putString("originlong", originlong);
-        sendInfo.putString("destlat", destlat);
-        sendInfo.putString("destlong", destlong);
+        sendInfo.putDouble("originlat", originlat);
+        sendInfo.putDouble("originlong", originlong);
+        sendInfo.putDouble("destlat", destlat);
+        sendInfo.putDouble("destlong", destlong);
         sendInfo.putString("emailID", emailID);
-        sendInfo.putString("passoriginlat", passoriginlat);
-        sendInfo.putString("passoriginlong", passoriginlong);
-        sendInfo.putString("passdestlat", passdestlat);
+        sendInfo.putDouble("passoriginlat", passoriginlat);
+        sendInfo.putDouble("passoriginlong", passoriginlong);
+        sendInfo.putDouble("passdestlat", passdestlat);
         sendInfo.putString("passdestlong", passdestlong);
         sendInfo.putString("passname", passName);
         sendInfo.putString("passdest", passdestination);
         sendInfo.putString("passorigin", passorigin);
+        sendInfo.putString("driverName", driverName);
+        sendInfo.putString("emailId", driverEmailID);
+        pay= (Button)findViewById(R.id.sendmoneybutton);
 
         pay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent goToFeedback = new Intent(PassengerEndTrip.this, ActionUserFeedback.class);
-                goToFeedback.putExtras(sendInfo);
-                startActivity(goToFeedback);
+                Intent end=new Intent(PassengerEndTrip.this, ActionUserFeedback.class);
+                end.putExtras(sendInfo);
+                startActivity(end);
             }
         });
 

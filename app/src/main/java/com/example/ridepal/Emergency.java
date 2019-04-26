@@ -88,14 +88,14 @@ public class Emergency extends AppCompatActivity {
         goBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent passback = new Intent(Emergency.this, PassengerDrivingToDesination.class);
+               // Intent passback = new Intent(Emergency.this, PassengerDrivingToDesination.class);
                 Intent driverback = new Intent(Emergency.this, DriverDrivingToDesination.class);
-                if(status.equals("driver")){
+//                if(status.equals("driver")){
                     startActivity(driverback);
-                }
-                if(status.equals("passenger")){
-                    startActivity(passback);
-                }
+               // }
+//                if(status.equals("passenger")){
+//                    startActivity(passback);
+//                }
             }
         });
 

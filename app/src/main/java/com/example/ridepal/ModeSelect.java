@@ -52,7 +52,9 @@ public class ModeSelect extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent rideMode = new Intent(ModeSelect.this, PassengerDestSearch.class);
-                rideMode.putExtras(sendInfo);
+                rideMode.putExtra("userName", userName);
+                rideMode.putExtra("emailID", emailID);
+              //  rideMode.putExtras(sendInfo);
                 startActivity(rideMode);
             }
         });

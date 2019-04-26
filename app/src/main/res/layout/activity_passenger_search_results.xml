@@ -81,7 +81,7 @@
             android:background="#551A8B"
             android:textColor="#FFF"
             android:textSize="14sp"
-            android:text="@string/goback" />
+            android:text="Go Back" />
     </LinearLayout>
 
 

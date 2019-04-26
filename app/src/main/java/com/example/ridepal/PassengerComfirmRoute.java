@@ -31,6 +31,7 @@ import com.google.android.libraries.places.api.net.FetchPlaceRequest;
 import com.google.android.libraries.places.api.net.PlacesClient;
 
 import java.sql.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -40,7 +41,7 @@ public class PassengerComfirmRoute extends AppCompatActivity {
 
     private TextView seekMiles;
     private SeekBar searchMiles;
-    String currentMiles;
+    int currentMiles;
     private Button changeDest, changeOrigin, search, modeSelect;
     String destPlaceID;
     PlacesClient placesClient;
@@ -54,9 +55,8 @@ public class PassengerComfirmRoute extends AppCompatActivity {
     String originAddress;
     String origPlaceID;
     LatLng currentLocationLatLng;
-    String emailID;
-    String driverName;
-
+    DataBaseHelper searchPassangerDb;
+    ArrayList<DestinationValues> passengerSearchResult;
 
     private static final String TAG = "PassengerComfirmRoute";
 
@@ -67,26 +67,32 @@ public class PassengerComfirmRoute extends AppCompatActivity {
     private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
     private static final float DEFAULT_ZOOM = 15f;
+    String userName;
+    String emailID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_passenger_comfirm_route);
+        Intent intent = getIntent();
+        userName = intent.getStringExtra("userName");
+        emailID = intent.getStringExtra("emailID");
+        searchPassangerDb = new DataBaseHelper(this);
 
         seekMiles = (TextView) findViewById(R.id.miles);
         searchMiles = (SeekBar) findViewById(R.id.milesbar);
-        currentMiles = searchMiles.getProgress() + " Miles";
-        seekMiles.setText(currentMiles);
+        currentMiles = searchMiles.getProgress();
+        seekMiles.setText(currentMiles + "Miles");
 
-        ModeSelect activity = new ModeSelect();
-        emailID = activity.getEmailID();
+        //   ModeSelect activity = new ModeSelect();
+        //emailID = activity.getEmailID();
 
         getLocationPermission();
 
-        changeDest = (Button)findViewById(R.id.destinationbutton);
-        changeOrigin = (Button)findViewById(R.id.originbutton);
-        search = (Button)findViewById(R.id.searchbutton);
-        modeSelect = (Button)findViewById(R.id.modeselect);
+        changeDest = (Button) findViewById(R.id.destinationbutton);
+        changeOrigin = (Button) findViewById(R.id.originbutton);
+        search = (Button) findViewById(R.id.searchbutton);
+        modeSelect = (Button) findViewById(R.id.modeselect);
         modeSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,88 +101,103 @@ public class PassengerComfirmRoute extends AppCompatActivity {
             }
         });
 
-        Places.initialize(getApplicationContext(),"AIzaSyB42SLMvdvtN6_P-GcgObIyf-u0S7Yu14Y");
+        Places.initialize(getApplicationContext(), "AIzaSyB42SLMvdvtN6_P-GcgObIyf-u0S7Yu14Y");
         placesClient = Places.createClient(this);
 
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-
                 double originlat = originLatLng.latitude;
                 double orginlong = originLatLng.longitude;
                 double destlat = destLatLng.latitude;
                 double deslong = destLatLng.longitude;
 
-                Bundle sendDriverInfo = new Bundle();
+                Bundle sendDriverInfo = new Bundle(); // driver info
                 sendDriverInfo.putString("emailID", emailID);
-                sendDriverInfo.putString("orinlat", String.valueOf(originlat));
-                sendDriverInfo.putString("originlong", String.valueOf(orginlong));
-                sendDriverInfo.putString("destlat", String.valueOf(destlat));
-                sendDriverInfo.putString("deslong", String.valueOf(deslong));
-                sendDriverInfo.putString("drivername", driverName);
+                sendDriverInfo.putDouble("originlat", originlat);
+                sendDriverInfo.putDouble("originlong", orginlong);
+                sendDriverInfo.putDouble("destlat", destlat);
+                sendDriverInfo.putDouble("deslongitude", deslong);
+                sendDriverInfo.putString("drivername", userName);
                 sendDriverInfo.putString("driverdestname", destName);
                 sendDriverInfo.putString("driveroriginname", originName);
-
+                //Todo
+                //Pass the current seek bar progress value.
+                //  String name, String origin, String destination, double latitude, double longitude, int searchMiles, String email
+                passengerSearchResult = (ArrayList<DestinationValues>) searchPassangerDb.cust_Destination(userName, originName, destName, originlat, orginlong, destlat, deslong, currentMiles, emailID);
                 Intent searchForPassengers = new Intent(PassengerComfirmRoute.this, PassengerSearchResults.class);
                 searchForPassengers.putExtras(sendDriverInfo);
+                //  searchForPassengers.putParcelableArrayListExtra("passengerSearchResult", passengerSearchResult);
+                searchForPassengers.putParcelableArrayListExtra("passengerSearchResult", passengerSearchResult);
+                List<String> abc = new ArrayList<String >();
+                abc.add("sdf");
+//                Bundle driverInfoLatLong = new Bundle();
+//                driverInfoLatLong.putDouble("driverorigintLat", originlat);
+//                driverInfoLatLong.putDouble("driverorigintLong", orginlong);
+//                driverInfoLatLong.putDouble("driverdestLat", destlat);
+//                driverInfoLatLong.putDouble("driverdestLong", deslong);
+//                driverInfoLatLong.putString("driverName",userName);
+//                driverInfoLatLong.putString("driverEmailId",emailID);
+//
+//                searchForPassengers.putExtras(driverInfoLatLong);
+               searchForPassengers.putStringArrayListExtra("abc", (ArrayList<String>) abc);
+             //   String a = passengerSearchResult.get(0).photoString;
                 startActivity(searchForPassengers);
-
             }
         });
 
+        if(!getIntent().equals("")) {
+            destPlaceID = getIntent().getExtras().getString("DestPlaceID");
+            origPlaceID = getIntent().getExtras().getString("OriginID");
+        }
 
-
-        destPlaceID = getIntent().getExtras().getString("DestPlaceID");
-        origPlaceID = getIntent().getExtras().getString("OriginID");
-
-        if(origPlaceID==null){
+        if (origPlaceID == null) {
             changeOrigin.setText("Current Location");
             getDeviceLocation();
             originLatLng = currentLocationLatLng;
 
-        }else{
-            List<Place.Field> originFields = Arrays.asList(Place.Field.ID,Place.Field.NAME,Place.Field.ADDRESS, Place.Field.LAT_LNG);
-            FetchPlaceRequest orginrequest = FetchPlaceRequest.builder(origPlaceID,originFields).build();
+        } else {
+            List<Place.Field> originFields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS, Place.Field.LAT_LNG);
+            FetchPlaceRequest orginrequest = FetchPlaceRequest.builder(origPlaceID, originFields).build();
 
-            placesClient.fetchPlace(orginrequest).addOnSuccessListener((originresponse)-> {
+            placesClient.fetchPlace(orginrequest).addOnSuccessListener((originresponse) -> {
                 origin = originresponse.getPlace();
-                Log.i(TAG,"Origin Place found: "+origin.getName());
+                Log.i(TAG, "Origin Place found: " + origin.getName());
                 originName = origin.getName();
                 originLatLng = origin.getLatLng();
                 originAddress = origin.getAddress();
 
                 changeOrigin.setText(originName);
-            }).addOnFailureListener((exception)->{
-                if(exception instanceof ApiException){
-                    ApiException apiException = (ApiException)exception;
+            }).addOnFailureListener((exception) -> {
+                if (exception instanceof ApiException) {
+                    ApiException apiException = (ApiException) exception;
                     int statusCode = apiException.getStatusCode();
-                    Log.e(TAG,"Origin Place not Found: "+exception.getMessage());
+                    Log.e(TAG, "Origin Place not Found: " + exception.getMessage());
                 }
             });
 
         }
 
-        List<Place.Field> destFields = Arrays.asList(Place.Field.ID,Place.Field.NAME,Place.Field.ADDRESS, Place.Field.LAT_LNG);
+        List<Place.Field> destFields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS, Place.Field.LAT_LNG);
 
-        FetchPlaceRequest destrequest = FetchPlaceRequest.builder(destPlaceID,destFields).build();
+        FetchPlaceRequest destrequest = FetchPlaceRequest.builder(destPlaceID, destFields).build();
 
-        placesClient.fetchPlace(destrequest).addOnSuccessListener((destresponse)->{
+        placesClient.fetchPlace(destrequest).addOnSuccessListener((destresponse) -> {
             dest = destresponse.getPlace();
-            Log.i(TAG, "Destination Place Found: "+dest.getName());
+            Log.i(TAG, "Destination Place Found: " + dest.getName());
             destName = dest.getName();
-            destLatLng=dest.getLatLng();
-            destAddress=dest.getAddress();
+            destLatLng = dest.getLatLng();
+            destAddress = dest.getAddress();
 
             changeDest.setText(destName);
-        }).addOnFailureListener((exception)->{
-            if(exception instanceof ApiException){
-                ApiException apiException = (ApiException)exception;
+        }).addOnFailureListener((exception) -> {
+            if (exception instanceof ApiException) {
+                ApiException apiException = (ApiException) exception;
                 int statusCode = apiException.getStatusCode();
-                Log.e(TAG, "Destination Place not Found: "+exception.getMessage());
+                Log.e(TAG, "Destination Place not Found: " + exception.getMessage());
             }
         });
-
 
 
         changeDest.setOnClickListener(new View.OnClickListener() {
@@ -191,10 +212,12 @@ public class PassengerComfirmRoute extends AppCompatActivity {
         changeOrigin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent setO = new Intent (PassengerComfirmRoute.this, PassengerOriginSearch.class);
+                Intent setO = new Intent(PassengerComfirmRoute.this, PassengerOriginSearch.class);
                 Bundle desID = new Bundle();
                 desID.putString("DestPlaceID", destPlaceID);
-                desID.putSerializable("drivername", driverName);
+                desID.putString("userName", userName);
+                desID.putString("emailID", emailID);
+                desID.putSerializable("drivername", userName);
                 setO.putExtras(desID);
                 startActivity(setO);
 
@@ -205,8 +228,8 @@ public class PassengerComfirmRoute extends AppCompatActivity {
         searchMiles.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                currentMiles = searchMiles.getProgress() + " Miles";
-                seekMiles.setText(currentMiles);
+                currentMiles = searchMiles.getProgress();
+                seekMiles.setText(currentMiles +"Miles");
             }
 
             @Override
@@ -222,34 +245,34 @@ public class PassengerComfirmRoute extends AppCompatActivity {
 
 
     }
-    private void getDeviceLocation(){
+
+    private void getDeviceLocation() {
         Log.d(TAG, "getDeviceLocation: getting the devices current location");
 
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
-        try{
-            if(mLocationPermissionsGranted){
+        try {
+            if (mLocationPermissionsGranted) {
 
                 final Task location = mFusedLocationProviderClient.getLastLocation();
                 location.addOnCompleteListener(new OnCompleteListener() {
                     @Override
                     public void onComplete(@NonNull Task task) {
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             Log.d(TAG, "onComplete: found location!");
                             Location currentLocation = (Location) task.getResult();
                             currentLocationLatLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
 
 
-
-                        }else{
+                        } else {
                             Log.d(TAG, "onComplete: current location is null");
                             Toast.makeText(PassengerComfirmRoute.this, "unable to get current location", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
             }
-        }catch (SecurityException e){
-            Log.e(TAG, "getDeviceLocation: SecurityException: " + e.getMessage() );
+        } catch (SecurityException e) {
+            Log.e(TAG, "getDeviceLocation: SecurityException: " + e.getMessage());
         }
     }
 
@@ -259,11 +282,11 @@ public class PassengerComfirmRoute extends AppCompatActivity {
         Log.d(TAG, "onRequestPermissionsResult: called.");
         mLocationPermissionsGranted = false;
 
-        switch(requestCode){
-            case LOCATION_PERMISSION_REQUEST_CODE:{
-                if(grantResults.length > 0){
-                    for(int i = 0; i < grantResults.length; i++){
-                        if(grantResults[i] != PackageManager.PERMISSION_GRANTED){
+        switch (requestCode) {
+            case LOCATION_PERMISSION_REQUEST_CODE: {
+                if (grantResults.length > 0) {
+                    for (int i = 0; i < grantResults.length; i++) {
+                        if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
                             mLocationPermissionsGranted = false;
                             Log.d(TAG, "onRequestPermissionsResult: permission failed");
                             return;
@@ -277,23 +300,23 @@ public class PassengerComfirmRoute extends AppCompatActivity {
         }
     }
 
-    private void getLocationPermission(){
+    private void getLocationPermission() {
         Log.d(TAG, "getLocationPermission: getting location permissions");
         String[] permissions = {ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION};
 
-        if(ContextCompat.checkSelfPermission(this.getApplicationContext(),
-                FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
-            if(ContextCompat.checkSelfPermission(this.getApplicationContext(),
-                    COURSE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+        if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
+                FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
+                    COURSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 mLocationPermissionsGranted = true;
 
-            }else{
+            } else {
                 ActivityCompat.requestPermissions(this,
                         permissions,
                         LOCATION_PERMISSION_REQUEST_CODE);
             }
-        }else{
+        } else {
             ActivityCompat.requestPermissions(this,
                     permissions,
                     LOCATION_PERMISSION_REQUEST_CODE);

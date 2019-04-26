@@ -107,6 +107,8 @@ public class PassengerOriginSearch extends FragmentActivity implements OnMapRead
     private PlaceDetectionClient mPlaceDetectionClient;
 
     private Button cont;
+    String userName;
+    String emailID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,6 +116,9 @@ public class PassengerOriginSearch extends FragmentActivity implements OnMapRead
         setContentView(R.layout.activity_passenger_origin_search);
         mGps=(ImageView)findViewById(R.id.ic_gps);
         cont=(Button)findViewById(R.id.contbutton);
+        Intent intent = getIntent();
+        userName = intent.getStringExtra("userName");
+        emailID = intent.getStringExtra("emailID");
         destinationID  = getIntent().getExtras().getString("DestPlaceID");
 
 
@@ -179,6 +184,8 @@ public class PassengerOriginSearch extends FragmentActivity implements OnMapRead
             public void onClick(View v) {
                 Intent next = new Intent(PassengerOriginSearch.this, PassengerComfirmRoute.class);
                 Bundle oID = new Bundle();
+                next.putExtra("userName", userName);
+                next.putExtra("emailID", emailID);
                 oID.putString("OriginID", originID);
                 oID.putString("DestPlaceID", destinationID);
                 next.putExtras(oID);

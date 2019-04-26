@@ -88,6 +88,7 @@
         <activity android:name=".PassengerRequestAccepted" />
         <activity android:name=".PassengerDriverEnRoute" />
         <activity android:name=".PassengerDrivingToDesination" />
+        <activity android:name=".ActionUserFeedback" />
         <activity android:name=".PassengerEndTrip"></activity>
     </application>
 

@@ -9,49 +9,76 @@ import android.widget.Button;
 public class PassengerRequestAccepted extends AppCompatActivity {
 
     private Button driveTo;
-    private String originlat, originlong, destlat, destlong, emailID, passoriginlat, passoriginlong, passdestlat, passdestlong, passName, passdestination, passorigin;
+    private double originlat, originlong, destlat, destlong, driverOriginlat,driverOriginlong,driverDestlat,driverDestLong;
     private Bundle sendInfo;
-    private String driverName, driverOriginName, driverDestName;
+    private String passDest, passOrigin, passName, emailID,driverDestName,driverOriginName,driverName,driverEmailID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_passenger_request_accepted);
-        Bundle getInfo = getIntent().getExtras();
-        originlat = getInfo.getString("originlat");
-        originlong = getInfo.getString("originlong");
-        destlat = getInfo.getString("destlat");
-        destlong = getInfo.getString("destlong");
-        emailID = getInfo.getString("emailID");
-        passoriginlat = getInfo.getString("passoriginlat");
-        passoriginlong = getInfo.getString("passoriginlong");
-        passdestlat = getInfo.getString("passdestlat");
-        passdestlong = getInfo.getString("passdestlong");
-        passName = getInfo.getString("passname");
-        passdestination = getInfo.getString("passdest");
-        passorigin = getInfo.getString("passorigin");
-        driverName = getInfo.getString("drivername");
-        driverDestName = getInfo.getString("driverdestname");
-        driverOriginName = getInfo.getString("driveroriginname");
+        Intent intent = getIntent();
+//        Intent intent = getIntent();
+//        name = intent.getStringExtra("passName");
+//        origin = intent.getStringExtra("passorigin");
+//        destination = intent.getStringExtra("passdest");
+//        emailId = intent.getStringExtra("emailId");
+//        originlat = intent.getDoubleExtra("passoriginlat",0.0);
+//        originlong = intent.getDoubleExtra("passoriginlong",0.0);
+//        destlat = intent.getDoubleExtra("passdestlat",0.0);
+//        destlong = intent.getDoubleExtra("passdestlong",0.0);
 
-        sendInfo = new Bundle();
-        sendInfo.putString("originlat", originlat);
-        sendInfo.putString("originlong", originlong);
-        sendInfo.putString("destlat", destlat);
-        sendInfo.putString("destlong", destlong);
+        originlat = intent.getDoubleExtra("passoriginlat", 0.0);
+        originlong = intent.getDoubleExtra("passoriginlong", 0.0);
+        destlat = intent.getDoubleExtra("passdestlat", 0.0);
+        destlong = intent.getDoubleExtra("passdestlong", 0.0);
+        passName = intent.getStringExtra("passName");
+        passDest = intent.getStringExtra("passdest");
+        passOrigin = intent.getStringExtra("passorigin");
+        emailID = intent.getStringExtra("emailId");
+        driverOriginlat= intent.getDoubleExtra("driverOrigingLat", 0.0);
+        driverOriginlong= intent.getDoubleExtra("driverOrigingLong", 0.0);
+        driverDestlat= intent.getDoubleExtra("driverDestLat", 0.0);
+        driverDestLong= intent.getDoubleExtra("driverDestLong", 0.0);
+        driverDestName= intent.getStringExtra("driverDest");
+        driverOriginName= intent.getStringExtra("driverOrigin");
+        driverName=intent.getStringExtra("driverName");
+        driverEmailID = intent.getStringExtra("driverEmailId");
+//        originlat = getInfo.getString("originlat");
+//        originlong = getInfo.getString("originlong");
+//        destlat = getInfo.getString("destlat");
+//        destlong = getInfo.getString("destlong");
+//        emailID = getInfo.getString("emailID");
+//        passoriginlat = getInfo.getString("passoriginlat");
+//        passoriginlong = getInfo.getString("passoriginlong");
+//        passdestlat = getInfo.getString("passdestlat");
+//        passdestlong = getInfo.getString("passdestlong");
+//        passName = getInfo.getString("passname");
+//        passdestination = getInfo.getString("passdest");
+//        passorigin = getInfo.getString("passorigin");
+//        driverName = getInfo.getString("drivername");
+//        driverDestName = getInfo.getString("driverdestname");
+//        driverOriginName = getInfo.getString("driveroriginname");
+
+            sendInfo = new Bundle();
+        sendInfo.putDouble("originlat", originlat);
+        sendInfo.putDouble("originlong", originlong);
+        sendInfo.putDouble("destlat", destlat);
+        sendInfo.putDouble("destlong", destlong);
         sendInfo.putString("emailID", emailID);
-        sendInfo.putString("passoriginlat", passoriginlat);
-        sendInfo.putString("passoriginlong", passoriginlong);
-        sendInfo.putString("passdestlat", passdestlat);
-        sendInfo.putString("passdestlong", passdestlong);
-        sendInfo.putString("passname", passName);
-        sendInfo.putString("passdest", passdestination);
-        sendInfo.putString("passorigin", passorigin);
-        sendInfo.putString("drivername", driverName);
-        sendInfo.putString("driverdestname", driverDestName);
-        sendInfo.putString("driveroriginname", driverOriginName);
+        sendInfo.putString("passName", passName);
+        sendInfo.putString("passDest", passDest);
+        sendInfo.putString("passOrigin", passOrigin);
+        sendInfo.putDouble("driverOrigingLat", driverOriginlat);
+        sendInfo.putDouble("driverOrigingLong", driverOriginlong);
+        sendInfo.putDouble("driverDestLat", driverDestlat);
+        sendInfo.putDouble("driverDestLong", driverDestLong);
+        sendInfo.putString("driverDest", driverDestName);
+        sendInfo.putString("driverOrigin", driverOriginName);
+        sendInfo.putString("driverName", driverName);
+        sendInfo.putString("driverEmailID", driverEmailID);
 
-        driveTo = (Button)findViewById(R.id.drivebutton);
+        driveTo = (Button) findViewById(R.id.drivetobutton);
         driveTo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

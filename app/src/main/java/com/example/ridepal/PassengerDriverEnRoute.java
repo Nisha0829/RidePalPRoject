@@ -7,8 +7,10 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraManager;
+import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,6 +30,8 @@ import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.ArrayList;
 
+import static android.Manifest.permission.CALL_PHONE;
+
 public class PassengerDriverEnRoute extends AppCompatActivity implements OnMapReadyCallback, TaskLoadedCallback {
 
     GoogleMap map;
@@ -38,55 +42,58 @@ public class PassengerDriverEnRoute extends AppCompatActivity implements OnMapRe
     CameraManager mCameraManager;
     boolean isFlashAvailable;
     boolean flashLightChecked = true;
-    private String originlat, originlong, destlat, destlong, emailID, passoriginlat, passoriginlong, passdestlat, passdestlong, passName, passdestination, passorigin;
+    private double originlat, originlong, destlat, destlong,driverOriginlat,driverOriginlong,driverDestlat,driverDestLong;
+    String passoriginlat, passoriginlong, passdestlat, passdestlong, passName, passdestination, passOrigin, passDest;
     private Bundle sendInfo;
-    private String driverName, driverOriginName, driverDestName;
+    private String driverName, driverOriginName, driverDestName, emailID,driverEmailID;
     private LatLng driverOriginLatLng, passOriginLatLng, driverDestLatLng, passDestLatLng;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_passenger_driver_en_route);
-
         Bundle getInfo = getIntent().getExtras();
-        originlat = getInfo.getString("originlat");
-        originlong = getInfo.getString("originlong");
-        destlat = getInfo.getString("destlat");
-        destlong = getInfo.getString("destlong");
+        Intent intent = getIntent();
+        originlat = getInfo.getDouble("originlat", 0.0);
+        originlong = getInfo.getDouble("originlong", 0.0);
+        destlat = getInfo.getDouble("destlat",0.0);
+        destlong = getInfo.getDouble("destlong", 0.0);
         emailID = getInfo.getString("emailID");
-        passoriginlat = getInfo.getString("passoriginlat");
-        passoriginlong = getInfo.getString("passoriginlong");
-        passdestlat = getInfo.getString("passdestlat");
-        passdestlong = getInfo.getString("passdestlong");
-        passName = getInfo.getString("passname");
-        passdestination = getInfo.getString("passdest");
-        passorigin = getInfo.getString("passorigin");
-        driverName = getInfo.getString("drivername");
-        driverDestName = getInfo.getString("driverdestname");
-        driverOriginName = getInfo.getString("driveroriginname");
+        passName = getInfo.getString("passName");
+        passDest = getInfo.getString("passDest");
+        passOrigin = getInfo.getString("passOrigin");
+        driverOriginlat= getInfo.getDouble("driverDestLat",0.0);
+        driverOriginlong= getInfo.getDouble("driverOrigingLong", 0.0);
+        driverDestlat= getInfo.getDouble("driverDestLat", 0.0);
+        driverDestLong= getInfo.getDouble("driverDestLong", 0.0);
+        driverDestName= getInfo.getString("driverDest");
+        driverOriginName= getInfo.getString("driverOrigin");
+        driverName=getInfo.getString("driverName");
+        driverEmailID = getInfo.getString("driverEmailID");
 
         sendInfo = new Bundle();
-        sendInfo.putString("originlat", originlat);
-        sendInfo.putString("originlong", originlong);
-        sendInfo.putString("destlat", destlat);
-        sendInfo.putString("destlong", destlong);
+        sendInfo.putDouble("originlat", originlat);
+        sendInfo.putDouble("originlong", originlong);
+        sendInfo.putDouble("destlat", destlat);
+        sendInfo.putDouble("destlong", destlong);
         sendInfo.putString("emailID", emailID);
-        sendInfo.putString("passoriginlat", passoriginlat);
-        sendInfo.putString("passoriginlong", passoriginlong);
-        sendInfo.putString("passdestlat", passdestlat);
-        sendInfo.putString("passdestlong", passdestlong);
-        sendInfo.putString("passname", passName);
-        sendInfo.putString("passdest", passdestination);
-        sendInfo.putString("passorigin", passorigin);
-        sendInfo.putString("drivername", driverName);
-        sendInfo.putString("driverdestname", driverDestName);
-        sendInfo.putString("driveroriginname", driverOriginName);
+        sendInfo.putString("passName", passName);
+        sendInfo.putString("passdest", passDest);
+        sendInfo.putString("passorigin", passOrigin);
+        sendInfo.putDouble("driverOrigingLat", driverOriginlat);
+        sendInfo.putDouble("driverOrigingLong", driverOriginlong);
+        sendInfo.putDouble("driverDestLat", driverDestlat);
+        sendInfo.putDouble("driverDestLong", driverDestLong);
+        sendInfo.putString("driverDest", driverDestName);
+        sendInfo.putString("driverOrigin", driverOriginName);
+        sendInfo.putString("driverName", driverName);
+        sendInfo.putString("driverEmailId", driverEmailID);
 
 
         isFlashAvailable = getApplicationContext().getPackageManager()
                 .hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
 
-        signalDriver = (Button)findViewById(R.id.signaldriver);
+        signalDriver = (Button) findViewById(R.id.signaldriver);
         signalDriver.setOnClickListener(new View.OnClickListener() {
             @TargetApi(Build.VERSION_CODES.M)
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -116,27 +123,35 @@ public class PassengerDriverEnRoute extends AppCompatActivity implements OnMapRe
                 } catch (CameraAccessException e) {
                     e.printStackTrace();
                 }
-                flashLightChecked= false;
+                flashLightChecked = false;
             }
-            });
+        });
 
-        driverOriginLatLng = new LatLng(Double.parseDouble(originlat), Double.parseDouble(originlong));
-        driverDestLatLng = new LatLng(Double.parseDouble(destlat), Double.parseDouble(destlong));
-        passOriginLatLng = new LatLng(Double.parseDouble(passoriginlat), Double.parseDouble(passoriginlong));
-        passDestLatLng = new LatLng(Double.parseDouble(passdestlat), Double.parseDouble(passdestlong));
+        driverOriginLatLng = new LatLng(driverOriginlat,driverOriginlong);
+        driverDestLatLng = new LatLng(driverDestlat, driverDestLong);
+        passOriginLatLng = new LatLng(originlat, originlong);
+        passDestLatLng = new LatLng(destlat, destlong);
 
-        MapFragment mapFragment = (MapFragment)getFragmentManager().findFragmentById(R.id.mapFrag);
+        MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.mapFrag);
         mapFragment.getMapAsync(this);
 
         //Test LatLng values. Must input actual Origin LatLng values when complete.
 
-        driver = new MarkerOptions().position(driverOriginLatLng).title("Driver");
+       driver = new MarkerOptions().position(driverOriginLatLng).title("Driver");
         passenger = new MarkerOptions().position(passOriginLatLng).title("Passenger");
-        startTrip=(Button)findViewById(R.id.starttrip);
+        call = (Button) findViewById(R.id.callbutton);
+        call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callDriver();
+            }
+        });
+
+        startTrip = (Button) findViewById(R.id.starttrip);
         startTrip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent pickup= new Intent(PassengerDriverEnRoute.this, PassengerDrivingToDesination.class);
+                Intent pickup = new Intent(PassengerDriverEnRoute.this, PassengerDrivingToDesination.class);
                 pickup.putExtras(sendInfo);
                 startActivity(pickup);
             }
@@ -156,10 +171,10 @@ public class PassengerDriverEnRoute extends AppCompatActivity implements OnMapRe
         points.add(passOriginLatLng);
         LatLngBounds.Builder bc = new LatLngBounds.Builder();
 
-        for (LatLng point:points){
+        for (LatLng point : points) {
             bc.include(point);
         }
-        CameraUpdate update = CameraUpdateFactory.newLatLngBounds(bc.build(),50);
+        CameraUpdate update = CameraUpdateFactory.newLatLngBounds(bc.build(), 50);
         map.moveCamera(update);
 
         String url = getUrl(driver.getPosition(), passenger.getPosition(), "driving");
@@ -185,12 +200,24 @@ public class PassengerDriverEnRoute extends AppCompatActivity implements OnMapRe
 
     @Override
     public void onTaskDone(Object... values) {
-        if(currentPolyline!=null) {
+        if (currentPolyline != null) {
             currentPolyline.remove();
-        }
-        else{
-            currentPolyline = map.addPolyline((PolylineOptions)values[0]);
+        } else {
+            currentPolyline = map.addPolyline((PolylineOptions) values[0]);
         }
 
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public void callDriver()
+    {
+        Intent i = new Intent(Intent.ACTION_CALL);
+        i.setData(Uri.parse("tel:123"));
+
+        if (ContextCompat.checkSelfPermission(getApplicationContext(), CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+            startActivity(i);
+        } else {
+            requestPermissions(new String[]{CALL_PHONE}, 1);
+        }
     }
 }
