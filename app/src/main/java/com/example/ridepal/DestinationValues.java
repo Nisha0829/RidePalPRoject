@@ -65,4 +65,40 @@ public class DestinationValues implements Parcelable {
             return new DestinationValues[size];
         }
     };
+
+    public String getOrigin() {
+        return origin;
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public double getOriginLat() {
+        return originLat;
+    }
+
+    public double getOriginLog() {
+        return originLog;
+    }
+
+    public double getDestLat() {
+        return destLat;
+    }
+
+    public double getDestLog() {
+        return destLog;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getEmailId() {
+        return emailId;
+    }
+
+    public String getPhotoString() {
+        return photoString;
+    }
 }

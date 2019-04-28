@@ -207,7 +207,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         //photoString = cursor.getString(6);
         Cursor cursor = this.getReadableDatabase().rawQuery("SELECT PHOTO FROM " + "customerInfo" + " where EMAILID ='" + emailId + "'", null);
         if (cursor.moveToFirst()) {
-            photoString = cursor.getString(0);
+            //photoString = cursor.getString(0);
         }
         List<DestinationValues> listDestinationValues;
         Cursor cursorInfo = this.getReadableDatabase().rawQuery("Select * from cust_destination", null);

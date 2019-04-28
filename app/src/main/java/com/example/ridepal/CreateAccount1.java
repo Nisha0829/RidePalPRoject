@@ -1,5 +1,6 @@
 package com.example.ridepal;
 
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -9,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
+import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +19,7 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 
 public class CreateAccount1 extends AppCompatActivity {
     DataBaseHelper newUserInfo;
@@ -70,10 +73,10 @@ public class CreateAccount1 extends AppCompatActivity {
 
                 //Code to transform image Uri to bitmap and then to string.
                 Bitmap image = ((BitmapDrawable) pickPhoto.getDrawable()).getBitmap();
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                image.compress(Bitmap.CompressFormat.PNG, 100, baos);
-                byte[] b = baos.toByteArray();
-                photo = Base64.encodeToString(b, Base64.DEFAULT);
+                ContextWrapper cw = new ContextWrapper(CreateAccount1.this);
+                File dir = cw.getDir("profile_pic", ContextWrapper.MODE_PRIVATE);
+                File pic = new File(dir, email+".jpg");
+                photo = pic.getAbsolutePath();
 
                 //filling in strings with input values.
                 firstname = ifirstname.getText().toString();
