@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.ArrayList;
 
 
@@ -17,7 +19,7 @@ import java.util.ArrayList;
 public class PassengerListAdapter extends ArrayAdapter<PassengerTestObject>{
 
     private Context mContext;
-    int mResource;
+    private int mResource;
 
 
     public PassengerListAdapter(Context context, int resource, ArrayList<PassengerTestObject> objects) {
@@ -36,8 +38,10 @@ public class PassengerListAdapter extends ArrayAdapter<PassengerTestObject>{
         String origin = getItem(position).getOriginName();
         String desination = getItem(position).getDestName();
         String emailID = getItem(position).getEmailID();
+        LatLng distlatLng = getItem(position).getOriginLatLng(); //getLatLng
+        LatLng originlatLng = getItem(position).getDestLatLng();
 
-        PassengerTestObject passenger = new PassengerTestObject(emailID,name,picture,desination,origin);
+        PassengerTestObject passenger = new PassengerTestObject(emailID,name,picture,desination,origin, originlatLng, distlatLng);
 
         LayoutInflater inflater = LayoutInflater.from(mContext);
 
@@ -54,5 +58,7 @@ public class PassengerListAdapter extends ArrayAdapter<PassengerTestObject>{
         return convertView;
 
 
+
     }
+
 }

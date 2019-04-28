@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -25,10 +25,13 @@
 
     <LinearLayout
 
-        android:layout_width="309dp"
-        android:layout_height="427dp"
+        android:id="@+id/mainsection"
+        android:layout_width="match_parent"
+        android:layout_height="468dp"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/imageView"
         android:layout_marginBottom="5dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="21dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,71 +43,71 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:textColor="#551A8B"
             android:text="@string/paymentinfo"
-            android:textSize="14sp" />
+            android:textColor="#551A8B"
+            android:textSize="18sp" />
 
         <EditText
             android:id="@+id/ccname"
-            android:textColorHint="#551A8B"
-            android:textColor="#551A8B"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="10sp"
+            android:hint="@string/ccname"
             android:inputType="textPersonName"
-            android:hint="@string/ccname" />
+            android:textColor="#551A8B"
+            android:textColorHint="#551A8B"
+            android:textSize="14sp" />
 
         <EditText
             android:id="@+id/ccnum"
-            android:textColorHint="#551A8B"
-            android:textColor="#551A8B"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="10sp"
+            android:hint="@string/ccnum"
             android:inputType="number"
-            android:hint="@string/ccnum" />
+            android:textColor="#551A8B"
+            android:textColorHint="#551A8B"
+            android:textSize="14sp" />
 
         <EditText
-            android:textColorHint="#551A8B"
-            android:textColor="#551A8B"
             android:id="@+id/ccexpdate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="10sp"
+            android:hint="@string/ccexp"
             android:inputType="date"
-            android:hint="@string/ccexp" />
+            android:textColor="#551A8B"
+            android:textColorHint="#551A8B"
+            android:textSize="14sp" />
 
         <EditText
-            android:textColorHint="#551A8B"
-            android:textColor="#551A8B"
             android:id="@+id/ccccv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="10sp"
+            android:hint="@string/ccccv"
             android:inputType="number"
-            android:hint="@string/ccccv" />
+            android:textColor="#551A8B"
+            android:textColorHint="#551A8B"
+            android:textSize="14sp" />
 
         <EditText
-            android:textColorHint="#551A8B"
-            android:textColor="#551A8B"
             android:id="@+id/cczip"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="10sp"
+            android:hint="@string/cczip"
             android:inputType="number"
-            android:hint="@string/cczip" />
+            android:textColor="#551A8B"
+            android:textColorHint="#551A8B"
+            android:textSize="14sp" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="150px" />
 
         <Button
-            android:background="#551A8B"
-            android:textColor="#FFF"
-            android:layout_gravity="center"
             android:id="@+id/finishbutton"
             android:layout_width="132dp"
             android:layout_height="25dp"
-            android:text="@string/finish" />
+            android:layout_gravity="center"
+            android:background="#551A8B"
+            android:text="@string/finish"
+            android:textColor="#FFF" />
     </LinearLayout>
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>

@@ -12,6 +12,14 @@ public class ModeSelect extends AppCompatActivity {
     Button drive, ride, signOut;
     TextView welcome;
     String hello;
+    private String emailID;
+
+    public String getEmailID(){
+        return emailID;
+    }
+
+
+
 
 
     @Override
@@ -20,17 +28,22 @@ public class ModeSelect extends AppCompatActivity {
         setContentView(R.layout.activity_mode_select);
         Intent intent = getIntent();
         String userName = intent.getStringExtra("userName");
+        emailID = intent.getStringExtra("emailID");
 
         drive = (Button)findViewById(R.id.drivebutton);
         ride = (Button)findViewById(R.id.ridebutton);
         signOut = (Button)findViewById(R.id.signoutbutton);
         welcome = (TextView)findViewById(R.id.hellotext);
         welcome.append("Hello, " +userName+"!");
+        Bundle sendInfo = new Bundle();
+        sendInfo.putString("username", userName);
+
 
         drive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent driveMode = new Intent (ModeSelect.this, DriverDestSearch.class);
+                driveMode.putExtras(sendInfo);
                 startActivity(driveMode);
             }
         });
@@ -39,6 +52,9 @@ public class ModeSelect extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent rideMode = new Intent(ModeSelect.this, PassengerDestSearch.class);
+                rideMode.putExtra("userName", userName);
+                rideMode.putExtra("emailID", emailID);
+              //  rideMode.putExtras(sendInfo);
                 startActivity(rideMode);
             }
         });

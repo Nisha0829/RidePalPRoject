@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DriverSearchResults">
+    tools:context=".PassengerSearchResults">
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -29,15 +29,14 @@
             android:textSize="14sp"/>
 
         <TextView
-            android:id="@+id/drivermodetitle"
+            android:id="@+id/passengermodetitle"
             android:layout_width="305dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/driving"
+            android:text="@string/riding"
             android:textColor="#551A8B"
-            android:textSize="14sp"
-            />
+            android:textSize="14sp" />
 
     </LinearLayout>
 
@@ -82,7 +81,7 @@
             android:background="#551A8B"
             android:textColor="#FFF"
             android:textSize="14sp"
-            android:text="@string/goback" />
+            android:text="Go Back" />
     </LinearLayout>
 
 

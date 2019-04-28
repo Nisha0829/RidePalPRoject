@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Emergency">
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="54dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ridepallogo" />
+
+    <LinearLayout
+        android:id="@+id/buttoncontainer"
+        android:layout_width="match_parent"
+        android:layout_height="489dp"
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
+
+
+        <Button
+            android:id="@+id/nineoneone"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="#551A8B"
+            android:layout_marginTop="100dp"
+            android:text="@string/call911"
+            android:textSize="16dp"
+            android:textColor="#FFF" />
+
+        <Space
+            android:id="@+id/space1"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+
+        <Button
+            android:id="@+id/servicesbutton"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:background="#551A8B"
+            android:textSize="14sp"
+            android:text="@string/roadsideassistance"
+            android:textColor="#FFF" />
+
+        <Button
+            android:id="@+id/gobackbutton"
+            android:layout_width="match_parent"
+            android:textSize="14sp"
+            android:layout_height="55dp"
+            android:background="#551A8B"
+            android:layout_marginTop="10dp"
+            android:text="@string/back"
+            android:textColor="#FFF" />
+    </LinearLayout>
+</RelativeLayout>

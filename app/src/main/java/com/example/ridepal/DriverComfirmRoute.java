@@ -1,6 +1,7 @@
 package com.example.ridepal;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -54,6 +55,10 @@ public class DriverComfirmRoute extends AppCompatActivity {
     String originAddress;
     String origPlaceID;
     LatLng currentLocationLatLng;
+    DataBaseHelper dataBaseHelper;
+    String emailID;
+    String driverName;
+
 
     Location mLastLocation;
     Marker mCurrLocationMarker;
@@ -80,6 +85,11 @@ public class DriverComfirmRoute extends AppCompatActivity {
         currentMiles = searchMiles.getProgress() + " Miles";
         seekMiles.setText(currentMiles);
 
+        ModeSelect activity = new ModeSelect();
+        emailID = activity.getEmailID();
+
+
+
         changeDest = (Button)findViewById(R.id.destinationbutton);
         changeOrigin = (Button)findViewById(R.id.originbutton);
         search = (Button)findViewById(R.id.passengersearch);
@@ -102,6 +112,7 @@ public class DriverComfirmRoute extends AppCompatActivity {
 
         destPlaceID = getIntent().getExtras().getString("DestPlaceID");
         origPlaceID = getIntent().getExtras().getString("OriginID");
+        driverName = getIntent().getExtras().getString("drivername");
 
 
 
@@ -173,6 +184,7 @@ public class DriverComfirmRoute extends AppCompatActivity {
                 Intent setO = new Intent (DriverComfirmRoute.this, DriverOriginSearch.class);
                 Bundle desID = new Bundle();
                 desID.putString("DestPlaceID", destPlaceID);
+                desID.putSerializable("drivername", driverName);
                 setO.putExtras(desID);
                 startActivity(setO);
 
@@ -202,11 +214,28 @@ public class DriverComfirmRoute extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent searchForPassengers = new Intent(DriverComfirmRoute.this, DriverSearchResults.class);
-                startActivity(searchForPassengers);
-                //TODO Create method to input Driver Status, UserEmail, Destination Name, Destination LatLng, Origin Name, Origin LatLng, and Current Miles into Search Table.
 
-                //TODO Create method to start search database for matching Passengers with above criteria.
+                double originlat = originLatLng.latitude;
+                double orginlong = originLatLng.longitude;
+                double destlat = destLatLng.latitude;
+                double deslong = destLatLng.longitude;
+
+
+                Bundle sendDriverInfo = new Bundle();
+                sendDriverInfo.putString("emailID", emailID);
+                sendDriverInfo.putString("orinlat", String.valueOf(originlat));
+                sendDriverInfo.putString("originlong", String.valueOf(orginlong));
+                sendDriverInfo.putString("destlat", String.valueOf(destlat));
+                sendDriverInfo.putString("deslong", String.valueOf(deslong));
+                sendDriverInfo.putString("drivername", driverName);
+                sendDriverInfo.putString("driverdestname", destName);
+                sendDriverInfo.putString("driveroriginname", originName);
+
+
+                Intent searchForPassengers = new Intent(DriverComfirmRoute.this, DriverSearchResults.class);
+                searchForPassengers.putExtras(sendDriverInfo);
+                startActivity(searchForPassengers);
+
             }
         });
     }

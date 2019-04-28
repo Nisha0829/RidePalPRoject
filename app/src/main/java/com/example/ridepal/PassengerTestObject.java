@@ -1,5 +1,7 @@
 package com.example.ridepal;
 
+import com.google.android.gms.maps.model.LatLng;
+
 public class PassengerTestObject {
 
     private String emailID;
@@ -7,13 +9,16 @@ public class PassengerTestObject {
     private String picture;
     private String destName;
     private String originName;
+    private LatLng destLatLng, originLatLng;
 
-    public PassengerTestObject(String emailID, String name, String picture, String destName, String originName) {
+    public PassengerTestObject(String emailID, String name, String picture, String destName, String originName, LatLng originLatLng, LatLng destLatLng) {
         this.emailID = emailID;
         this.name = name;
         this.picture = picture;
         this.destName = destName;
         this.originName = originName;
+        this.destLatLng = destLatLng;
+        this.originLatLng = originLatLng;
     }
 
     public PassengerTestObject(){
@@ -58,5 +63,21 @@ public class PassengerTestObject {
 
     public void setOriginName(String originName) {
         this.originName = originName;
+    }
+
+    public LatLng getDestLatLng() {
+        return destLatLng;
+    }
+
+    public void setDestLatLng(LatLng destLatLng) {
+        this.destLatLng = destLatLng;
+    }
+
+    public LatLng getOriginLatLng() {
+        return originLatLng;
+    }
+
+    public void setOriginLatLng(LatLng originLatLng) {
+        this.originLatLng = originLatLng;
     }
 }

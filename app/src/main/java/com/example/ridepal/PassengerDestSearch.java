@@ -106,6 +106,9 @@ public class PassengerDestSearch extends FragmentActivity implements OnMapReadyC
     private PlaceDetectionClient mPlaceDetectionClient;
 
     private Button cont;
+    private String userName;
+    private String driverName;
+    String emailID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +116,12 @@ public class PassengerDestSearch extends FragmentActivity implements OnMapReadyC
         setContentView(R.layout.activity_passenger_dest_search);
         mGps=(ImageView)findViewById(R.id.ic_gps);
         cont=(Button)findViewById(R.id.contbutton);
+        Intent intent = getIntent();
+        userName = intent.getStringExtra("userName");
+        emailID = intent.getStringExtra("emailID");
+
+        Bundle getInfo = getIntent().getExtras();
+       // driverName = getInfo.getString("username");
 
 
         autocompleteSupportFragment = (AutocompleteSupportFragment)
@@ -176,9 +185,12 @@ public class PassengerDestSearch extends FragmentActivity implements OnMapReadyC
             @Override
             public void onClick(View v) {
                 Intent next = new Intent(PassengerDestSearch.this, PassengerComfirmRoute.class);
+                next.putExtra("userName", userName);
+                next.putExtra("emailID", emailID);
                 Bundle destID = new Bundle();
                 destID.putString("DestPlaceID", destinationID);
                 destID.putString("CurrentLocLatLng", currentLocationLatLng.toString());
+                destID.putString("drivername", driverName);
                 next.putExtras(destID);
                 startActivity(next);
             }

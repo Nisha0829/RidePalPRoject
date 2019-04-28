@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="110dp"
-        android:layout_height="70dp"
+        android:layout_width="150dp"
+        android:layout_height="92dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -24,67 +24,48 @@
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/ridepallogo" />
 
-    <TextView
-        android:id="@+id/hellotext"
-        android:layout_width="179dp"
-        android:layout_height="97dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:textColor="#551A8B"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.461"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.181" />
 
     <LinearLayout
-        android:layout_width="214dp"
-        android:layout_height="153dp"
+        android:layout_width="291dp"
+        android:layout_height="170dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.446">
 
-        <Button
-            android:id="@+id/drivebutton"
-            android:layout_width="225dp"
+        <EditText
+            android:id="@+id/feedback"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="15dp"
-            android:background="#551A8B"
-            android:text="@string/drivingmodeselect"
-            android:textColor="#fff" />
+            android:hint="Enter Feedback"
+            android:textColor="#551A8B" />
 
-        <Button
-            android:id="@+id/ridebutton"
-            android:layout_width="211dp"
+        <RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="240dp"
+            android:layout_marginLeft="20dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:background="#551A8B"
-            android:text="@string/passengermodeselect"
-            android:textColor="#fff" />
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="20dp"/>
+
     </LinearLayout>
 
     <Button
-        android:id="@+id/signoutbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/submitFeedback"
+        android:layout_width="132dp"
+        android:layout_height="30dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:background="#551A8B"
-        android:textSize="12sp"
-        android:text="@string/signout"
+        android:text="Submit"
         android:textColor="#fff"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
