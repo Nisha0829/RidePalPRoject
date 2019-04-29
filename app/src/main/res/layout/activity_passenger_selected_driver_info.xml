@@ -136,21 +136,23 @@
         android:layout_height="40dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:background="#551A8B"
-        android:textColor="#FFF"
         android:layout_marginBottom="5dp"
-        android:text="@string/changepref" />
+        android:background="#551A8B"
+        android:text="@string/changepref"
+        android:textColor="#FFF"
+        android:visibility="invisible" />
 
     <Button
         android:id="@+id/changeroute"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_above="@+id/preferences"
-        android:background="#551A8B"
-        android:textColor="#FFF"
         android:layout_marginBottom="5dp"
+        android:background="#551A8B"
+        android:text="@string/editroute"
 
-        android:text="@string/editroute" />
+        android:textColor="#FFF"
+        android:visibility="invisible" />
 
     <Button
         android:id="@+id/backtoresults"
@@ -158,20 +160,21 @@
         android:layout_height="40dp"
         android:layout_above="@+id/changeroute"
         android:layout_centerHorizontal="true"
-        android:background="#551A8B"
-        android:textColor="#FFF"
         android:layout_marginBottom="5dp"
-        android:text="@string/backtoresults" />
+        android:background="#551A8B"
+        android:text="@string/backtoresults"
+        android:textColor="#FFF"
+        android:visibility="invisible" />
 
     <Button
         android:id="@+id/sendrequest"
-        android:layout_width="236dp"
-        android:layout_height="55dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="360dp"
-        android:layout_marginBottom="152dp"
+        android:layout_marginTop="560dp"
+
         android:background="#551A8B"
         android:text="@string/sendrequest"
         android:textColor="#FFF" />
