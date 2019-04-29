@@ -191,7 +191,9 @@ public class DriverComfirmRoute extends AppCompatActivity {
                 Intent setO = new Intent (DriverComfirmRoute.this, DriverOriginSearch.class);
                 Bundle desID = new Bundle();
                 desID.putString("DestPlaceID", destPlaceID);
-                desID.putSerializable("drivername", driverName);
+                desID.putString("userName", userName);
+                desID.putString("emailID", emailID);
+                desID.putSerializable("drivername", userName);;
                 setO.putExtras(desID);
                 startActivity(setO);
 

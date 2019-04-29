@@ -128,7 +128,7 @@ public class DriverDrivingToDesination extends AppCompatActivity implements OnMa
         endTrip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent end=new Intent(DriverDrivingToDesination.this, DriverEndTrip.class);
+                Intent end=new Intent(DriverDrivingToDesination.this, DriverCheckGasPrice.class);
                 end.putExtras(sendInfo);
                 startActivity(end);
             }
