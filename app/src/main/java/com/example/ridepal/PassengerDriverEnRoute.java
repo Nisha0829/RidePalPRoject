@@ -137,6 +137,8 @@ public class PassengerDriverEnRoute extends AppCompatActivity implements OnMapRe
                 flashLightChecked = false;
             }
         });
+        profilePic = (ImageView)findViewById(R.id.driverimage);
+        profilePic.setImageBitmap(getProfilePic(photo));
 
         driverOriginLatLng = new LatLng(driverOriginlat,driverOriginlong);
         driverDestLatLng = new LatLng(driverDestlat, driverDestLong);
@@ -230,6 +232,17 @@ public class PassengerDriverEnRoute extends AppCompatActivity implements OnMapRe
         } else {
             requestPermissions(new String[]{CALL_PHONE}, 1);
         }
+    }
+
+    private Bitmap getProfilePic(String pic){
+        Bitmap bitmap = null;
+        File picture = new File(pic);
+        try {
+            bitmap = BitmapFactory.decodeStream(new FileInputStream(picture));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return bitmap;
     }
 
 
