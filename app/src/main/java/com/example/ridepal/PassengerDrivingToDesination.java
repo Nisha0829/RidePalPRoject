@@ -1,10 +1,13 @@
 package com.example.ridepal;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -17,6 +20,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class PassengerDrivingToDesination extends AppCompatActivity implements OnMapReadyCallback, TaskLoadedCallback {
@@ -25,11 +31,13 @@ public class PassengerDrivingToDesination extends AppCompatActivity implements O
     MarkerOptions start, end;
     Polyline currentPolyline;
     Button tripDetails, emergency, endTrip;
-    private Double originlat, originlong, destlat, destlong, passoriginlat, passoriginlong, passdestlat, passdestlong,driverOriginlat,driverOriginlong,driverDestlat,driverDestLong;
+    private double originlat, originlong, destlat, destlong, passoriginlat, passoriginlong, passdestlat, passdestlong,driverOriginlat,driverOriginlong,driverDestlat,driverDestLong;
 
     private Bundle sendInfo;
-    private String driverName, driverOriginName, driverDestName,passName, passdestination, passorigin,emailID,driverEmailID;
+    private String driverName, driverOriginName, driverDestName,passName, passdestination, passorigin,emailID,driverEmailID, photo;
     private LatLng driverOriginLatLng, passOriginLatLng, driverDestLatLng, passDestLatLng;
+    private ImageView profilePic;
+
 
 
     @Override
@@ -53,6 +61,7 @@ public class PassengerDrivingToDesination extends AppCompatActivity implements O
         passName = getInfo.getString("passName");
         passdestination = getInfo.getString("passdest");
         passorigin = getInfo.getString("passorigin");
+        photo = getInfo.getString("photo");
 
         sendInfo = new Bundle();
         sendInfo.putDouble("originlat", originlat);
@@ -71,11 +80,13 @@ public class PassengerDrivingToDesination extends AppCompatActivity implements O
         sendInfo.putString("driverOrigin", driverOriginName);
         sendInfo.putString("driverName", driverName);
         sendInfo.putString("driverEmailId", driverEmailID);
+        sendInfo.putString("photo", photo);
 
         driverOriginLatLng = new LatLng(originlat, originlong);
         driverDestLatLng = new LatLng(destlat,destlong);
         passOriginLatLng = new LatLng(originlat, originlong);
         passDestLatLng = new LatLng(destlat, destlong);
+
 
         MapFragment mapFragment = (MapFragment)getFragmentManager().findFragmentById(R.id.mapFrag);
         mapFragment.getMapAsync(this);
@@ -110,7 +121,7 @@ public class PassengerDrivingToDesination extends AppCompatActivity implements O
         endTrip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent end=new Intent(PassengerDrivingToDesination.this, PassengerEndTrip.class);
+                Intent end=new Intent(PassengerDrivingToDesination.this, PassengerCheckGasPrice.class);
                 end.putExtras(sendInfo);
                 startActivity(end);
             }
@@ -173,5 +184,16 @@ public class PassengerDrivingToDesination extends AppCompatActivity implements O
         String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters + "&key=" + getString(R.string.google_maps_key);
         return url;
 
+    }
+
+    private Bitmap getProfilePic(String pic){
+        Bitmap bitmap = null;
+        File picture = new File(pic);
+        try {
+            bitmap = BitmapFactory.decodeStream(new FileInputStream(picture));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return bitmap;
     }
 }

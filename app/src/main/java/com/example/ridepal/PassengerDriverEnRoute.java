@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraManager;
 import android.net.Uri;
@@ -16,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -28,6 +31,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import static android.Manifest.permission.CALL_PHONE;
@@ -43,10 +49,11 @@ public class PassengerDriverEnRoute extends AppCompatActivity implements OnMapRe
     boolean isFlashAvailable;
     boolean flashLightChecked = true;
     private double originlat, originlong, destlat, destlong,driverOriginlat,driverOriginlong,driverDestlat,driverDestLong;
-    String passoriginlat, passoriginlong, passdestlat, passdestlong, passName, passdestination, passOrigin, passDest;
+    String passoriginlat, passoriginlong, passdestlat, passdestlong, passName, passdestination, passOrigin, passDest, photo;
     private Bundle sendInfo;
     private String driverName, driverOriginName, driverDestName, emailID,driverEmailID;
     private LatLng driverOriginLatLng, passOriginLatLng, driverDestLatLng, passDestLatLng;
+    private ImageView profilePic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +77,7 @@ public class PassengerDriverEnRoute extends AppCompatActivity implements OnMapRe
         driverOriginName= getInfo.getString("driverOrigin");
         driverName=getInfo.getString("driverName");
         driverEmailID = getInfo.getString("driverEmailID");
+        photo = getInfo.getString("photo");
 
         sendInfo = new Bundle();
         sendInfo.putDouble("originlat", originlat);
@@ -88,6 +96,9 @@ public class PassengerDriverEnRoute extends AppCompatActivity implements OnMapRe
         sendInfo.putString("driverOrigin", driverOriginName);
         sendInfo.putString("driverName", driverName);
         sendInfo.putString("driverEmailId", driverEmailID);
+        sendInfo.putString("photo", photo);
+
+
 
 
         isFlashAvailable = getApplicationContext().getPackageManager()
@@ -220,4 +231,6 @@ public class PassengerDriverEnRoute extends AppCompatActivity implements OnMapRe
             requestPermissions(new String[]{CALL_PHONE}, 1);
         }
     }
+
+
 }

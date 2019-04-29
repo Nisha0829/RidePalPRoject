@@ -30,6 +30,15 @@
         android:layout_width="match_parent"
         android:layout_height="315dp"
         android:layout_weight="25" />
+    <Button
+        android:id="@+id/btnGetDirections"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="#551A8B"
+        android:textSize="14sp"
+        android:layout_marginBottom="5dp"
+        android:text="@string/usegooglenav"
+        android:textColor="#FFF" />
 
     <Button
         android:id="@+id/tripdetailsbutton"

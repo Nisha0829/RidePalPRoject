@@ -59,7 +59,7 @@
             android:textSize="18sp" />
 
         <Space
-            android:id="@+id/titlespace"
+            android:id="@+id/midspace"
             android:layout_width="match_parent"
             android:layout_height="20dp"
             android:layout_below="@id/tripdetailsheader" />
@@ -68,7 +68,7 @@
             android:id="@+id/drivernamecontainter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/titlespace"
+            android:layout_below="@+id/midspace"
             android:layout_marginTop="0dp"
             android:gravity="center"
             android:orientation="horizontal">

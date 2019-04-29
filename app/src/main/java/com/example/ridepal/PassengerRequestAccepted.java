@@ -1,17 +1,26 @@
 package com.example.ridepal;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 public class PassengerRequestAccepted extends AppCompatActivity {
 
     private Button driveTo;
     private double originlat, originlong, destlat, destlong, driverOriginlat,driverOriginlong,driverDestlat,driverDestLong;
     private Bundle sendInfo;
-    private String passDest, passOrigin, passName, emailID,driverDestName,driverOriginName,driverName,driverEmailID;
+    private String passDest, passOrigin, passName, emailID,driverDestName,driverOriginName,driverName,driverEmailID, photo;
+    private ImageView profilePic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +53,7 @@ public class PassengerRequestAccepted extends AppCompatActivity {
         driverOriginName= intent.getStringExtra("driverOrigin");
         driverName=intent.getStringExtra("driverName");
         driverEmailID = intent.getStringExtra("driverEmailId");
+        photo = intent.getStringExtra("photo");
 //        originlat = getInfo.getString("originlat");
 //        originlong = getInfo.getString("originlong");
 //        destlat = getInfo.getString("destlat");
@@ -77,6 +87,10 @@ public class PassengerRequestAccepted extends AppCompatActivity {
         sendInfo.putString("driverOrigin", driverOriginName);
         sendInfo.putString("driverName", driverName);
         sendInfo.putString("driverEmailID", driverEmailID);
+        sendInfo.putString("photo", photo);
+
+        profilePic = (ImageView)findViewById(R.id.passengerimage);
+        profilePic.setImageBitmap(getProfilePic(photo));
 
         driveTo = (Button) findViewById(R.id.drivetobutton);
         driveTo.setOnClickListener(new View.OnClickListener() {
@@ -87,5 +101,16 @@ public class PassengerRequestAccepted extends AppCompatActivity {
                 startActivity(drive);
             }
         });
+    }
+
+    private Bitmap getProfilePic(String pic){
+        Bitmap bitmap = null;
+        File picture = new File(pic);
+        try {
+            bitmap = BitmapFactory.decodeStream(new FileInputStream(picture));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return bitmap;
     }
 }

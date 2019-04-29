@@ -1,22 +1,30 @@
 package com.example.ridepal;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.model.LatLng;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 public class PassengerSelectedDriverInfo extends AppCompatActivity {
 
     private Button modeSelect, changePref, backToResults, changeRoute, sendRequest;
     private TextView iName, iAge, iOrigin, iDestination;
-    private String name, age, origin, destination, emailId,driverDestName,driverOriginName,driverName,driverEmailID;
+    private String name, age, origin, destination, emailId,driverDestName,driverOriginName,driverName,driverEmailID,photo;
     double originlat, originlong, destlat, destlong,driverOriginlat,driverOriginlong,driverDestlat,driverDestLong;
     Bundle sendInfo;
     private PassengerTestObject testPassenger;
+    private ImageView profilePic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +47,7 @@ public class PassengerSelectedDriverInfo extends AppCompatActivity {
         driverOriginName= intent.getStringExtra("driverOrigin");
         driverName=intent.getStringExtra("driverName");
         driverEmailID = intent.getStringExtra("driverEmailId");
+        photo = intent.getStringExtra("photo");
  //        sendInfo.putDouble("driverOrigingLat", driverOriginlat);
 //        sendInfo.putDouble("driverOrigingLong", driverOriginlong);
 //        sendInfo.putDouble("driverDestLat", driverDestlat);
@@ -93,12 +102,14 @@ public class PassengerSelectedDriverInfo extends AppCompatActivity {
         iAge = (TextView) findViewById(R.id.age);
         iOrigin = (TextView) findViewById(R.id.origin);
         iDestination = (TextView) findViewById(R.id.destination);
+        profilePic = (ImageView)findViewById(R.id.passengerimage);
 
 
         iName.setText(name);
         // iAge.setText(age);
         iOrigin.setText(origin);
         iDestination.setText(destination);
+        profilePic.setImageBitmap(getProfilePic(photo));
 
         sendRequest = (Button) findViewById(R.id.sendrequest);
         sendRequest.setOnClickListener(new View.OnClickListener() {
@@ -122,10 +133,22 @@ public class PassengerSelectedDriverInfo extends AppCompatActivity {
                 sendInfo.putString("driverOrigin", driverOriginName);
                 sendInfo.putString("driverName", driverName);
                 sendInfo.putString("driverEmailId", driverEmailID);
+                sendInfo.putString("photo", photo);
 
                 request.putExtras(sendInfo);
                 startActivity(request);
             }
         });
+    }
+
+    private Bitmap getProfilePic(String pic){
+        Bitmap bitmap = null;
+        File picture = new File(pic);
+        try {
+            bitmap = BitmapFactory.decodeStream(new FileInputStream(picture));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return bitmap;
     }
 }

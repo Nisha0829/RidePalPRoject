@@ -21,6 +21,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String Database_Name = "passenger.db";
     private static final int DATABASE_VERSION = 4;
     private SQLiteDatabase sqLliteDatabase;
+    String photoString;
 
 
     public DataBaseHelper(Context context) {
@@ -200,14 +201,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     public List<DestinationValues> cust_Destination(String name, String origin, String destination, double latitude, double longitude, double destLat, double destLong, int searchMiles, String email) {
         String emailId = email;
-        String photoString = "";
+        photoString = "";
         this.getReadableDatabase().rawQuery("Select * from cust_destination", null);
       //  this.getReadableDatabase().delete(TABLE_TODO, null, null);
         // Cursor cursor=this.getReadableDatabase().query(TABLE_TODO,new String[]{"PHOTO"},"EMAILID","+emailId+",null,null,null,null);
         //photoString = cursor.getString(6);
         Cursor cursor = this.getReadableDatabase().rawQuery("SELECT PHOTO FROM " + "customerInfo" + " where EMAILID ='" + emailId + "'", null);
         if (cursor.moveToFirst()) {
-            //photoString = cursor.getString(0);
+            photoString = cursor.getString(0);
         }
         List<DestinationValues> listDestinationValues;
         Cursor cursorInfo = this.getReadableDatabase().rawQuery("Select * from cust_destination", null);

@@ -32,6 +32,7 @@ import com.google.android.libraries.places.api.net.FetchPlaceRequest;
 import com.google.android.libraries.places.api.net.PlacesClient;
 
 import java.sql.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -41,7 +42,7 @@ public class DriverComfirmRoute extends AppCompatActivity {
 
     private TextView seekMiles;
     private SeekBar searchMiles;
-    String currentMiles;
+    int currentMiles;
     private Button changeDest, changeOrigin, search, modeSelect;
     String destPlaceID;
     PlacesClient placesClient;
@@ -56,7 +57,7 @@ public class DriverComfirmRoute extends AppCompatActivity {
     String origPlaceID;
     LatLng currentLocationLatLng;
     DataBaseHelper dataBaseHelper;
-    String emailID;
+    String emailID, userName;
     String driverName;
 
 
@@ -64,6 +65,9 @@ public class DriverComfirmRoute extends AppCompatActivity {
     Marker mCurrLocationMarker;
     private Boolean mLocationPermissionsGranted = false;
     private FusedLocationProviderClient mFusedLocationProviderClient;
+
+    DataBaseHelper searchPassangerDb;
+    ArrayList<DestinationValues> passengerSearchResult;
 
     private static final String FINE_LOCATION = ACCESS_FINE_LOCATION;
     private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
@@ -79,14 +83,17 @@ public class DriverComfirmRoute extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver_comfirm_route);
+        Intent intent = getIntent();
+        userName = intent.getStringExtra("userName");
+        emailID = intent.getStringExtra("emailID");
+        searchPassangerDb = new DataBaseHelper(this);
 
         seekMiles = (TextView) findViewById(R.id.miles);
         searchMiles = (SeekBar) findViewById(R.id.milesbar);
-        currentMiles = searchMiles.getProgress() + " Miles";
-        seekMiles.setText(currentMiles);
+        currentMiles = searchMiles.getProgress();
+        seekMiles.setText(currentMiles + "Miles");
 
-        ModeSelect activity = new ModeSelect();
-        emailID = activity.getEmailID();
+
 
 
 
@@ -195,8 +202,8 @@ public class DriverComfirmRoute extends AppCompatActivity {
         searchMiles.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                currentMiles = searchMiles.getProgress() + " Miles";
-                seekMiles.setText(currentMiles);
+                currentMiles = searchMiles.getProgress();
+                seekMiles.setText(currentMiles + "Miles");
             }
 
             @Override
@@ -221,23 +228,33 @@ public class DriverComfirmRoute extends AppCompatActivity {
                 double deslong = destLatLng.longitude;
 
 
-                Bundle sendDriverInfo = new Bundle();
+                Bundle sendDriverInfo = new Bundle(); // driver info
                 sendDriverInfo.putString("emailID", emailID);
-                sendDriverInfo.putString("orinlat", String.valueOf(originlat));
-                sendDriverInfo.putString("originlong", String.valueOf(orginlong));
-                sendDriverInfo.putString("destlat", String.valueOf(destlat));
-                sendDriverInfo.putString("deslong", String.valueOf(deslong));
-                sendDriverInfo.putString("drivername", driverName);
+                sendDriverInfo.putDouble("originlat", originlat);
+                sendDriverInfo.putDouble("originlong", orginlong);
+                sendDriverInfo.putDouble("destlat", destlat);
+                sendDriverInfo.putDouble("deslongitude", deslong);
+                sendDriverInfo.putString("drivername", userName);
                 sendDriverInfo.putString("driverdestname", destName);
                 sendDriverInfo.putString("driveroriginname", originName);
 
-
+                passengerSearchResult = (ArrayList<DestinationValues>) searchPassangerDb.cust_Destination(userName, originName, destName, originlat, orginlong, destlat, deslong, currentMiles, emailID);
                 Intent searchForPassengers = new Intent(DriverComfirmRoute.this, DriverSearchResults.class);
                 searchForPassengers.putExtras(sendDriverInfo);
+                //  searchForPassengers.putParcelableArrayListExtra("passengerSearchResult", passengerSearchResult);
+                searchForPassengers.putParcelableArrayListExtra("passengerSearchResult", passengerSearchResult);
+                List<String> abc = new ArrayList<String >();
+                abc.add("sdf");
+
+
                 startActivity(searchForPassengers);
 
             }
         });
+        if(!getIntent().equals("")) {
+            destPlaceID = getIntent().getExtras().getString("DestPlaceID");
+            origPlaceID = getIntent().getExtras().getString("OriginID");
+        }
     }
 
     private void getDeviceLocation(){

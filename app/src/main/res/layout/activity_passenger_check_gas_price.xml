@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PassengerCheckGasPrice">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="54dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ridepallogo" />
+
+    <Space
+        android:id="@+id/startspace"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true" />
+
+    <LinearLayout
+        android:layout_width="364dp"
+        android:layout_height="404dp"
+        android:layout_below="@+id/imageView"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="37dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginRight="12dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tripdetailsheader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/startspace"
+            android:gravity="center"
+            android:text="@string/getgasprice"
+            android:textSize="24sp" />
+
+        <Space
+            android:id="@+id/topspace"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_below="@id/tripdetailsheader" />
+
+        <TextView
+            android:id="@+id/checkgaspricetext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/gasmessage"
+            android:textSize="18sp" />
+
+        <Space
+            android:id="@+id/midspace"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_below="@id/tripdetailsheader" />
+
+        <Button
+            android:id="@+id/gasbutton"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="@string/gasbutton"
+            android:background="#551A8B"
+            android:textColor="#FFF"/>
+
+        <Space
+            android:id="@+id/bottomspace"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/tripdetailsheader" />
+
+        <EditText
+            android:id="@+id/gaspriceinput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/gaspriceinput"
+            android:inputType="numberDecimal" />
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/continuebutton"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"
+        android:layout_weight="1"
+        android:background="#551A8B"
+        android:text="@string/cont"
+        android:textColor="#FFF"
+        android:textSize="14sp" />
+
+</RelativeLayout>

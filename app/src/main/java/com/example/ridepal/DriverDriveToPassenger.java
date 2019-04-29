@@ -1,10 +1,12 @@
 package com.example.ridepal;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -28,59 +30,75 @@ public class DriverDriveToPassenger extends AppCompatActivity implements OnMapRe
     Button getDirection, call, pickUp;
     MarkerOptions driver, passenger;
     Polyline currentPolyline;
-    private String originlat, originlong, destlat, destlong, emailID, passoriginlat, passoriginlong, passdestlat, passdestlong, passName, passdestination, passorigin;
+    private double originlat, originlong, destlat, destlong,driverOriginlat,driverOriginlong,driverDestlat,driverDestLong;
+    String passoriginlat, passoriginlong, passdestlat, passdestlong, passName, passdestination, passOrigin, passDest, photo;
     private Bundle sendInfo;
-    private String driverName, driverOriginName, driverDestName;
+    private String driverName, driverOriginName, driverDestName, emailID,driverEmailID;
     private LatLng driverOriginLatLng, passOriginLatLng, driverDestLatLng, passDestLatLng;
+    private ImageView profilePic;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver_drive_to_passenger);
-
         Bundle getInfo = getIntent().getExtras();
-        originlat = getInfo.getString("originlat");
-        originlong = getInfo.getString("originlong");
-        destlat = getInfo.getString("destlat");
-        destlong = getInfo.getString("destlong");
+        Intent intent = getIntent();
+        originlat = getInfo.getDouble("originlat", 0.0);
+        originlong = getInfo.getDouble("originlong", 0.0);
+        destlat = getInfo.getDouble("destlat",0.0);
+        destlong = getInfo.getDouble("destlong", 0.0);
         emailID = getInfo.getString("emailID");
-        passoriginlat = getInfo.getString("passoriginlat");
-        passoriginlong = getInfo.getString("passoriginlong");
-        passdestlat = getInfo.getString("passdestlat");
-        passdestlong = getInfo.getString("passdestlong");
-        passName = getInfo.getString("passname");
-        passdestination = getInfo.getString("passdest");
-        passorigin = getInfo.getString("passorigin");
-        driverName = getInfo.getString("drivername");
-        driverDestName = getInfo.getString("driverdestname");
-        driverOriginName = getInfo.getString("driveroriginname");
-
+        passName = getInfo.getString("passName");
+        passDest = getInfo.getString("passDest");
+        passOrigin = getInfo.getString("passOrigin");
+        driverOriginlat= getInfo.getDouble("driverDestLat",0.0);
+        driverOriginlong= getInfo.getDouble("driverOrigingLong", 0.0);
+        driverDestlat= getInfo.getDouble("driverDestLat", 0.0);
+        driverDestLong= getInfo.getDouble("driverDestLong", 0.0);
+        driverDestName= getInfo.getString("driverDest");
+        driverOriginName= getInfo.getString("driverOrigin");
+        driverName=getInfo.getString("driverName");
+        driverEmailID = getInfo.getString("driverEmailID");
+        photo = getInfo.getString("photo");
 
 
         sendInfo = new Bundle();
-        sendInfo.putString("originlat", originlat);
-        sendInfo.putString("originlong", originlong);
-        sendInfo.putString("destlat", destlat);
-        sendInfo.putString("destlong", destlong);
+        sendInfo.putDouble("originlat", originlat);
+        sendInfo.putDouble("originlong", originlong);
+        sendInfo.putDouble("destlat", destlat);
+        sendInfo.putDouble("destlong", destlong);
         sendInfo.putString("emailID", emailID);
-        sendInfo.putString("passoriginlat", passoriginlat);
-        sendInfo.putString("passoriginlong", passoriginlong);
-        sendInfo.putString("passdestlat", passdestlat);
-        sendInfo.putString("passdestlong", passdestlong);
-        sendInfo.putString("passname", passName);
-        sendInfo.putString("passdest", passdestination);
-        sendInfo.putString("passorigin", passorigin);
-        sendInfo.putString("drivername", driverName);
-        sendInfo.putString("driverdestname", driverDestName);
-        sendInfo.putString("driveroriginname", driverOriginName);
+        sendInfo.putString("passName", passName);
+        sendInfo.putString("passdest", passDest);
+        sendInfo.putString("passorigin", passOrigin);
+        sendInfo.putDouble("driverOrigingLat", driverOriginlat);
+        sendInfo.putDouble("driverOrigingLong", driverOriginlong);
+        sendInfo.putDouble("driverDestLat", driverDestlat);
+        sendInfo.putDouble("driverDestLong", driverDestLong);
+        sendInfo.putString("driverDest", driverDestName);
+        sendInfo.putString("driverOrigin", driverOriginName);
+        sendInfo.putString("driverName", driverName);
+        sendInfo.putString("driverEmailId", driverEmailID);
+        sendInfo.putString("photo", photo);
 
-        driverOriginLatLng = new LatLng(Double.parseDouble(originlat), Double.parseDouble(originlong));
-        driverDestLatLng = new LatLng(Double.parseDouble(destlat), Double.parseDouble(destlong));
-        passOriginLatLng = new LatLng(Double.parseDouble(passoriginlat), Double.parseDouble(passoriginlong));
-        passDestLatLng = new LatLng(Double.parseDouble(passdestlat), Double.parseDouble(passdestlong));
+        driverOriginLatLng = new LatLng(driverOriginlat,driverOriginlong);
+        driverDestLatLng = new LatLng(driverDestlat, driverDestLong);
+        passOriginLatLng = new LatLng(originlat, originlong);
+        passDestLatLng = new LatLng(destlat, destlong);
 
         getDirection = (Button)findViewById(R.id.btnGetDirections);
+        getDirection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri gmmIntentUri = Uri.parse("google.navigation:q="+passoriginlat+","+passoriginlong);
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+                startActivity(mapIntent);
+            }
+        });
+
+
         MapFragment mapFragment = (MapFragment)getFragmentManager().findFragmentById(R.id.mapFrag);
         mapFragment.getMapAsync(this);
 

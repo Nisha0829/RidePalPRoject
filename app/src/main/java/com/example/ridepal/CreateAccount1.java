@@ -20,6 +20,9 @@ import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class CreateAccount1 extends AppCompatActivity {
     DataBaseHelper newUserInfo;
@@ -70,14 +73,6 @@ public class CreateAccount1 extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                //Code to transform image Uri to bitmap and then to string.
-                Bitmap image = ((BitmapDrawable) pickPhoto.getDrawable()).getBitmap();
-                ContextWrapper cw = new ContextWrapper(CreateAccount1.this);
-                File dir = cw.getDir("profile_pic", ContextWrapper.MODE_PRIVATE);
-                File pic = new File(dir, email+".jpg");
-                photo = pic.getAbsolutePath();
-
                 //filling in strings with input values.
                 firstname = ifirstname.getText().toString();
                 lastname = ilastname.getText().toString();
@@ -85,6 +80,30 @@ public class CreateAccount1 extends AppCompatActivity {
                 birthday = ibirthday.getText().toString();
                 password = ipassword.getText().toString();
                 passowrdconfirm = ipasswordconfirm.getText().toString();
+
+                //Code to transform image Uri to bitmap and then to string.
+                Bitmap image = ((BitmapDrawable) pickPhoto.getDrawable()).getBitmap();
+                ContextWrapper cw = new ContextWrapper(CreateAccount1.this);
+                File dir = cw.getDir("profile_pic", ContextWrapper.MODE_PRIVATE);
+                File pic = new File(dir, email+".jpg");
+
+                FileOutputStream fileOutputStream = null;
+                try {
+                    fileOutputStream = new FileOutputStream(pic);
+                    image.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }finally{
+                    try {
+                        fileOutputStream.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+                photo = pic.getAbsolutePath();
+
+
 
                 switch (genderbuttons.getCheckedRadioButtonId()) {
                     case R.id.malebutton:

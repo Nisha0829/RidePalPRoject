@@ -12,13 +12,13 @@ import com.google.maps.android.SphericalUtil;
 
 public class PassengerEndTrip extends AppCompatActivity {
 
-    private double originlat, originlong, destlat, destlong, passoriginlat, passoriginlong, passdestlat;
+    private double originlat, originlong, destlat, destlong, passoriginlat, passoriginlong, passdestlat, avgGas, distance, totalOwed;
     private Bundle sendInfo;
     double driverOriginlat,driverOriginlong,driverDestlat,driverDestLong;
     private TextView driverNameTV, driverDestTV, driverMilesTV, passNameTV, passDestTV, passMilesTV, avgGasPriceTV, totalGasTV;
     private Button pay;
     private LatLng driverOriginLatLng, passOriginLatLng, driverDestLatLng, passDestLatLng;
-    private String driverName, emailID, driverOriginName, driverDestName, driverEmailID, passdestlong, passName, passdestination, passorigin;;
+    private String driverName, emailID, driverOriginName, driverDestName, driverEmailID, passdestlong, passName, passdestination, passorigin, gasPrice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,11 +50,13 @@ public class PassengerEndTrip extends AppCompatActivity {
         driverOriginName = getInfo.getString("driverOrigin");
         driverDestName = getInfo.getString("driverDest");
         driverEmailID = getInfo.getString("driverEmailId");
+        gasPrice = getInfo.getString("gasprice");
 
         driverNameTV.setText(driverName);
         driverDestTV.setText(driverDestName);
         passNameTV.setText(passName);
         passDestTV.setText(passdestination);
+        avgGasPriceTV.setText("$"+gasPrice);
 
         driverOriginLatLng = new LatLng(originlat, originlong);
         driverDestLatLng = new LatLng(destlat,destlong);
@@ -69,6 +71,11 @@ public class PassengerEndTrip extends AppCompatActivity {
         double passDistanceMeters = SphericalUtil.computeDistanceBetween(passOriginLatLng, passDestLatLng);
         double passDistanceMiles = passDistanceMeters*0.00062171;
         passMilesTV.setText(String.format("%.2f", passDistanceMiles));
+        avgGas=Double.valueOf(gasPrice);
+
+        totalOwed =(passDistanceMiles/23.6)/avgGas;
+
+        totalGasTV.setText("$"+String.format("%.2f", totalOwed));
 
 
 
@@ -89,6 +96,7 @@ public class PassengerEndTrip extends AppCompatActivity {
         sendInfo.putString("driverName", driverName);
         sendInfo.putString("emailId", driverEmailID);
         pay= (Button)findViewById(R.id.sendmoneybutton);
+        pay.setText(getResources().getText(R.string.paygasbutton)+" $"+String.format("%.2f", totalOwed));
 
         pay.setOnClickListener(new View.OnClickListener() {
             @Override

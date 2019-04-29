@@ -20,7 +20,7 @@ public class PassengerSearchResults extends AppCompatActivity {
     ListView driverList;
     PassengerTestObject testOne, testTwo, testThree;
     Button modeSelect, editSearch;
-    private String emailID, driverDestName, driverOriginName, driverName, destination,origin, driverEmailID;
+    private String emailID, driverDestName, driverOriginName, driverName, destination,origin, driverEmailID, photo;
             double passoriginlat, passoriginlong, passdestlat, passdestlong,originlat, originlong, destlat, destlong,driverOriginlat,driverOriginlong,driverDestlat,driverDestLong;
     private Bundle sendInfo;
     ArrayList<PassengerTestObject> testList;
@@ -118,6 +118,8 @@ public class PassengerSearchResults extends AppCompatActivity {
                 passdestlong =(testList.get(position).getDestLatLng().longitude);
                 destination = testList.get(position).getDestName();
                 origin = testList.get(position).getOriginName();
+                photo = testList.get(position).getPicture();
+
 
                 sendInfo.putDouble("passoriginlat", passoriginlat);
                 sendInfo.putDouble("passoriginlong", passoriginlong);
@@ -143,6 +145,7 @@ public class PassengerSearchResults extends AppCompatActivity {
                 sendInfo.putString("driverOrigin", driverOriginName);
                 sendInfo.putString("driverName", driverName);
                 sendInfo.putString("driverEmailId", driverEmailID);
+                sendInfo.putString("photo", photo);
 
 
 

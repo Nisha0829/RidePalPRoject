@@ -43,7 +43,8 @@ public class ModeSelect extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent driveMode = new Intent (ModeSelect.this, DriverDestSearch.class);
-                driveMode.putExtras(sendInfo);
+                driveMode.putExtra("userName", userName);
+                driveMode.putExtra("emailID", emailID);
                 startActivity(driveMode);
             }
         });

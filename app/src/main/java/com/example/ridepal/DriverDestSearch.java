@@ -105,6 +105,10 @@ public class DriverDestSearch extends FragmentActivity implements OnMapReadyCall
     private Button cont;
     private String driverName;
 
+    private String userName;
+
+    String emailID;
+
 
 
 
@@ -115,8 +119,9 @@ public class DriverDestSearch extends FragmentActivity implements OnMapReadyCall
         setContentView(R.layout.activity_driver_dest_search);
         mGps=(ImageView)findViewById(R.id.ic_gps);
         cont=(Button)findViewById(R.id.contbutton);
-        Bundle getInfo = getIntent().getExtras();
-        driverName = getInfo.getString("username");
+        Intent intent = getIntent();
+        userName = intent.getStringExtra("userName");
+        emailID = intent.getStringExtra("emailID");
 
 
 
@@ -181,10 +186,12 @@ public class DriverDestSearch extends FragmentActivity implements OnMapReadyCall
             @Override
             public void onClick(View v) {
                 Intent next = new Intent(DriverDestSearch.this, DriverComfirmRoute.class);
+                next.putExtra("userName", userName);
+                next.putExtra("emailID", emailID);
                 Bundle destID = new Bundle();
                 destID.putString("DestPlaceID", destinationID);
+                destID.putString("CurrentLocLatLng", currentLocationLatLng.toString());
                 destID.putString("drivername", driverName);
-
                 next.putExtras(destID);
                 startActivity(next);
             }

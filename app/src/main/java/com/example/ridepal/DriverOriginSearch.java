@@ -106,6 +106,8 @@ public class DriverOriginSearch extends FragmentActivity implements OnMapReadyCa
     private PlaceDetectionClient mPlaceDetectionClient;
 
     private Button cont;
+    String userName;
+    String emailID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +115,9 @@ public class DriverOriginSearch extends FragmentActivity implements OnMapReadyCa
         setContentView(R.layout.activity_driver_origin_search);
         mGps=(ImageView)findViewById(R.id.ic_gps);
         cont=(Button)findViewById(R.id.contbutton);
+        Intent intent = getIntent();
+        userName = intent.getStringExtra("userName");
+        emailID = intent.getStringExtra("emailID");
         destinationID  = getIntent().getExtras().getString("DestPlaceID");
 
 
@@ -178,6 +183,8 @@ public class DriverOriginSearch extends FragmentActivity implements OnMapReadyCa
             public void onClick(View v) {
                 Intent next = new Intent(DriverOriginSearch.this, DriverComfirmRoute.class);
                 Bundle oID = new Bundle();
+                next.putExtra("userName", userName);
+                next.putExtra("emailID", emailID);
                 oID.putString("OriginID", originID);
                 oID.putString("DestPlaceID", destinationID);
                 next.putExtras(oID);

@@ -38,7 +38,7 @@
     <string name="drivingmodeselect">I\'m Driving!</string>
     <string name="passengermodeselect">I\'m Riding!</string>
     <string name="modeselectreturn">Select Mode</string>
-    <string name="driving">Driving</string> 
+    <string name="driving">Driving</string>
     <string name="destinationquestion">Where are you going?</string>
     <string name="searchbutton">Search</string>
     <string name="mapsearchinput">Enter an address or place</string>
@@ -85,4 +85,8 @@
     <string name="totalgaspricefrotrip">Total Gas Price for Trip: </string>
     <string name="Sendgasrequest">Send Request for Gas Money: </string>
     <string name="paygasbutton">Pay Driver Gas Money:</string>
+    <string name="getgasprice">Get Local Gas Prices</string>
+    <string name="gasmessage">Click below to check nearby gas prices and input the nearest gas price below</string>
+    <string name="gasbutton">Check Gas Prices</string>
+    <string name="gaspriceinput">Enter Gas Price Here</string>
 </resources>
