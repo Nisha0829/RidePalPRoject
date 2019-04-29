@@ -170,7 +170,8 @@
             android:background="#551A8B"
             android:text="@string/changepref"
             android:textColor="#FFF"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:visibility="invisible" />
     </LinearLayout>
 
 </RelativeLayout>
