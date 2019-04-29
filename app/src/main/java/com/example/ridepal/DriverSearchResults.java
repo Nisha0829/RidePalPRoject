@@ -97,32 +97,31 @@ public class DriverSearchResults extends AppCompatActivity {
         }
 
         PassengerListAdapter adapter = new PassengerListAdapter(this, R.layout.list_item_layout, testList);
+    driverList.setAdapter(adapter);
 
-        driverList.setAdapter(adapter);
+    driverList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-        driverList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                String passName = testList.get(position).getName();
-                String emailId = String.valueOf((testList.get(position).getEmailID()));
-                passoriginlat = (testList.get(position).getOriginLatLng().latitude);
-                passoriginlong = (testList.get(position).getOriginLatLng().longitude);
-                passdestlat = (testList.get(position).getDestLatLng().latitude);
-                passdestlong =(testList.get(position).getDestLatLng().longitude);
-                destination = testList.get(position).getDestName();
-                origin = testList.get(position).getOriginName();
-                photo = testList.get(position).getPicture();
+            String passName = testList.get(position).getName();
+            String emailId = String.valueOf((testList.get(position).getEmailID()));
+            passoriginlat = (testList.get(position).getOriginLatLng().latitude);
+            passoriginlong = (testList.get(position).getOriginLatLng().longitude);
+            passdestlat = (testList.get(position).getDestLatLng().latitude);
+            passdestlong = (testList.get(position).getDestLatLng().longitude);
+            destination = testList.get(position).getDestName();
+            origin = testList.get(position).getOriginName();
+            photo = testList.get(position).getPicture();
 
 
-                sendInfo.putDouble("passoriginlat", passoriginlat);
-                sendInfo.putDouble("passoriginlong", passoriginlong);
-                sendInfo.putDouble("passdestlat", passdestlat);
-                sendInfo.putDouble("passdestlong", passdestlong);
-                sendInfo.putString("passName", passName);
-                sendInfo.putString("passdest", destination);
-                sendInfo.putString("passorigin", origin);
-                sendInfo.putString("emailId", emailId);
+            sendInfo.putDouble("passoriginlat", passoriginlat);
+            sendInfo.putDouble("passoriginlong", passoriginlong);
+            sendInfo.putDouble("passdestlat", passdestlat);
+            sendInfo.putDouble("passdestlong", passdestlong);
+            sendInfo.putString("passName", passName);
+            sendInfo.putString("passdest", destination);
+            sendInfo.putString("passorigin", origin);
+            sendInfo.putString("emailId", emailId);
 //                originlat = getInfo.getString("originlat");
 //                originlong = getInfo.getString("originlong");
 //                destlat = getInfo.getString("destlat");
@@ -131,30 +130,23 @@ public class DriverSearchResults extends AppCompatActivity {
 //                driverName = getInfo.getString("drivername");
 //                driverDestName = getInfo.getString("driverdestname");
 //                driverOriginName = getInfo.getString("driveroriginname");
-                sendInfo.putDouble("driverOrigingLat", driverOriginlat);
-                sendInfo.putDouble("driverOrigingLong", driverOriginlong);
-                sendInfo.putDouble("driverDestLat", driverDestlat);
-                sendInfo.putDouble("driverDestLong", driverDestLong);
-                sendInfo.putString("driverDest", driverDestName);
-                sendInfo.putString("driverOrigin", driverOriginName);
-                sendInfo.putString("driverName", driverName);
-                sendInfo.putString("driverEmailId", driverEmailID);
-                sendInfo.putString("photo", photo);
+            sendInfo.putDouble("driverOrigingLat", driverOriginlat);
+            sendInfo.putDouble("driverOrigingLong", driverOriginlong);
+            sendInfo.putDouble("driverDestLat", driverDestlat);
+            sendInfo.putDouble("driverDestLong", driverDestLong);
+            sendInfo.putString("driverDest", driverDestName);
+            sendInfo.putString("driverOrigin", driverOriginName);
+            sendInfo.putString("driverName", driverName);
+            sendInfo.putString("driverEmailId", driverEmailID);
+            sendInfo.putString("photo", photo);
 
 
-
-                Intent passengerInfo = new Intent(DriverSearchResults.this, DriverSelectedPassInfo.class);
-                passengerInfo.putExtras(sendInfo);
-                startActivity(passengerInfo);
-            }
-        });
-
+            Intent passengerInfo = new Intent(DriverSearchResults.this, DriverSelectedPassInfo.class);
+            passengerInfo.putExtras(sendInfo);
+            startActivity(passengerInfo);
+        }
+    });
 
 
-
-
-
-
-
-    }
 }
+    }

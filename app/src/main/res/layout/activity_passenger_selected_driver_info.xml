@@ -130,12 +130,31 @@
         </LinearLayout>
     </LinearLayout>
 
+
+    <Button
+        android:id="@+id/sendrequest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="460dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginBottom="59dp"
+        android:background="#551A8B"
+        android:text="@string/sendrequest"
+        android:textColor="#FFF" />
     <Button
         android:id="@+id/preferences"
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="522dp"
         android:layout_marginBottom="5dp"
         android:background="#551A8B"
         android:text="@string/changepref"
@@ -166,17 +185,5 @@
         android:textColor="#FFF"
         android:visibility="invisible" />
 
-    <Button
-        android:id="@+id/sendrequest"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="560dp"
-
-        android:background="#551A8B"
-        android:text="@string/sendrequest"
-        android:textColor="#FFF" />
 
 </RelativeLayout>

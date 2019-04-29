@@ -78,7 +78,7 @@ public class DriverEndTrip extends AppCompatActivity {
         passMilesTV.setText(String.format("%.2f", passDistanceMiles));
         avgGas=Double.valueOf(gasPrice);
 
-        totalOwed =(passDistanceMiles/23.6)/avgGas;
+        totalOwed =(passDistanceMiles)/avgGas;
 
         totalGasTV.setText("$"+String.format("%.2f", totalOwed));
 
