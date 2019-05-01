@@ -98,6 +98,9 @@ public class PassengerDriverEnRoute extends AppCompatActivity implements OnMapRe
         sendInfo.putString("driverEmailId", driverEmailID);
         sendInfo.putString("photo", photo);
 
+        profilePic = (ImageView)findViewById(R.id.driverimage);
+        profilePic.setImageBitmap(getProfilePic(photo));
+
 
 
 
@@ -230,6 +233,17 @@ public class PassengerDriverEnRoute extends AppCompatActivity implements OnMapRe
         } else {
             requestPermissions(new String[]{CALL_PHONE}, 1);
         }
+    }
+
+    private Bitmap getProfilePic(String pic){
+        Bitmap bitmap = null;
+        File picture = new File(pic);
+        try {
+            bitmap = BitmapFactory.decodeStream(new FileInputStream(picture));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return bitmap;
     }
 
 

@@ -140,8 +140,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public String logIn(String emailId, String pwd)  //Success // Password is wrong, user does not exist
 
     {
-      //this.getReadableDatabase().delete("cust_destination", null, null);
-        //this.getReadableDatabase().delete("customerInfo", null, null);
+   //this.getReadableDatabase().delete("cust_destination", null, null);
+   //this.getReadableDatabase().delete("customerInfo", null, null);
         String result = "User Does Not Exist";
         Cursor cursor = this.getReadableDatabase().query("customerInfo", new String[]{"EMAILID", "PASSWORD", "FIRSTNAME"}, null, null, null, null, null, null);
         if (cursor != null & cursor.getCount() > 0) {
